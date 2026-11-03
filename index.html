@@ -218,7 +218,16 @@ section.blk{position:relative;width:1200px;overflow:hidden}
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const star=document.getElementById('star'),final=document.getElementById('heroFinal');
   const rv=[...document.querySelectorAll('#hero .rv')];
-  function showAll(){final.style.opacity=1;star.classList.add('on','glow');rv.forEach(x=>x.classList.add('on'));}
+  // hover zoom on tree photos, enabled once the tree is assembled
+  const Z=4.2;
+  function zoom(o,on){o.z=on;const w=o.e.offsetWidth*Z,h=o.e.offsetHeight*Z;
+    let dx=0,dy=0;if(on){dy=Math.max(0,h/2+12-o.cy)-Math.max(0,o.cy+h/2+12-675);dx=Math.max(0,w/2+12-o.cx)-Math.max(0,o.cx+w/2+12-1200);}
+    o.e.style.zIndex=on?60:'';o.e.style.boxShadow=on?'0 22px 48px rgba(0,0,0,.65)':'';
+    o.e.style.transform=on?`translate(${dx}px,${dy}px) rotate(0deg) scale(${Z})`:`rotate(${-o.r}deg)`;}
+  function enableZoom(){els.forEach(o=>{o.e.style.transition='transform .45s cubic-bezier(.22,1,.36,1),box-shadow .3s cubic-bezier(.22,1,.36,1)';o.e.style.cursor='zoom-in';
+    o.e.addEventListener('mouseenter',()=>zoom(o,true));o.e.addEventListener('mouseleave',()=>zoom(o,false));
+    o.e.addEventListener('click',()=>{const on=!o.z;els.forEach(x=>x.z&&x!==o&&zoom(x,false));zoom(o,on);});});}
+  function showAll(){final.style.opacity=1;star.classList.add('on','glow');rv.forEach(x=>x.classList.add('on'));enableZoom();}
   if(reduce){showAll();}
   else{
     root.classList.add('anim');document.getElementById('pain').classList.add('wait');
@@ -234,6 +243,7 @@ section.blk{position:relative;width:1200px;overflow:hidden}
       setTimeout(()=>{star.classList.add('on');setTimeout(()=>star.classList.add('glow'),900);},2700);
       setTimeout(()=>{final.style.opacity=1;rv.forEach((x,i)=>{x.style.transitionDelay=(i*90)+'ms';x.classList.add('on');});},3400);
       setTimeout(()=>document.getElementById('pain').classList.remove('wait'),4300);
+      setTimeout(enableZoom,3500);
     };
     Promise.all(imgs).then(start);setTimeout(start,3500);
   }
