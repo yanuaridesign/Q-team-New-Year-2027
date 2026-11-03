@@ -1,0 +1,316 @@
+<meta charset="utf-8">
+<title>Q-team · Новорічний корпоратив 2027</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,300;1,400&display=swap">
+<style>
+/* Layout: the Figma desktop canvas (1200 wide) rendered 1:1 and scaled down to fit narrower screens */
+:root{
+  --ink:#0b0908; --night:#0b0908; --cream:#f6f5f2; --paper:#faf8f2;
+  --gold:#ffba23; --gold-2:#f7c24d; --gold-3:#dcac4f; --btn:#151312; --btn-line:#ffc759;
+  --f:"Montserrat", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+html,body{background:var(--night)}
+body{color:var(--cream);font-family:var(--f);overflow-x:hidden}
+.wrap{display:flex;justify-content:center}
+.scaler{position:relative;width:1200px;overflow:hidden}
+.stage{position:absolute;left:0;top:0;width:1200px;transform-origin:0 0}
+section.blk{position:relative;width:1200px;overflow:hidden}
+.bg{position:absolute;inset:0;width:1200px;height:100%;display:block;pointer-events:none;user-select:none}
+.abs{position:absolute}
+.g{color:var(--gold-2)} .g1{color:var(--gold)} .b{font-weight:600}
+.h35{font-weight:700;font-size:35px;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;white-space:nowrap}
+.cta{position:absolute;width:204px;height:45px;background:var(--btn);border:1px solid var(--btn-line);color:var(--gold-3);font:700 14px/1.2 var(--f);text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s cubic-bezier(.22,1,.36,1),color .3s cubic-bezier(.22,1,.36,1),transform .3s cubic-bezier(.22,1,.36,1)}
+.cta:hover{background:var(--btn-line);color:var(--ink)}
+.cta:active{transform:translateY(1px)}
+.cta:focus-visible,.opt:focus-visible,.qbtn:focus-visible,.back:focus-visible{outline:2px solid var(--btn-line);outline-offset:3px}
+
+/* HERO */
+#hero{height:675px}
+.hero-final{opacity:0;transition:opacity 1.2s cubic-bezier(.22,1,.36,1)}
+.tree .p{position:absolute;background:url(img/sprite.webp) no-repeat;background-size:720px 648px;box-shadow:0 1.5px 3px rgba(0,0,0,.35);will-change:transform}
+.star{position:absolute;left:552px;top:38px;width:92px;transform:rotate(-6.9deg);filter:drop-shadow(0 0 14px rgba(255,186,35,.35))}
+.hl{font:italic 400 12px/.95 var(--f);letter-spacing:-.02em;color:var(--cream);text-align:center}
+.hero-title{font:700 60px/.95 var(--f);letter-spacing:-.01em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+.sub14{font:600 14px/1.2 var(--f);letter-spacing:-.01em}
+.stars{font-size:19px;color:#e0a92e;letter-spacing:1px}
+/* animation states, enabled by JS */
+.anim .tree .p{transition:transform 1s cubic-bezier(.22,1,.36,1)}
+.anim .star{opacity:0;transform:translateY(-240px) scale(.5) rotate(-60deg);transition:transform .9s cubic-bezier(.34,1.56,.64,1),opacity .4s ease-out}
+.anim .star.on{opacity:1;transform:rotate(-6.9deg)}
+.anim .rv{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.anim .rv.on{opacity:1;transform:none}
+.star.glow{animation:glow 3.2s ease-in-out infinite}
+@keyframes glow{50%{filter:drop-shadow(0 0 26px rgba(255,186,35,.7))}}
+
+/* BLOCK 2 */
+.wq{position:absolute;font:italic 400 9px/.95 var(--f);letter-spacing:-.02em;color:rgba(0,0,0,.15);text-align:center;transform-origin:50% 50%}
+.wq svg{position:absolute;overflow:visible;pointer-events:none}
+.qm{position:absolute;width:24px;text-align:center;font:italic 300 29px/.95 var(--f);color:rgba(0,0,0,.15)}
+.cover2{position:absolute;left:0;top:0;width:1200px;height:200px;opacity:0;pointer-events:none;transition:opacity .9s cubic-bezier(.22,1,.36,1)}
+#pain .cap12{transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.anim #pain.wait .cover2{opacity:1}
+.anim #pain.wait .cap12{opacity:0;transform:translateY(10px)}
+#pain{height:1318px}
+.cap12{font:400 12px/1.2 var(--f);letter-spacing:-.01em;text-align:center;color:var(--cream)}
+.cap12 b{font-weight:600;color:var(--gold-2)}
+.ink{color:var(--ink)}
+.t14{font:400 14px/1.2 var(--f);letter-spacing:-.01em;color:var(--ink)}
+.t14 b{font-weight:600}
+.logos{position:absolute;left:0;top:1134px;width:1200px;height:36px;overflow:hidden;opacity:.3;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.logos .row{display:flex;width:max-content;animation:marquee 46s linear infinite}
+.logos img{height:36px;width:2655px;max-width:none;display:block}
+@keyframes marquee{to{transform:translateX(-2655px)}}
+
+/* QUIZ */
+#quiz{height:730px}
+.qh{font:700 35px/1.22 var(--f);text-transform:uppercase;text-align:center;color:#faf7f2}
+.qsub{font:400 15px/1.4 var(--f);text-align:center;color:rgba(250,247,242,.85)}
+.qsub b{font-weight:600;color:var(--gold)}
+.card{position:absolute;left:50px;top:236px;width:1100px;height:390px;color:var(--ink)}
+.prog{position:absolute;left:40px;top:36px;font:600 12px/1 var(--f);color:rgba(11,9,8,.55)}
+.track{position:absolute;left:190px;top:34px}
+.timer{position:absolute;left:1040px;top:35px;font:700 13px/1 var(--f);color:var(--gold);font-variant-numeric:tabular-nums}
+.back{position:absolute;left:40px;top:58px;font:600 12px/1 var(--f);color:rgba(11,9,8,.6);text-decoration:underline;background:none;border:0;padding:4px 0;cursor:pointer}
+.qtitle{position:absolute;left:0;top:76px;width:1100px;text-align:center;font:700 24px/1.2 var(--f);text-transform:uppercase}
+.opts{position:absolute;left:0;top:118px;width:1100px;height:262px}
+.opt{position:absolute;top:10px;width:176px;height:244px;background:var(--paper);border:.5px solid #d1c4a8;box-shadow:0 3px 6px rgba(0,0,0,.28);cursor:pointer;padding:0;font:inherit;color:inherit;text-align:center;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .3s cubic-bezier(.22,1,.36,1)}
+.opt:hover{transform:translateY(-8px) rotate(0deg)!important;box-shadow:0 14px 22px rgba(0,0,0,.25)}
+.opt.sel{box-shadow:0 0 0 3px var(--gold),0 14px 22px rgba(0,0,0,.25)}
+.opt .ph{position:absolute;left:10px;top:10px;width:156px;height:156px;object-fit:cover;display:block}
+.opt .num{position:absolute;left:10px;top:10px;width:156px;height:156px;background:#fff2cc;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 40px/1 var(--f)}
+.opt .num small{font:600 13px/1.4 var(--f);opacity:.6}
+.opt .cp{position:absolute;left:6px;right:6px;top:166px;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.opt .cp b{font:700 13px/1.1 var(--f)}
+.opt .cp span{font:400 11px/1.2 var(--f);opacity:.55}
+.opt .tape{position:absolute;left:59px;top:-8px;width:58px;height:18px;background:#ede0bd;opacity:.85}
+.form{position:absolute;left:0;top:130px;width:1100px;display:flex;flex-direction:column;align-items:center;gap:24px}
+.fields{display:flex;gap:24px}
+.fld{display:flex;flex-direction:column;gap:6px;width:270px;text-align:left}
+.fld label{font:600 12px/1 var(--f);text-transform:uppercase;letter-spacing:.06em;opacity:.6}
+.fld input{font:400 18px/1.3 var(--f);color:var(--ink);background:transparent;border:0;border-bottom:1.5px solid var(--ink);padding:6px 2px;outline:none}
+.fld input:focus{border-bottom-color:var(--gold)}
+.fld .err{font:400 12px/1.2 var(--f);color:#b3261e;min-height:15px}
+.picked{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.picked span{font:600 12px/1 var(--f);padding:6px 12px;border-radius:999px;background:#fff2cc;border:1px solid rgba(11,9,8,.2)}
+.qbtn{font:700 14px/1.2 var(--f);text-transform:uppercase;letter-spacing:.04em;background:var(--gold);color:var(--ink);border:0;padding:16px 32px;cursor:pointer;transition:transform .3s cubic-bezier(.22,1,.36,1),background .3s cubic-bezier(.22,1,.36,1)}
+.qbtn:hover{background:var(--gold-2)} .qbtn:active{transform:translateY(1px)}
+.done{position:absolute;left:150px;top:120px;width:800px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+.done p{font:400 16px/1.5 var(--f);max-width:620px}
+.done .note{font-size:12px;opacity:.55}
+.fade{animation:fadeIn .5s cubic-bezier(.22,1,.36,1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}}
+
+/* BOARD */
+#board{height:1338px}
+.bh{font:700 36px/40px var(--f);text-transform:uppercase;white-space:nowrap;color:var(--cream)}
+.pc{font:700 15px/22px var(--f);color:var(--ink);text-align:center;width:199px}
+.d14{font:400 14px/1.05 var(--f);color:rgba(246,245,242,.85)}
+.f10{font:600 10px/.9 var(--f);color:var(--gold);white-space:nowrap}
+
+@media (prefers-reduced-motion: reduce){
+  .anim .tree .p,.anim .star,.anim .rv,.hero-final{transition:none!important}
+  .logos .row,.star.glow{animation:none}
+}
+</style>
+
+<div class="wrap"><div class="scaler" id="scaler"><div class="stage" id="stage">
+
+<!-- HERO -->
+<section class="blk" id="hero" aria-label="Новорічний корпоратив 2027">
+  <img class="bg" src="img/hero-plain.webp" alt="" width="1200" height="675">
+  <img class="bg hero-final rv-bg" id="heroFinal" src="img/hero-final.webp" alt="" width="1200" height="675">
+  <div class="tree" id="tree" aria-hidden="true"></div>
+  <img class="star" id="star" src="img/star.webp" alt="">
+  <h1 class="abs hero-title rv" style="left:45px;top:256px;margin:0">Новорічний</h1>
+  <div class="abs hero-title rv" style="left:698px;top:256px" aria-hidden="true">корпоратив</div>
+  <div class="abs hl rv" style="left:271px;top:150px;width:89px">Капсула часу</div>
+  <div class="abs hl rv" style="left:831px;top:152px;width:80px">Форт Боярд</div>
+  <div class="abs hl rv" style="left:140px;top:200px;width:105px">Різдвяний<br>детектив</div>
+  <div class="abs hl rv" style="left:936px;top:450px;width:82px">Елітарний<br>квіз</div>
+  <div class="abs hl rv" style="left:258px;top:450px;width:91px">Рольова<br>квесторія</div>
+  <p class="abs sub14 rv" style="left:56px;top:571px;width:330px;margin:0;color:var(--cream)"><span class="g">Нова надихаюча програма</span> під ключ,<br>на своїй локації зі світлом, та без тривог</p>
+  <div class="abs rv" style="left:56px;top:616px;display:flex;align-items:center;gap:14px"><span class="stars" aria-hidden="true">★★★★★</span><span style="font:400 12px/1 var(--f);letter-spacing:-.03em">4,9 з 5 у Google</span></div>
+  <button class="cta rv" style="left:946px;top:567px" data-go="quiz">Залишити заявку</button>
+</section>
+
+<!-- BLOCK 2: pain + proof -->
+<section class="blk" id="pain">
+  <img class="bg" src="img/block2.webp" alt="" width="1200" height="1318">
+  <img class="cover2" src="img/b2cover.webp" alt="" width="1200" height="200">
+  <div id="worries" aria-hidden="true"></div>
+  <p class="abs cap12" style="left:56px;top:105px;width:164px;margin:0"><b>На нашій локації в Києві, Online</b> чи на виїзд по всій Україні</p>
+  <p class="abs cap12" style="left:351px;top:105px;width:167px;margin:0"><b>Проводимо на -1 поверсі</b>, без тривог, зі світлом та теплом</p>
+  <p class="abs cap12" style="left:648px;top:105px;width:154px;margin:0">Вас в команді може бути <b>як 4 гравці, так і 994</b>, залучені будуть всі</p>
+  <p class="abs cap12" style="left:933px;top:105px;width:218px;margin:0"><b style="color:var(--gold-3)">Рейтинг безпеки локації 86 зі 100</b>, ми одразу залишили ТРЦ, як тільки це стало небезпечно</p>
+  <h2 class="abs h35 ink" style="left:50px;top:348px;margin:0">А ти вже знаєш як компанія</h2>
+  <div class="abs h35 ink" style="left:162px;top:381px">святкуватиме <span class="g">новий рік?</span></div>
+  <p class="abs t14" style="left:469px;top:517px;width:399px;margin:0"><b>Кінець року і так тримає в напрузі:</b> плани, звіти, відключення. А ще <u>треба корпоратив організувати</u>, який всім сподобається, і вкластися в бюджет....</p>
+  <h2 class="abs h35 ink" style="left:50px;top:766px;width:640px;white-space:normal;margin:0">Видихай, бо зараз <span class="g">Ти саме там, де треба!</span></h2>
+  <p class="abs t14" style="left:80px;top:989px;width:235px;text-align:center;margin:0"><b>Тримаємо ціни з 2023 року</b>, хоча це не просто, коли все навколо дорожчає</p>
+  <p class="abs t14" style="left:483px;top:989px;width:233px;text-align:center;margin:0">З <b>2014 року</b> ми провели <b>5800+ корпоративів,</b> тож знаємо, як зробити ваш незабутнім</p>
+  <p class="abs t14" style="left:892px;top:989px;width:219px;text-align:center;margin:0"><b>2000+ компаній</b> вже довірили свої команди Q-team, і ми цьому вдячні</p>
+  <div class="logos" aria-label="Нам довіряють: Нова пошта, ДТЕК, ПриватБанк, EPAM, Київстар, Danone та інші"><div class="row"><img src="img/logos.webp" alt="" loading="lazy"><img src="img/logos.webp" alt="" loading="lazy"></div></div>
+</section>
+
+<!-- BLOCK 4: quiz -->
+<section class="blk" id="quiz">
+  <img class="bg" src="img/block4.webp" alt="" width="1200" height="730" loading="lazy">
+  <h2 class="abs qh" style="left:216px;top:66px;width:768px;margin:0">Дізнайся, <span class="g">скільки коштуватиме</span> твій корпоратив?</h2>
+  <p class="abs qsub" style="left:280px;top:163px;width:640px;margin:0">Дай відповідь на 3 запитання, і ми надішлемо <b>4 детальні програми з таймінгом</b> та розрахуємо вартість</p>
+  <div class="card" id="card">
+    <div class="prog" id="prog">питання 1 з 3</div>
+    <svg class="track" width="840" height="20" viewBox="0 0 840 20" aria-hidden="true">
+      <path d="M2 10 C 250 8, 500 12, 832 10" fill="none" stroke="rgba(11,9,8,.15)" stroke-width="2" stroke-linecap="round"/>
+      <path id="trackFill" d="M2 11 C 250 8, 500 13, 832 10" fill="none" stroke="#ffba23" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="67" style="transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)"/>
+    </svg>
+    <div class="timer" id="timer" aria-label="Час на квіз">3:00</div>
+    <button class="back" id="back" hidden>← Попереднє питання</button>
+    <div id="qbody"></div>
+  </div>
+</section>
+
+<!-- BLOCK 5: detective board -->
+<section class="blk" id="board">
+  <img class="bg" src="img/block5.webp" alt="" width="1200" height="1338" loading="lazy">
+  <h2 class="abs bh" style="left:218px;top:36px;margin:0"><span class="g1">40+ сценаріїв</span> від кіносценаристів</h2>
+  <div class="abs bh" style="left:334px;top:78px">і один із них точно <span class="g1">твій</span></div>
+  <div class="abs pc" style="left:170px;top:412px;transform:rotate(-2.5deg)">Форт Боярд</div>
+  <div class="abs pc" style="left:836px;top:391px;transform:rotate(-1.5deg)">Капсула часу</div>
+  <div class="abs pc" style="left:614px;top:715px;transform:rotate(1.5deg)">Рольова квесторія</div>
+  <div class="abs pc" style="left:66px;top:825px;transform:rotate(-1.7deg)">Різдвяний детектив</div>
+  <div class="abs pc" style="left:902px;top:1002px;transform:rotate(-.6deg)">Елітарний квіз</div>
+  <div class="abs pc" style="left:391px;top:1190px;transform:rotate(1.7deg)">Онлайн тімбілдинг</div>
+
+  <p class="abs d14" style="left:162px;top:464px;width:310px;margin:0">Єдиний ліцензійний Форт в Україні: 11 тонн механізмів, лазерний лабіринт і загадки Старця Фура. У фіналі одна хвилина, щоб зібрати 7 кг золотих монет. Для команд, які люблять рухатись.</p>
+  <div class="abs f10" style="left:162px;top:543px">1,5–6 год · від 5 людей</div>
+  <p class="abs d14" style="left:546px;top:203px;width:260px;text-align:right;margin:0">Квест, «Три дяки» за рік і три послання, які кожен пише собі в майбутнє. Капсулу запечатують із сухим льодом і світлом. Відкриєте її через пів року і дізнаєтесь, чий прогноз збувся.</p>
+  <div class="abs f10" style="left:546px;width:260px;text-align:right;top:295px">2,5–5 год · 7–1000 людей</div>
+  <p class="abs d14" style="left:328px;top:665px;width:260px;text-align:right;margin:0">Кожен отримує костюм, роль і секрет, який не можна видати. Пірмонт, 1926 рік, і кожен за столом щось приховує. Чим закінчиться вечір, вирішуєте ви.</p>
+  <div class="abs f10" style="left:328px;width:260px;text-align:right;top:744px">до 2 год · 7–18 у сюжеті</div>
+  <p class="abs d14" style="left:50px;top:893px;width:243px;margin:0">Мисливські кепки сищиків, докази на столі і злочин, який треба розкрити до кінця вечора. Тут думають, а не бігають, тож ідеально для команди, яка втомилась.</p>
+  <div class="abs f10" style="left:50px;top:985px">до 2 год · від 3 людей</div>
+  <p class="abs d14" style="left:892px;top:1062px;width:260px;margin:0">Смокінги, дзеркальний стіл і ведучий Олексій Самульов. Відеопитання записали знавці «Що? Де? Коли?» та зірки. Це не той квіз, що був у вас торік.</p>
+  <div class="abs f10" style="left:892px;top:1140px">до 2 год · від 8 людей</div>
+  <p class="abs d14" style="left:152px;top:1062px;width:215px;text-align:right;margin:0">Детективи й квізи в Zoom або Google Meet, де кожен грає роль, а не дивиться трансляцію. Коли половина команди в Києві, а половина в інших містах і країнах.</p>
+  <div class="abs f10" style="left:152px;width:215px;text-align:right;top:1154px">1,5–2 год · 4–999 людей</div>
+  <button class="cta" style="left:833px;top:1241px" data-go="quiz">Залишити заявку</button>
+</section>
+
+</div></div></div>
+
+<script>
+(function(){
+  const TOTAL=675+1318+730+1338;
+  const scaler=document.getElementById('scaler'),stage=document.getElementById('stage');
+  function fit(){const w=document.documentElement.clientWidth;const s=w/1200;stage.style.transform='scale('+s+')';scaler.style.width=w+'px';scaler.style.height=(TOTAL*s)+'px';}
+  fit();addEventListener('resize',fit);
+
+  // ---------- hero tree ----------
+  const P=[[619.5,169.2,44.3,53.2,-6.6],[647.4,204.2,43.8,52.5,0.7],[553.1,200.9,45.2,54.2,3.4],[585.9,168.7,43,51.6,1.8],[433.9,453.1,42.5,51,7],[584.6,212.9,44.8,53.8,-3.3],[615.4,207.5,43.2,51.8,-3.2],[675.3,244.3,41.8,50.2,3.2],[523.2,244.2,43.7,52.5,1.6],[642.9,238.9,40.6,48.7,-1.8],[557.3,242.7,45,54,-0.8],[614.5,239.9,41.8,50.2,-7.3],[589.8,252.1,43.7,52.4,-5.7],[537.3,277,44.4,53.3,-5.1],[574.9,270.9,41.9,50.3,3.8],[622.5,271.3,44.9,53.9,0],[510.2,305.7,34.4,41.3,-2.6],[626.8,303.6,41.5,49.8,-2.7],[656.9,277.7,43.6,52.4,5.3],[665.7,308.2,43.3,52,-8.9],[547.4,307.8,44.1,52.9,7.2],[588.7,301.5,40.8,49,-7],[698.4,345.1,40.7,48.9,4.2],[672.1,341.9,38.9,46.6,2.3],[589.7,337.8,33.2,39.8,1.1],[489.6,336.1,41.1,49.4,3],[525.5,345.3,43.1,51.7,-5.1],[558.1,339.6,45.1,54.2,0.4],[617.5,339.5,42.3,50.8,1.3],[645.1,340.2,39.3,47.2,6.6],[460.5,346.6,34.7,41.7,12.1],[728.6,348.1,34.5,41.4,6.2],[638.1,374.9,44.3,53.1,-3.7],[676.1,374.4,42.2,50.6,-6.3],[602.5,377,42.7,51.2,-1.2],[569.9,379.4,45.1,54.1,-2.6],[541.9,374.5,42.3,50.8,7.2],[504.3,372.7,44.9,53.8,-6.3],[709.2,378.5,31.8,38.1,-12],[735.3,406.3,41.8,50.1,-2.7],[662.2,414.4,42.9,51.5,2],[592.4,410.5,43.5,52.2,1.7],[506.1,409.3,45,54,6.5],[704.8,413.4,43.3,51.9,-7.8],[586.2,440.5,43.8,52.5,-1.5],[624.7,407.2,42.9,51.5,-0.9],[650.8,446.2,43,51.6,-0.4],[552.7,409.8,42,50.4,7.6],[525.7,405.7,28.4,34.1,-7.4],[467.3,407.2,40.7,48.9,-5.1],[620,443.6,36.3,43.5,-10.9],[555,444.5,42.4,50.9,-5.1],[759.2,443.5,42.1,50.5,-5.3],[528.8,442.9,44.6,53.5,4.7],[504.2,449.6,45.1,54.1,-5.6],[728.3,447.7,41.2,49.5,5.3],[469,448.5,44.3,53.1,5.8],[685.4,444.5,44.6,53.5,5.6],[719.5,483,45.1,54.2,3.9],[619,480.8,45.3,54.3,1.4],[654.4,480.8,43.7,51.3,-6],[690.5,482.3,44,52.8,-5.7],[561.6,473.8,41.7,50,-3.4],[587.7,476.5,40.7,48.9,-7.3],[529.5,474.8,41.8,50.2,4.1],[503.4,476.4,42.1,50.5,-4.6],[477.7,479.5,40.8,49,1.8],[465.8,514.1,45.4,54.5,6.8],[484.6,509.7,36,43.2,-11.4],[710.1,517.1,42.5,51,2.3],[424.1,514.9,40.7,48.8,-1.7],[521.6,510.8,43.1,51.7,-2.4],[745.9,514,43.1,51.7,-1.8],[638.7,512.2,42.8,51.3,7.1],[560.9,510.2,44.3,53.1,-2.5],[584.1,512.9,36.4,43.7,12.5],[784.3,512.6,40.9,49.1,6.2],[674.6,517.4,42.8,51.4,-13.7],[612.5,515.9,33.3,39.9,-1.6],[474.7,551.7,44.3,53.1,1.9],[801.3,545.3,42.9,51.4,1.8],[565.7,545.9,41.7,50,0.8],[361.6,547.9,44.7,53.6,14],[387.5,544.9,43.9,52.7,2.4],[583.3,549.9,41.1,49.3,-5.6],[723.9,549.5,45.4,54.5,-4],[758.5,546.7,42.6,51.1,1],[690.2,551.3,43.8,52.5,3.6],[527.3,544,41,49.2,4.9],[445.5,550.2,39,46.8,-5.7],[413.9,553.3,37.4,44.9,7.8],[615.6,551.7,43.6,52.3,7.9],[650.5,551.3,42.3,50.8,-0.7],[498.4,551.7,37.3,44.7,-5.9],[842.4,548.2,44.2,53.1,-4.6],[526.7,583.6,37.5,45,-0.1],[562.6,593.3,39.3,47.2,5],[598.4,595.3,39.3,47.2,-4.6],[635.7,596.7,39.3,47.2,-0.8]];
+  const tree=document.getElementById('tree'),els=[];
+  P.forEach((d,i)=>{const [cx,cy,w,h,r]=d;const e=document.createElement('div');e.className='p';
+    e.style.cssText=`left:${cx-w/2}px;top:${cy-h/2}px;width:${w}px;height:${h}px;background-position:${-((i%12)*60+(60-w)/2)}px ${-(Math.floor(i/12)*72+(72-h)/2)}px;transform:rotate(${-r}deg)`;
+    tree.appendChild(e);els.push({e,cx,cy,r});});
+  const root=document.documentElement;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const star=document.getElementById('star'),final=document.getElementById('heroFinal');
+  const rv=[...document.querySelectorAll('#hero .rv')];
+  function showAll(){final.style.opacity=1;star.classList.add('on','glow');rv.forEach(x=>x.classList.add('on'));}
+  if(reduce){showAll();}
+  else{
+    root.classList.add('anim');document.getElementById('pain').classList.add('wait');
+    // start: every polaroid above the frame, spinning
+    let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+    els.forEach(o=>{const dx=(rnd()*2-1)*420+(600-o.cx)*0.3,dy=-(o.cy+220+rnd()*500);o.e.style.transition='none';o.e.style.transform=`translate(${dx}px,${dy}px) rotate(${(rnd()*2-1)*120}deg) scale(1.35)`;});
+    const imgs=['img/sprite.webp','img/hero-plain.webp','img/star.webp','img/b2cover.webp'].map(s=>new Promise(res=>{const i=new Image();i.onload=i.onerror=res;i.src=s;}));
+    let started=false;
+    const start=()=>{if(started)return;started=true;void tree.offsetWidth;
+      const ys=els.map(o=>o.cy),maxY=Math.max(...ys),minY=Math.min(...ys);
+      els.forEach(o=>{const order=(maxY-o.cy)/(maxY-minY);const delay=120+order*1500+rnd()*260;
+        o.e.style.transition=`transform ${900+rnd()*300}ms cubic-bezier(.22,1,.36,1) ${delay}ms`;o.e.style.transform=`rotate(${-o.r}deg)`;});
+      setTimeout(()=>{star.classList.add('on');setTimeout(()=>star.classList.add('glow'),900);},2700);
+      setTimeout(()=>{final.style.opacity=1;rv.forEach((x,i)=>{x.style.transitionDelay=(i*90)+'ms';x.classList.add('on');});},3400);
+      setTimeout(()=>document.getElementById('pain').classList.remove('wait'),4300);
+    };
+    Promise.all(imgs).then(start);setTimeout(start,3500);
+  }
+
+  // ---------- scroll buttons ----------
+  document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{const t=document.getElementById(b.dataset.go);const s=parseFloat(scaler.style.width)/1200;const y=scaler.getBoundingClientRect().top+scrollY+t.offsetTop*s;scrollTo({top:y,behavior:reduce?'auto':'smooth'});}));
+
+  // ---------- quiz ----------
+  const Q=[
+    {t:'Яка нагода свята?',o:[['Новорічний корпоратив','','img/q0.jpg'],['Тімбілдинг','','img/q1.jpg'],['Річниця компанії','','img/q2.jpg'],['Інше','','img/q3.jpg']]},
+    {t:'Де проводимо?',o:[['На нашій локації','Київ, усе під ключ','img/q4.jpg'],['Виїзний','у твоєму офісі чи місті','img/q5.jpg'],['Онлайн','для розподілених команд','img/q6.jpg']]},
+    {t:'Скільки буде учасників?',num:true,o:[['4–25','Невелика команда'],['26–50','Середня команда'],['51–100','Великий відділ'],['100+','Уся компанія']]}
+  ];
+  const tilts=[-3,2.2,-1.8,2.8];
+  let step=0;const ans=[];let name='';
+  const body=document.getElementById('qbody'),prog=document.getElementById('prog'),fill=document.getElementById('trackFill'),back=document.getElementById('back');
+  function setProg(i){prog.textContent=i<3?`питання ${i+1} з 3`:'останній крок';fill.style.strokeDashoffset=String(100-Math.round(Math.min(i+1,3)/3*100));}
+  function render(){
+    body.innerHTML='';back.hidden=step===0||step>3;setProg(step);
+    if(step<3){const q=Q[step];const t=document.createElement('div');t.className='qtitle fade';t.textContent=q.t;body.appendChild(t);
+      const wrap=document.createElement('div');wrap.className='opts';body.appendChild(wrap);
+      const n=q.o.length,pw=176,gap=46,span=n*pw+(n-1)*gap,sx=(1100-span)/2;
+      q.o.forEach((o,j)=>{const b=document.createElement('button');b.className='opt fade';b.type='button';b.style.left=(sx+j*(pw+gap))+'px';b.style.transform=`rotate(${tilts[j%4]}deg)`;
+        b.style.animationDelay=(j*60)+'ms';
+        b.innerHTML=(q.num?`<span class="num">${o[0]}<small>людей</small></span>`:`<img class="ph" src="${o[2]}" alt="" loading="lazy">`)+
+          `<span class="cp"><b>${q.num?o[1]:o[0]}</b>${!q.num&&o[1]?`<span>${o[1]}</span>`:''}</span><span class="tape"></span>`;
+        if(ans[step]===j)b.classList.add('sel');
+        b.setAttribute('aria-label',q.num?`${o[0]} людей, ${o[1]}`:o[0]+(o[1]?', '+o[1]:''));
+        b.addEventListener('click',()=>{ans[step]=j;startTimer();wrap.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');setTimeout(()=>{step++;render();},380);});
+        wrap.appendChild(b);});
+    } else if(step===3){
+      const t=document.createElement('div');t.className='qtitle fade';t.textContent='Куди надіслати 4 програми?';body.appendChild(t);
+      const f=document.createElement('form');f.className='form fade';f.noValidate=true;
+      const picked=ans.map((a,i)=>Q[i].num?Q[i].o[a][0]+' людей':Q[i].o[a][0]);
+      f.innerHTML=`<div class="picked">${picked.map(p=>`<span>${p}</span>`).join('')}</div>
+        <div class="fields">
+          <div class="fld"><label for="q-name">Ім'я</label><input id="q-name" autocomplete="given-name" placeholder="Олена"><span class="err" id="e-name"></span></div>
+          <div class="fld"><label for="q-phone">Телефон</label><input id="q-phone" type="tel" autocomplete="tel" placeholder="+380 67 123 45 67"><span class="err" id="e-phone"></span></div>
+          <div class="fld"><label for="q-company">Компанія</label><input id="q-company" autocomplete="organization" placeholder="Необов'язково"><span class="err"></span></div>
+        </div>
+        <button class="qbtn" type="submit">Отримати 4 програми</button>`;
+      f.addEventListener('submit',e=>{e.preventDefault();const nm=f.querySelector('#q-name').value.trim(),ph=f.querySelector('#q-phone').value.replace(/\D/g,'');let ok=true;
+        f.querySelector('#e-name').textContent=nm?'':'Напиши, як до тебе звертатися';if(!nm)ok=false;
+        f.querySelector('#e-phone').textContent=ph.length>=10?'':'Потрібен номер з кодом, наприклад +380 67 123 45 67';if(ph.length<10)ok=false;
+        if(ok){name=nm;step=4;render();}});
+      body.appendChild(f);
+    } else {
+      const d=document.createElement('div');d.className='done fade';
+      d.innerHTML=`<div class="qtitle" style="position:static;width:auto">Дякуємо, ${name.replace(/[<>&]/g,'')}!</div>
+        <p>Менеджер Q-team підбере 4 програми з таймінгом під твою команду і розрахує вартість.</p>
+        <p class="note">Демоверсія лендингу: форма ще не підключена до CRM, тому заявка нікуди не відправляється.</p>
+        <button class="qbtn" type="button" id="again">Пройти ще раз</button>`;
+      body.appendChild(d);d.querySelector('#again').addEventListener('click',()=>{ans.length=0;step=0;render();});
+      stopTimer();
+    }
+  }
+  back.addEventListener('click',()=>{if(step>0){step--;render();}});
+  let left=180,tid=null;const tm=document.getElementById('timer');
+  function startTimer(){if(tid)return;tid=setInterval(()=>{left=Math.max(0,left-1);tm.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');if(!left)stopTimer();},1000);}
+  function stopTimer(){clearInterval(tid);}
+  render();
+
+  // ---------- background worries: real text + hand drawn SVG outlines ----------
+  const W=[[423,430,83,25,11,83,'Де святкувати?'],[944,387,85,33,-11,83,'Просто застілля якось банально...'],[62,426,87,49,16,83,'Всі локації зайняті ще з жовтня...'],[906,483,85,36,-13,83,'А бюджета вистачить?'],[42,558,63,29,-11,61,'Це взагалі на часі?'],[992,562,93,40,14,92,'Тільки б не про політику за столом'],[181,605,91,41,15,90,'Це корпоратив чи планерка вийде?'],[605,626,82,33,17,83,'Як розважати?'],[806,640,85,36,13,83,'Де знайти генератор?'],[197,493,85,36,-13,83,'А раптом тривога....'],[382,621,85,32,-10,83,'Половина людей закордоном'],[762,369,99,36,11,98,'Корпоративів вже 3 роки не було...'],[617,448,60,31,-14,57,'А чи буде цікаво?'],[1046,438,109,40,12,108,'Декор із маркетплейсу виявися неякісним...']];
+  const QM=[[67,650,15],[20,448,15],[522,463,15],[271,667,15],[1145,538,15,31],[1104,352,15],[816,461,15],[273,436,-19],[158,537,-19],[731,435,-19],[915,315,-19],[941,675,-19]];
+  const host=document.getElementById('worries');const items=[];
+  W.forEach(([x,y,bw,bh,r,w,t])=>{const d=document.createElement('div');d.className='wq';d.textContent=t;d.style.width=w+'px';d.style.left=(x+bw/2-w/2)+'px';d.dataset.cy=y+bh/2;d.style.transform=`rotate(${-r}deg)`;host.appendChild(d);items.push(d);});
+  QM.forEach(([x,y,r,s])=>{const q=document.createElement('div');q.className='qm';q.textContent='?';q.style.left=x+'px';q.style.top=y+'px';if(s)q.style.fontSize=s+'px';q.style.transform=`rotate(${-r}deg)`;host.appendChild(q);});
+  function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function smooth(p){let d=`M ${((p[0][0]+p[1][0])/2).toFixed(1)} ${((p[0][1]+p[1][1])/2).toFixed(1)}`;for(let i=1;i<p.length-1;i++){const [x,y]=p[i],[nx,ny]=p[i+1];d+=` Q ${x.toFixed(1)} ${y.toFixed(1)} ${((x+nx)/2).toFixed(1)} ${((y+ny)/2).toFixed(1)}`;}return d;}
+  function draw(){const R=rng(1905);items.forEach((d,k)=>{const w=d.offsetWidth,h=d.offsetHeight;d.style.top=(d.dataset.cy-h/2)+'px';
+      const rx=w/2+9+R()*4,ry=h/2+7+R()*3,type=k%3,a0=R()*Math.PI*2,pts=[];
+      if(type!==1){const turns=type===2?1.85:1.12,n=Math.round(28*turns);for(let i=0;i<=n;i++){const a=a0+i/n*turns*Math.PI*2,sp=1+.06*(i/n),nz=1+(R()*2-1)*.05;pts.push([Math.cos(a)*rx*sp*nz,Math.sin(a)*ry*sp*nz]);}}
+      else{const side=R()<.5?1:-1,ta=side>0?Math.PI*.62:Math.PI*.38,s=ta+.22,e=ta-.22+Math.PI*2,tip=[Math.cos(ta)*rx*1.55-side*6,Math.sin(ta)*ry*1.9];pts.push(tip,tip);for(let i=0;i<=30;i++){const a=s+(e-s)*i/30,nz=1+(R()*2-1)*.04;pts.push([Math.cos(a)*rx*nz,Math.sin(a)*ry*nz]);}pts.push(tip,tip);}
+      const pad=40,svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('width',w+pad*2);svg.setAttribute('height',h+pad*2);svg.style.left=-pad+'px';svg.style.top=-pad+'px';
+      const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',smooth(pts));p.setAttribute('transform',`translate(${w/2+pad} ${h/2+pad})`);p.setAttribute('fill','none');p.setAttribute('stroke','rgba(0,0,0,.24)');p.setAttribute('stroke-width',type===2?.8:1);p.setAttribute('stroke-linecap','round');
+      svg.appendChild(p);d.querySelectorAll('svg').forEach(s=>s.remove());d.appendChild(svg);});}
+  draw();(document.fonts&&document.fonts.ready||Promise.resolve()).then(draw);
+})();
+</script>
