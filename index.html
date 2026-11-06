@@ -49,9 +49,9 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 .anim #hero .star.on{opacity:1;transform:none}
 #hero .star.glow img{animation:glow 3.6s ease-in-out infinite}
 @keyframes glow{0%,100%{filter:drop-shadow(0 0 8px rgba(255,209,2,.2))}50%{filter:drop-shadow(0 0 30px rgba(255,209,2,.7))}}
-.anim #hero .arr{clip-path:inset(-20% 100% -20% -20%);transition:clip-path .9s cubic-bezier(.45,.05,.3,1)}
-.anim #hero .arr.rtl{clip-path:inset(-20% -20% -20% 100%)}
-.anim #hero .arr.on{clip-path:inset(-20% -20% -20% -20%)}
+.anim #hero .arr img{clip-path:inset(-20% 100% -20% -20%);transition:clip-path .9s cubic-bezier(.45,.05,.3,1)}
+.anim #hero .arr.rtl img{clip-path:inset(-20% -20% -20% 100%)}
+.anim #hero .arr.on img{clip-path:inset(-20% -20% -20% -20%)}
 .anim #hero .lab{opacity:0;transform:translateY(10px);transition:opacity .7s var(--ez) .25s,transform .8s var(--ez) .25s}
 .anim #hero .lab.on{opacity:1;transform:none}
 .anim #hero .pl{opacity:0;transform:translateY(48px) scale(.95);transition:opacity .7s var(--ez),transform .95s var(--pop)}
@@ -132,8 +132,8 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 #board .pol.live{transition:transform .7s var(--ez)}
 .anim #board .ds{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ez),transform .9s var(--ez)}
 .anim #board .ds.on{opacity:1;transform:none}
-.anim #board .thr{clip-path:inset(0 100% 0 0);transition:clip-path 1.4s cubic-bezier(.45,.05,.3,1)}
-.anim #board .thr.on{clip-path:inset(-5% -5% -5% -5%)}
+.anim #board .thr img{clip-path:inset(0 100% 0 0);transition:clip-path 1.4s cubic-bezier(.45,.05,.3,1)}
+.anim #board .thr.on img{clip-path:inset(-5% -5% -5% -5%)}
 .anim #board .pin{opacity:0;transform:translateY(-30px) scale(1.6);transform-origin:var(--ox) var(--oy);transition:opacity .3s var(--ez),transform .55s var(--pop)}
 .anim #board .pin.on{opacity:1;transform:none}
 
@@ -450,7 +450,7 @@ for(const it of BD.items){
   if(it.T){const g=G(board,'ds');TX(it.T,g,0,0,'p');dss.push(g);continue;}
   const k=it.L,p=it.p,i=it.i;const src=V+'board-'+k+'.webp';
   if(/^pin/.test(k)){const g=G(board,'pin');IMG(src,p,g);g.style.setProperty('--ox',(p[0]+p[2]/2)+'px');g.style.setProperty('--oy',(p[1]+p[3]/2)+'px');pins.push(g);continue;}
-  if([17,19,20,21,22,23,24].includes(i)){const g=G(board,'thr');const im=IMG(src,p,g);thrs.push(im);continue;}
+  if([17,19,20,21,22,23,24].includes(i)){const g=G(board,'thr');IMG(src,p,g);thrs.push(g);continue;}
   if(i===2||i===0||i===1){IMG(src,p,board);continue;}
   if(i===32){const g=G(board,'ds');g.setAttribute('aria-hidden','true');IMG(src,p,g);(it.tx||[]).forEach(t=>TX(t,g,p[0],p[1]));dss.unshift(g);continue;}
   const g=G(board,'pol');IMG(src,p,g);(it.tx||[]).forEach(t=>TX(t,g,p[0],p[1],'p'));
@@ -462,7 +462,7 @@ else{
   dss.forEach((d,j)=>onView(d.firstElementChild||d,()=>{d.style.transitionDelay=(j===1?200:0)+'ms';d.classList.add('on');},0.4));
   pols.forEach(p=>onView(p.g.firstChild,()=>{p.g.style.transitionDelay=((p.i*53)%180)+'ms';p.g.classList.add('on');setTimeout(()=>p.g.classList.add('live'),1400);},0.25));
   pins.forEach(p=>onView(p.firstChild,()=>{p.style.transitionDelay='650ms';p.classList.add('on');},0.5));
-  thrs.forEach(t=>onView(t,()=>setTimeout(()=>t.classList.add('on'),900),0.4));
+  thrs.forEach(t=>onView(t.firstChild,()=>setTimeout(()=>t.classList.add('on'),900),0.4));
 }
 if(!reduce&&matchMedia('(hover:hover)').matches){let mx=-1e4,my=-1e4,tk=false;
   const upd=()=>{tk=false;pols.forEach(p=>{if(!p.g.classList.contains('live'))return;const dx=p.cx-mx,dy=p.cy-my,d=Math.hypot(dx,dy),R=420;
