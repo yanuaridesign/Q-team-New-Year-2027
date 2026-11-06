@@ -4,44 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Q-team · Новорічний корпоратив</title>
-<meta name="description" content="Новорічний корпоратив під ключ від Q-team: на своїй локації в Києві на -1 поверсі, зі світлом і без тривог. 40+ сценаріїв від кіносценаристів.">
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Новорічний корпоратив від Q-team у Bakkara Hotel on the river: 40+ сценаріїв, свято не переривається під час тривоги, є генератор, світло і тепло.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
 <style>
-:root{--ink:#0b0908;--cream:#fdf8f0;--y:#ffd102;--paper:#f6f5f2;--ez:cubic-bezier(.22,1,.36,1);--pop:cubic-bezier(.34,1.56,.64,1);--hand:cubic-bezier(.45,.05,.55,.95);--f:"Montserrat",system-ui,sans-serif;--c:"Caveat",cursive;color-scheme:dark}
+:root{--ink:#0b0908;--y:#fbfc7e;--pu:#5542e7;--pu2:#4635c9;--pu3:#2a1d9a;--pink:#ed1b7e;--cy:#00ffff;--ez:cubic-bezier(.22,1,.36,1);--pop:cubic-bezier(.34,1.56,.64,1);--hand:cubic-bezier(.45,.05,.55,.95);--f:"Montserrat",system-ui,sans-serif}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--ink)}
-body{color:var(--cream);font-family:var(--f);overflow-x:hidden}
+html,body{margin:0;background:var(--pu)}
+body{font-family:var(--f);overflow-x:hidden;color:var(--ink)}
 .scaler{position:relative;width:100%;overflow:hidden}
 .stage{position:absolute;left:0;top:0;width:1920px;transform-origin:0 0}
 section{position:relative;width:1920px;overflow:hidden}
 .bg{position:absolute;left:0;top:0;width:1920px;display:block;pointer-events:none;user-select:none}
 .L{position:absolute;display:block;pointer-events:none;user-select:none;max-width:none}
-.abs{position:absolute;margin:0}
-.btnL{position:absolute;padding:0;border:0;background:none;cursor:pointer;transition:transform .3s var(--ez),filter .3s var(--ez)}
-.btnL img{display:block;width:100%;height:100%}
-.btnL:hover{transform:translateY(-3px);filter:brightness(1.06) drop-shadow(0 10px 24px rgba(255,209,2,.35))}
-.btnL:active{transform:translateY(1px)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0}
 button:focus-visible{outline:3px solid var(--y);outline-offset:4px}
 
+/* buttons */
+.cta{position:absolute;display:flex;align-items:center;justify-content:center;font:700 22.44px/1.2 var(--f);text-transform:uppercase;cursor:pointer;border-radius:3.2px;padding:0;
+  transition:transform .35s var(--ez),box-shadow .35s var(--ez),filter .35s var(--ez),background-color .35s var(--ez)}
+.cta.hero{background:var(--y);color:var(--pu2);border:3.6px solid var(--y);box-shadow:8px 8px 0 var(--pu2)}
+.cta.hero:hover{transform:scale(1.05);box-shadow:10px 10px 0 var(--pu3);filter:brightness(1.05) saturate(1.1)}
+.cta.more{background:var(--y);color:#d30869;border:1.6px solid #d30869}
+.cta.more:hover{transform:scale(1.05);filter:brightness(1.05);box-shadow:6px 6px 0 #a3004f}
+.cta:active{transform:scale(.98)}
+.imgbtn{position:absolute;padding:0;border:0;background:none;cursor:pointer;transition:transform .35s var(--ez),filter .35s var(--ez)}
+.imgbtn img{display:block;width:100%;height:100%}
+.imgbtn:hover{transform:scale(1.05);filter:brightness(1.06) drop-shadow(0 10px 22px rgba(251,252,126,.35))}
+
 /* HERO */
-#hero{height:1333px}
+#hero{height:1513px;background:var(--pu)}
 .tree .p{position:absolute;background:#f6f5f2 center/100% 100% no-repeat;box-shadow:0 2px 4px rgba(0,0,0,.4);will-change:transform}
-.hand{font:700 29px/.7 var(--c);letter-spacing:-.01em;color:var(--y);transform-origin:0 0;white-space:nowrap}
-.hand span{display:block;clip-path:inset(-20% 100% -20% 0);transition:clip-path .75s var(--hand)}
-.hand span.on{clip-path:inset(-20% -5% -20% 0)}
-.arr{clip-path:inset(0 100% 0 0);transition:clip-path .7s var(--hand)}
-.arr.rtl{clip-path:inset(0 0 0 100%)}
-.arr.on{clip-path:inset(0 0 0 0)}
-.sub{font:400 29px/1.2 var(--f);color:var(--cream);width:680px}
-.sub b,.pt b{font-weight:600;color:var(--y)}
-.pt{font:400 19.5px/1 var(--f);text-align:center;color:var(--cream)}
 .anim .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ez),transform .8s var(--ez)}
 .anim .rv.on{opacity:1;transform:none}
-.anim .obj{opacity:0;transform:scale(.4) rotate(-14deg);transition:opacity .5s var(--ez),transform .8s var(--pop)}
-.anim .obj.on{opacity:1;transform:none}
 .anim .tt{opacity:0;transform:translateX(-40px);transition:opacity .9s var(--ez),transform .9s var(--ez)}
 .anim .tt.r{transform:translateX(40px)}
 .anim .tt.on{opacity:1;transform:none}
@@ -49,56 +45,57 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:4px}
 .anim .star.on{opacity:1;transform:none}
 .star.glow{animation:glow 3.4s ease-in-out infinite}
 @keyframes glow{0%,100%{filter:drop-shadow(0 0 10px rgba(255,209,2,.25))}50%{filter:drop-shadow(0 0 34px rgba(255,209,2,.75)) brightness(1.08)}}
-#heroBtn.glow{animation:bglow 3.4s ease-in-out infinite}
-@keyframes bglow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,209,2,0))}50%{filter:drop-shadow(0 0 22px rgba(255,209,2,.55))}}
-.anim .pi{opacity:0;transform:translateY(30px) scale(.92);transition:opacity .7s var(--ez),transform .8s var(--pop)}
-.anim .pi.on{opacity:1;transform:none}
+.anim .clip{clip-path:inset(-10% 100% -10% -10%);transition:clip-path .75s var(--hand)}
+.anim .clip.rtl{clip-path:inset(-10% -10% -10% 100%)}
+.anim .clip.on{clip-path:inset(-10% -10% -10% -10%)}
+.anim .obj{opacity:0;transform:scale(.4) rotate(-14deg);transition:opacity .5s var(--ez),transform .8s var(--pop)}
+.anim .obj.on{opacity:1;transform:none}
+.anim .pl{opacity:0;transform:translateY(46px) scale(.94);transition:opacity .7s var(--ez),transform .9s var(--pop)}
+.anim .pl.on{opacity:1;transform:none}
 
 /* PAIN */
-#pain{height:1956px;background:var(--ink)}
-.tear{position:absolute;left:-240px;top:0;width:2400px;height:320px;transform-origin:30% 100%;will-change:transform;pointer-events:none}
-.tear::before{content:"";position:absolute;left:0;right:0;bottom:316px;height:2200px;background:var(--ink)}
-.tear img{position:absolute;left:240px;top:0;width:1920px;height:320px}
+#pain{height:1956px;background:#fdff83}
+.tear{position:absolute;left:-240px;top:0;width:2400px;height:260px;transform-origin:30% 100%;will-change:transform;pointer-events:none}
+.tear::before{content:"";position:absolute;left:0;right:0;bottom:250px;height:2400px;background:var(--pu)}
+.tear img{position:absolute;left:240px;top:0;width:1920px;height:260px}
 .anim .wo{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2) rotate(var(--r));transition:opacity .25s var(--ez),transform .55s var(--pop)}
 .anim .wo.on{opacity:1;transform:none}
-.squish{animation:squish .32s var(--ez)}
-@keyframes squish{30%{transform:scale(.985,.97) translateX(var(--sx,0))}}
 .anim .sc{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ez),transform .9s var(--ez)}
 .anim .sc.on{opacity:1;transform:none}
 .anim .cat{opacity:0;transform:translateY(90px) scale(.9);transition:opacity .6s var(--ez),transform .9s var(--pop)}
 .anim .cat.on{opacity:1;transform:none}
-.logos{position:absolute;left:0;top:1690px;width:1920px;height:60px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.logos .row{display:flex;gap:80px;width:max-content;padding-left:79px;animation:marq 50s linear infinite}
-.logos img{height:50px;width:1844.5px;display:block;margin-top:7px}
-@keyframes marq{to{transform:translateX(-1924.5px)}}
+.logos{position:absolute;left:0;top:1706.7px;width:1920px;height:58px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.logos .row{display:flex;gap:80px;width:max-content;padding-left:19.5px;animation:marq 70s linear infinite}
+.logos img{height:58px;width:4248px;display:block}
+@keyframes marq{to{transform:translateX(-4328px)}}
 
 /* QUIZ */
-#quiz{height:1168px}
+#quiz{height:1168px;background:var(--pink)}
 .card{position:absolute;left:0;top:0;width:1920px;height:1168px;color:var(--ink)}
-.prog{position:absolute;left:144px;top:435px;font:600 19px/23px var(--f);color:rgba(11,9,8,.6)}
-.track{position:absolute;left:380px;top:440px;overflow:visible}
-.timer{position:absolute;left:1744px;top:434px;font:700 21px/23px var(--f);color:#e5b800;font-variant-numeric:tabular-nums}
+.prog{position:absolute;left:144px;top:435.6px;font:600 19.2px/23px var(--f);color:rgba(11,9,8,.55)}
+.track{position:absolute;left:380px;top:439px;overflow:visible}
+.timer{position:absolute;left:1744px;top:434px;font:700 20.8px/25px var(--f);color:var(--pu);font-variant-numeric:tabular-nums}
 .back{position:absolute;left:144px;top:470px;font:600 16px/1 var(--f);color:rgba(11,9,8,.6);text-decoration:underline;background:none;border:0;padding:4px 0;cursor:pointer}
-.qtitle{position:absolute;left:80px;top:499px;width:1760px;text-align:center;font:700 38px/47px var(--f);text-transform:uppercase;color:var(--ink)}
-.opt{position:absolute;width:282px;height:368px;background:#faf7f2;border:.8px solid #d1c7b2;box-shadow:0 4px 10px rgba(0,0,0,.28);cursor:pointer;padding:0;color:var(--ink);transition:transform .5s var(--ez),box-shadow .3s var(--ez)}
+.qtitle{position:absolute;left:80px;top:499.6px;width:1760px;text-align:center;font:700 38.4px/47px var(--f);text-transform:uppercase;color:var(--ink)}
+.opt{position:absolute;width:281.6px;height:368px;background:#faf7f2;border:.8px solid #d1c7b2;border-radius:1.6px;box-shadow:0 4.8px 9.6px rgba(0,0,0,.28);cursor:pointer;padding:0;color:var(--ink);transition:transform .5s var(--ez),box-shadow .3s var(--ez)}
 .opt:hover{transform:translateY(-10px) rotate(0deg)!important;box-shadow:0 18px 30px rgba(0,0,0,.28)}
-.opt.sel{box-shadow:0 0 0 4px var(--y),0 18px 30px rgba(0,0,0,.28)}
-.opt .ph{position:absolute;left:16px;top:17px;width:250px;height:250px;object-fit:cover;display:block}
-.opt .num{position:absolute;left:16px;top:17px;width:250px;height:250px;background:#fff1b0;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 60px/1 var(--f)}
-.opt .num small{font:600 18px/1.4 var(--f);opacity:.6}
-.opt .cp{position:absolute;left:10px;right:10px;top:270px;bottom:8px;display:flex;align-items:center;justify-content:center;font:700 37.8px/.95 var(--c);text-align:center}
-.opt .tape{position:absolute;left:94px;top:-17px;width:93px;height:29px;background:#ede0bd;opacity:.9}
+.opt.sel{box-shadow:0 0 0 4px var(--pu),0 18px 30px rgba(0,0,0,.28)}
+.opt .ph{position:absolute;left:16px;top:16px;width:249.6px;height:249.6px;object-fit:cover;display:block}
+.opt .num{position:absolute;left:16px;top:16px;width:249.6px;height:249.6px;background:#e9e5ff;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 60px/1 var(--f);color:var(--pu)}
+.opt .num small{font:600 18px/1.4 var(--f);opacity:.7}
+.opt .cp{position:absolute;left:9.6px;right:9.6px;top:276px;bottom:10px;display:flex;align-items:center;justify-content:center;font:700 20.8px/.9 var(--f);text-align:center}
+.opt .tape{position:absolute;left:95.4px;top:-26.8px;width:92.8px;height:28.8px;background:#ede0bd;opacity:.95}
 .form{position:absolute;left:80px;top:600px;width:1760px;display:flex;flex-direction:column;align-items:center;gap:36px}
 .fields{display:flex;gap:40px}
 .fld{display:flex;flex-direction:column;gap:8px;width:400px;text-align:left}
 .fld label{font:600 16px/1 var(--f);text-transform:uppercase;letter-spacing:.06em;opacity:.6}
 .fld input{font:400 26px/1.3 var(--f);color:var(--ink);background:transparent;border:0;border-bottom:2px solid var(--ink);padding:8px 2px;outline:none}
-.fld input:focus{border-bottom-color:#e5b800}
+.fld input:focus{border-bottom-color:var(--pu)}
 .fld .err{font:400 16px/1.2 var(--f);color:#b3261e;min-height:20px}
 .picked{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.picked span{font:600 18px/1 var(--f);padding:10px 18px;border-radius:999px;background:#fff1b0;border:1px solid rgba(11,9,8,.2)}
-.qbtn{font:700 21px/1.2 var(--f);text-transform:uppercase;letter-spacing:.02em;background:var(--y);color:var(--ink);border:0;padding:24px 48px;cursor:pointer;transition:transform .3s var(--ez),filter .3s var(--ez)}
-.qbtn:hover{filter:brightness(1.06);transform:translateY(-2px)} .qbtn:active{transform:translateY(1px)}
+.picked span{font:600 18px/1 var(--f);padding:10px 18px;border-radius:999px;background:#e9e5ff;border:1px solid rgba(11,9,8,.2)}
+.qbtn{font:700 21px/1.2 var(--f);text-transform:uppercase;background:var(--y);color:var(--pu2);border:3px solid var(--y);box-shadow:7px 7px 0 var(--pu2);padding:22px 46px;cursor:pointer;transition:transform .3s var(--ez),box-shadow .3s var(--ez)}
+.qbtn:hover{transform:scale(1.04);box-shadow:9px 9px 0 var(--pu3)}
 .done{position:absolute;left:260px;top:560px;width:1400px;text-align:center;display:flex;flex-direction:column;gap:22px;align-items:center}
 .done p{font:400 24px/1.5 var(--f);max-width:960px;margin:0}
 .done .note{font-size:17px;opacity:.55}
@@ -107,18 +104,30 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:4px}
 .anim #quiz .qin{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ez),transform .9s var(--ez)}
 .anim #quiz.on .qin{opacity:1;transform:none}
 
+/* TABLE (horizontal scroll) */
+#tblw{background:var(--pink);overflow:visible}
+#tbl{position:absolute;left:0;top:0;width:1920px;height:1268px;overflow:hidden;will-change:transform}
+#tbl .strip{position:absolute;left:0;top:1145px;width:1920px;height:123px;background:var(--cy);opacity:0}
+#tbl .tab{position:absolute;left:0;top:164px;width:4000px;height:1041px;will-change:transform}
+#tbl .lid{transform-origin:var(--ox) var(--oy);will-change:transform}
+#tbl .ph{will-change:transform,opacity;transform-origin:50% 100%}
+#tbl .dsc{transition:none}
+#tbl .more{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ez),transform .6s var(--ez);pointer-events:none}
+#tbl .more.on{opacity:1;transform:none;pointer-events:auto}
+
 /* BOARD */
-#board{height:2354px}
-.pol{transform-origin:var(--ox) var(--oy);will-change:transform}
-.anim .pol{opacity:0;transform:translate(var(--fx),var(--fy)) scale(1.9) rotate(var(--fr));filter:blur(8px);transition:opacity .5s var(--ez),transform 1.1s var(--ez),filter .9s var(--ez)}
+#board{height:2354px;background:var(--cy)}
+.pol{transform-origin:50% 0;will-change:transform}
+.anim .pol{opacity:0;transform:translate(var(--fx),var(--fy)) scale(1.7) rotate(var(--fr));filter:blur(8px);transition:opacity .5s var(--ez),transform 1.1s var(--ez),filter .9s var(--ez)}
 .anim .pol.on{opacity:1;transform:none;filter:none}
 .pol.live{transition:transform .6s var(--ez)!important}
 .anim .ds{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ez),transform .8s var(--ez)}
 .anim .ds.on{opacity:1;transform:none}
+.anim .thr{opacity:0;clip-path:inset(0 0 100% 0);transition:opacity .6s var(--ez),clip-path 1.6s var(--ez)}
+.anim .thr.on{opacity:1;clip-path:inset(0 0 0 0)}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before{transition-duration:0s!important;animation:none!important}
-  .str,.arr,.hand span{clip-path:none!important}
 }
 </style>
 </head>
@@ -126,33 +135,25 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:4px}
 <div class="scaler" id="scaler"><main class="stage" id="stage">
 
 <section id="hero" aria-label="Новорічний корпоратив">
-  <img class="bg" src="img/bg/hero.webp" alt="" width="1920" height="1333">
-  <div class="tree" id="tree" aria-hidden="true"></div>
-  <h1 class="abs" style="left:0;top:0;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Новорічний корпоратив від Q-team</h1>
-  <p class="abs sub rv" style="left:80px;top:387.5px"><b>Нова надихаюча програма</b> під ключ,<br>на своїй локації зі світлом, та без тривог</p>
-  <div class="abs hand" id="h1" style="left:1128.2px;top:174.2px;transform:rotate(-17.5deg)"><span>Різдвяний</span><span>детектив</span></div>
-  <div class="abs hand" id="h2" style="left:549.6px;top:539.6px;transform:rotate(18.7deg);line-height:1.2"><span>Форт Боярд</span></div>
-  <div class="abs hand" id="h3" style="left:1378.7px;top:644.9px;transform:rotate(-16.9deg)"><span>Капсула</span><span>Часу</span></div>
-  <p class="abs pt pi" data-i="0" style="left:80px;top:1059.6px;width:256px">На нашій локації в Києві, <b>Оnline</b> чи на виїзд по всій Україні</p>
-  <p class="abs pt pi" data-i="1" style="left:429.9px;top:1182.3px;width:266px"><b>Проводимо на -1 поверсі</b>, без тривог, зі світлом та теплом</p>
-  <p class="abs pt pi" data-i="3" style="left:1179.6px;top:1182.3px;width:352px;letter-spacing:-.02em"><b>Рейтинг безпеки локації 86 зі 100</b>, ми одразу залишили ТРЦ, як тільки це стало небезпечно</p>
-  <p class="abs pt pi" data-i="4" style="left:1568px;top:1059.6px;width:272px">Вас в команді може бути <b>як 4 гравці, так і 994</b>, залучені будуть всі</p>
+  <img class="bg" src="img/v3/hero-bg.webp" alt="" width="1920" height="1513">
+  <h1 class="sr">Новорічний корпоратив від Q-team</h1>
+  <p class="sr">Нова надихаюча програма під ключ, на своїй локації зі світлом та без тривог</p>
 </section>
 
 <section id="pain" aria-label="Чому Q-team">
-  <img class="bg" src="img/bg/paper.webp" alt="" width="1920" height="1956">
-  <h2 class="abs" style="width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">А ти вже знаєш, як компанія святкуватиме Новий рік? Видихай, бо зараз ти саме там, де треба</h2>
-  <div class="logos" aria-label="Нам довіряють: Нова пошта, ДТЕК, BetterMe, ПриватБанк, NIX, Work.ua, Young Business Club, Luxoft та інші"><div class="row"><img src="img/l/b2-logos.webp" alt=""><img src="img/l/b2-logos.webp" alt=""></div></div>
-  <div class="tear" id="tear" aria-hidden="true"><img src="img/bg/tear.webp" alt=""></div>
+  <img class="bg" src="img/v3/b2-bg.webp" alt="" width="1920" height="1956">
+  <h2 class="sr">А може, цього року нічого не проводити? Один корпоратив — інвестиція, що працює на команду весь рік</h2>
+  <div class="logos" aria-label="Нам довіряють: Нова пошта, ДТЕК, BetterMe, ПриватБанк, NIX, Work.ua, Luxoft, EPAM, Danone, McDonald's, Puma, Coca-Cola та інші"><div class="row"><img src="img/v3/b2-logos.webp" alt=""><img src="img/v3/b2-logos.webp" alt=""></div></div>
+  <div class="tear" id="tear" aria-hidden="true"><img src="img/v3/b2-tear.webp" alt=""></div>
 </section>
 
-<section id="quiz" aria-label="Квіз: дізнайся вартість">
-  <img class="bg" src="img/bg/quiz.webp" alt="" width="1920" height="1168" loading="lazy">
-  <h2 class="abs" style="width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Дізнайся, скільки коштуватиме твій корпоратив</h2>
+<section id="quiz" aria-label="Квіз: отримай 4 доречні програми">
+  <img class="bg" src="img/v3/quiz-bg.webp" alt="" width="1920" height="1168" loading="lazy">
+  <h2 class="sr">Отримай 4 доречні програми 2027 з таймінгом та вартістю</h2>
   <div class="card qin" id="card">
     <div class="prog" id="prog">питання 1 з 3</div>
     <svg class="track" width="1336" height="16" viewBox="0 0 1336 16" aria-hidden="true">
-      <path id="trackFill" d="M4 8 L1332 8" fill="none" stroke="#ffd102" stroke-width="8" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="67" style="transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)"/>
+      <path id="trackFill" d="M4 8 L1332 8" fill="none" stroke="#5542e7" stroke-width="8" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="67" style="transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)"/>
     </svg>
     <div class="timer" id="timer" aria-label="Час на квіз">3:00</div>
     <button class="back" id="back" hidden>← Попереднє питання</button>
@@ -160,113 +161,123 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:4px}
   </div>
 </section>
 
-<section id="board" aria-label="Сценарії">
-  <img class="bg" src="img/bg/board.webp" alt="" width="1920" height="2354" loading="lazy">
-  <h2 class="abs" style="width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">40+ сценаріїв від кіносценаристів, і один із них точно твій: Форт Боярд, Капсула часу, Рольова квесторія, Різдвяний детектив, Елітарний квіз, Онлайн тімбілдинг</h2>
+<section id="tblw" aria-label="Сценарії: шведський стіл">
+  <h2 class="sr">40+ готових сценаріїв на будь-який смак від HR-ів, Mental Health-спеціалістів та кіносценаристів: Різдвяний детектив, Форт Боярд, Капсула часу, Елітарний квіз, За кадром в готелі Монблан</h2>
+  <div id="tbl">
+    <img class="bg" src="img/v3/t-bg.webp" alt="" width="1920" height="1268" loading="lazy">
+    <div class="strip" id="strip"></div>
+    <div class="tab" id="tab"></div>
+  </div>
+</section>
+
+<section id="board" aria-label="Безпечне свято">
+  <img class="bg" src="img/v3/b6-bg.webp" alt="" width="1920" height="2354" loading="lazy">
+  <h2 class="sr">Безпечне свято, що точно відбудеться, навіть якщо в місті тривога, відключення чи висадка прибульців із Марса</h2>
 </section>
 
 </main></div>
 
 <script>
 (function(){
-const POS={"hero": {"H": [34.9, 208.1, 805.0, 160.5], "K": [978.7, 326.3, 851.0, 201.5], "star": [894.3, 46.6, 147.0, 167.5], "btn": [796.8, 930.6, 326.5, 72.5], "key": [528.4, 579.6, 109.5, 73.0], "caps": [1342.8, 688.5, 88.0, 73.5], "magn": [1186.9, 151.7, 107.5, 88.5], "medal": [1710.9, 459.8, 109.0, 157.5], "rating": [841.3, 1255.2, 185.5, 57.0], "ic1": [168.6, 962.2, 85.0, 84.0], "ic2": [533.0, 1112.1, 63.0, 60.5], "ic3": [896.8, 1173.4, 89.0, 74.5], "ic4": [1321.2, 1078.1, 77.0, 80.5], "ic5": [1674.3, 969.5, 60.5, 79.0], "arr1": [1015.5, 187.0, 112.5, 85.0], "arr2": [611.2, 518.4, 133.5, 73.0], "arr3": [1243.2, 644.9, 121.5, 67.0], "xpol": [714.7, 476.6, 83.0, 96.0]}, "b2": {"h1": [199.8, 268.6, 1411.0, 194.0], "box": [293.6, 441.5, 1253.0, 294.0], "h2": [194.7, 992.9, 1175.5, 193.5], "cat1": [76.4, 1235.6, 479.0, 303.5], "cat2": [720.6, 1244.3, 479.0, 294.5], "cat3": [1364.1, 1227.0, 479.0, 312.0], "w1": [70.7, 483.8, 186.0, 72.5], "w2": [31.2, 617.8, 160.5, 70.0], "w3": [181.9, 736.7, 130.0, 73.0], "w4": [470.9, 754.5, 169.0, 109.0], "w5": [778.3, 762.3, 160.5, 90.5], "w6": [1191.4, 772.5, 169.5, 72.5], "w7": [1511.4, 737.4, 214.0, 84.5], "w8": [1585.0, 517.3, 138.5, 55.0], "w9": [1724.8, 647.1, 165.0, 67.0], "w10": [1766.0, 425.1, 141.0, 64.5], "q1": [31.7, 567.5, 29.0, 31.0], "q2": [316.0, 885.5, 14.5, 38.5], "q3": [712.4, 818.7, 14.5, 38.5], "q4": [1462.9, 848.3, 14.5, 38.5], "q5": [1796.0, 535.5, 14.5, 38.5], "q6": [1851.7, 787.5, 29.0, 31.0]}, "b5": {"head": [219.2, 90.2, 1434.5, 150.0], "fort": [88.4, 305.9, 597.5, 560.0], "caps": [1205.4, 312.2, 553.0, 517.0], "quest": [944.8, 845.6, 483.0, 502.0], "det": [39.0, 974.0, 421.5, 550.5], "quiz": [1403.6, 1349.6, 519.5, 455.5], "online": [569.9, 1570.4, 454.5, 538.5], "d1": [258.9, 855.2, 467.0, 146.5], "d2": [933.0, 497.4, 354.0, 185.5], "d3": [618.6, 1138.3, 314.5, 166.5], "d4": [85.0, 1540.4, 384.0, 226.5], "d5": [1431.3, 1810.4, 410.5, 106.5], "d6": [275.8, 1920.4, 297.5, 146.5], "s1": [590.9, 667.9, 778.5, 95.5], "s2": [581.7, 748.2, 420.0, 237.5], "s3": [1357.0, 667.9, 382.0, 766.0], "s4": [378.2, 1385.1, 1361.0, 50.5], "s5": [378.2, 1385.1, 280.0, 362.0], "s6": [1254.2, 1180.3, 87.5, 929.5], "s7": [643.8, 1189.9, 633.0, 557.0], "pa": [565.6, 730.4, 43.0, 44.5], "pb": [1347.2, 654.0, 43.0, 44.5], "pc": [983.4, 963.2, 43.0, 44.0], "pd": [1245.0, 1178.7, 43.0, 44.5], "pe": [367.5, 1372.2, 43.0, 44.0], "pf": [1713.9, 1405.8, 43.0, 44.5], "pg": [635.6, 1719.2, 43.0, 44.0], "ph": [1318.7, 2081.6, 43.0, 44.5], "btn": [1313.9, 2095.4, 326.5, 72.5]}};
-const ALT={'hero-H':'','b2-h1':'А ти вже знаєш, як компанія святкуватиме Новий рік?','b2-box':'Кінець року і так тримає в напрузі: плани, звіти, відключення. А ще треба корпоратив організувати, який всім сподобається, і вкластися в бюджет','b2-h2':'Видихай, бо зараз ти саме там, де треба!','b2-cat1':'Тримаємо ціни з 2023 року, хоча це не просто, коли все навколо дорожчає','b2-cat2':'З 2014 року ми провели 5800+ корпоративів, тож знаємо, як зробити ваш незабутнім','b2-cat3':'2000+ компаній вже довірили свої команди Q-team, і ми цьому вдячні','b5-fort':'Форт Боярд','b5-caps':'Капсула часу','b5-quest':'Рольова квесторія','b5-det':'Різдвяний детектив','b5-quiz':'Елітарний квіз','b5-online':'Онлайн тімбілдинг','b5-d1':'Шанс опинитися всередині легендарного телешоу, що 35 років дивляться мільйони людей. 11 тонн механізмів і ланцюгів, випробування Метра Тіней, загадки Старця Фура. 1,5–6 год, від 5 гравців','b5-d2':'Програма «Капсула часу» переносить нас у 2031 рік, у світ, де труднощі сьогодення вже в минулому. 2,5–5 год, від 7 гравців','b5-d3':'Гравці стають героями, кожен має власну роль і завдання. До 2 год, від 7 гравців','b5-d4':'Опівночі в готелі на Північному полюсі хтось заморозив Санта-Клауса і викрав мішок із подарунками. До 2 год, від 7 гравців','b5-d5':'Смокінги, дзеркальний стіл і ведучий Олексій Самульов. До 2 год, від 8 гравців','b5-d6':'Детективи й квізи в Zoom або Google Meet, де кожен грає роль. 1,5–2 год, 4–999 людей'};
-const SEC={hero:'hero',b2:'pain',b5:'board'};
+const POS={"hero":{"l1":[1130,142.1,111,71],"l2":[541.8,546.2,135,73],"l3":[1366.9,645.7,98,73],"l4":[364.3,707,111,94],"a1":[1012.2,187.2,116,88],"a2":[611.2,517,138,75],"a3":[1239.4,644,125,69],"a4":[460.5,753.8,110,91],"medal":[1378.2,457.5,152,162],"btn":[785.6,944.7,356,81],"r1":[115.9,1118.5,401,159],"r2":[759.6,1118.5,401,159],"r3":[1419.9,1118.5,401,159],"r4":[387.4,1350.9,492,159],"r5":[1073.6,1350.9,492,159],"t1":[161.9,1171.5,311,82],"t2":[849,1143.5,222,124],"t3":[1470.8,1171.8,300,81],"t4":[476.7,1407.5,315,77],"t5":[1107.3,1407.5,425,80],"i1":[269.3,1064.8,101,101],"i2":[909.8,1080.8,106,88],"i3":[1584.1,1064.8,79,93],"i4":[592.4,1307.7,88,85],"i5":[1281.7,1324.2,82,79],"bg":[0,0,1920,1513],"H":[32,204,801,209],"K":[989.5,326.5,843,241],"star":[897.2,75.7,144,141],"sub":[152.9,405.8,606,65]},"b2":{"h1":[196.8,268.6,1298,203],"box":[287.1,434.5,1218,271],"w1":[64.2,472.3,198,105],"w2":[26.2,606.3,171,93],"w3":[176.5,716.2,147,106],"w4":[454.9,737,195,145],"w5":[757.8,725.3,204,169],"w6":[1185.9,758.5,181,101],"w7":[1497.9,699.4,235,140],"w8":[1583,508.3,144,84],"w9":[1719.8,637.1,175,88],"w10":[1760,412.6,153,90],"q1":[31.2,563.5,31,41],"q2":[310,884.5,29,40],"q3":[706.4,817.7,29,40],"q4":[1456.9,897.3,29,40],"q5":[1790,534.5,29,40],"q6":[1811.2,913.5,31,41],"h2":[119.9,998.1,1651,169],"cat1":[76.4,1235.1,479,304],"cat2":[720.6,1233.8,479,306],"cat3":[1364.1,1227.1,479,312],"logos":[19.5,1706.7,4248,58]},"b6":{"f9":[1323.9,2004.3,327,73],"f10":[358,401.7,636,147],"f11":[441.3,578,431,446],"f12":[1313.9,419,364,460],"f13":[885.7,875.3,444,448],"f14":[171.1,1055.2,359,454],"f15":[1375.1,1360.9,414,412],"f16":[586.9,1639,358,418],"f32":[178.5,243.3,1075,198],"f33":[169.8,538.7,451,236],"f34":[178.6,663.1,45,49],"f35":[1615.5,1814,312,312],"f36":[1756.5,1814,45,45],"f37":[0,1434,316,316],"f38":[126.5,1434,45,45]},"t":{"h-291_1312":[124.7,370.9,571,65],"h-291_1313":[324.4,167.7,732,69],"h-291_1314":[130.9,236.5,765,69],"h-291_1315":[121,143.8,182,85],"arrow":[1258.7,271,94,106],"ps":[1625.8,294.6,156,66],"btnbox":[1390.3,402.6,300,74],"btntxt":[1422.8,427.9,236,24],"d-det-o":[1390.2,180.6,443,133],"d-det-f":[1390.3,366.1,184,16],"d-fort-o":[1390.1,180.1,430,115],"d-fort-f":[1390.1,328.1,186,16],"d-caps-o":[1390,180.1,422,134],"d-caps-f":[1390.1,328.1,189,16],"d-quiz-o":[1178.3,180.6,342,95],"d-quiz-f":[1178.2,311.1,185,16],"d-mon-o":[1390.1,180.6,468,111],"d-mon-f":[1390.1,311.1,185,16],"fade":[126.2,461.9,498,73]}};
+const TB={"lid-white":{"p":[372.5,390.8,761,389],"o":[0,0],"m":[0.976,-0.2177,0.2177,0.976,-50.8,-194.6]},"lid-red":{"p":[910.7,374.4,599,279],"o":[0,0],"m":[0.9907,-0.1364,0.1364,0.9907,-16.6,-232.8]},"lid-blue":{"p":[1340.2,409.4,752,376],"o":[0,0],"m":[0.9941,0.1083,-0.1083,0.9941,39.2,-336.2]},"lid-gold":{"p":[1841.3,333.2,729,319],"o":[3.5,0],"m":[0.9887,-0.1502,0.1502,0.9887,-15.8,-195.7]},"lid-purple":{"p":[2345.3,441.8,704,352],"o":[0,0],"m":[0.9971,-0.0767,0.0767,0.9971,-8.8,-318.2]},"lab-0":{"p":[1760.3,663.2,301,149]},"lab-1":{"p":[1121.9,560.8,303,150]},"lab-2":{"p":[372.5,663.2,301,150]},"lab-3":{"p":[2085.6,566.3,266,132]},"lab-4":{"p":[2691.3,679.9,301,149]},"ph-white":{"p":[496.1,454.9,524,247]},"ph-red":{"p":[943.8,347.7,524,247]},"ph-blue":{"p":[1405.3,441.8,628,295]},"ph-gold":{"p":[1972.2,365.3,491,252]},"ph-purple":{"p":[2423,433.9,539,272]}};
+const ALT={'hero-l1':'Різдвяний детектив','hero-l2':'Форт Боярд','hero-l3':'Капсула часу','hero-l4':'Онлайн тімбілдінг',
+ 'hero-t1':'На нашій локації в Києві, Online чи на виїзд по всій Україні','hero-t2':'4,9 з 5, рейтинг у Google','hero-t3':'Вас в команді може бути як 4 гравці, так і 994, залучені будуть всі','hero-t4':'Проводимо на -1 поверсі, без тривог, зі світлом та теплом','hero-t5':'Рейтинг безпеки локації 86 зі 100, ми одразу залишили ТРЦ, як тільки це стало небезпечно',
+ 'b2-box':'Ті, хто пропустив минулий рік, тепер приходять до нас, коли команда мовчки розвалюється, а цінних спеціалістів вже не повернути',
+ 'b2-cat1':'Тримаємо ціни з 2023 року, хоча це не просто, коли все навколо дорожчає','b2-cat2':'З 2014 року провели 5800+ корпоративів для 2000+ компаній','b2-cat3':'Своя безпечна локація на -1 поверсі: окремо платити за оренду зали не треба',
+ 'b6-f11':'Корпоратив на -1 поверсі. Під час тривоги свято не переривається. Є генератор, тому світло і тепло не зникнуть під час відключень','b6-f12':'4 зали різного розміру. Для команд будь-якого розміру. Навіть якщо того ж дня святкує інша компанія, ви не перетнетеся','b6-f13':'Номери в готелі. Команда може залишитися на ніч і не думати, як дістатися додому до комендантської','b6-f14':'Ресторан. Ресторан-партнер у тому ж готелі: банкет без переплати за сторонній ресторан','b6-f15':'Центр Києва. Не треба їхати за місто і стояти на блокпостах','b6-f16':'Трансфер до локації. Заберемо команду і привеземо на місце','b6-f33':'Bakkara Hotel on the river',
+ 't-d-det-o':'Різдвяний детектив: опівночі в готелі на Північному полюсі хтось заморозив Санта-Клауса і викрав мішок із подарунками','t-d-fort-o':'Форт Боярд: шанс опинитися всередині легендарного телешоу','t-d-caps-o':'Капсула часу: переносить нас у 2030 рік','t-d-quiz-o':'Елітарний квіз: смокінги, дзеркальний стіл і ведучий Олексій Самульов','t-d-mon-o':'За кадром: знімальна група у високогірному готелі'};
+const SEC={hero:'hero',b2:'pain',b6:'board'};
 const E={};
-function lay(bk,n,cls,before){const p=POS[bk][n];const id=bk+'-'+n;const im=document.createElement('img');im.src='img/l/'+id+'.webp';im.alt=ALT[id]||'';im.className='L '+(cls||'');im.decoding='async';
-  im.style.cssText=`left:${p[0]}px;top:${p[1]}px;width:${p[2]}px;height:${p[3]}px`;
+function img(src,p,cls,alt){const im=document.createElement('img');im.src=src;im.alt=alt||'';im.className='L '+(cls||'');im.decoding='async';
+  im.style.cssText=`left:${p[0]}px;top:${p[1]}px;width:${p[2]}px;height:${p[3]}px`;return im;}
+function lay(bk,n,cls,before){const id=bk+'-'+n;const im=img('img/v3/'+id+'.webp',POS[bk][n],cls,ALT[id]);
   const s=document.getElementById(SEC[bk]);before?s.insertBefore(im,s.querySelector(before)):s.appendChild(im);E[id]=im;return im;}
-function layBtn(bk,n,id){const p=POS[bk][n];const b=document.createElement('button');b.className='btnL';b.id=id;b.type='button';b.dataset.go='quiz';
-  b.style.cssText=`left:${p[0]}px;top:${p[1]}px;width:${p[2]}px;height:${p[3]}px`;b.innerHTML=`<img src="img/l/${bk}-${n}.webp" alt="Залишити заявку">`;document.getElementById(SEC[bk]).appendChild(b);return b;}
+function cta(parent,cls,txt,x,y,w,h,go){const b=document.createElement('button');b.type='button';b.className='cta '+cls;b.textContent=txt;b.dataset.go=go||'quiz';
+  b.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px`;parent.appendChild(b);return b;}
 
 const scaler=document.getElementById('scaler'),stage=document.getElementById('stage');
-const TOTAL=1333+1956+1168+2354;let S=1;
-function fit(){const w=document.documentElement.clientWidth;S=w/1920;stage.style.transform='scale('+S+')';scaler.style.height=(TOTAL*S)+'px';}
-fit();addEventListener('resize',fit);
+const tblw=document.getElementById('tblw'),tbl=document.getElementById('tbl');
+const TH=1268,D=3000;tblw.style.height=(TH+D)+'px';
+const TOTAL=1513+1956+1168+TH+D+2354;let S=1;
+function fit(){const w=document.documentElement.clientWidth;S=w/1920;stage.style.transform='scale('+S+')';scaler.style.height=(TOTAL*S)+'px';tblUpd();}
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root=document.documentElement;if(!reduce)root.classList.add('anim');
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function onView(el,fn,th){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){io.disconnect();fn();}}),{threshold:th||0.25});io.observe(el);}
 
-/* ---------- HERO layers ---------- */
+/* ---------- HERO ---------- */
 const hero=document.getElementById('hero');
+// info plates (appear only after the first scroll)
+const PL=[['r1','t1','i1'],['r2','t2','i2'],['r3','t3','i3'],['r4','t4','i4'],['r5','t5','i5']];
+const plates=PL.map(g=>g.map(n=>lay('hero',n,'pl')));
+lay('hero','H','tt');
 const T=[[1000.7,248.9,77.6,93.1,-6.6,0],[1035.9,310.7,70,84,0.7,1],[884.9,305.5,72.3,86.8,3.4,2],[937.4,253.8,68.8,82.6,1.8,3],[694.2,709,68,81.5,7,4],[928.7,317.7,57.5,73,-3.3,5],[984.7,316,69.1,82.9,-3.2,6],[1080.4,374.8,66.9,80.3,3.2,7],[837.2,374.7,70,84,1.6,8],[1028.6,366.3,65,78,-1.8,9],[891.6,372.4,72,86.4,-0.8,10],[983.3,367.8,66.9,80.3,-7.3,11],[943.7,387.4,69.9,83.9,-5.7,12],[859.7,427.2,71,85.2,-5.1,13],[919.8,417.5,67,80.5,3.8,14],[996,418.1,71.8,86.2,0,15],[816.3,473.2,55,66.1,-2.6,16],[1002.9,469.7,66.4,79.7,-2.7,17],[1051.1,428.3,69.8,83.8,5.3,18],[1065.1,477.1,69.3,83.2,-8.9,19],[875.8,476.5,70.5,84.6,7.2,20],[941.9,466.3,65.4,78.4,-7,21],[1117.5,536.1,65.2,78.2,4.2,22],[1075.4,531,62.2,74.6,2.3,23],[943.6,524.4,53.1,63.7,1.1,24],[840.9,536.5,68.9,82.7,-5.1,26],[892.9,527.4,72.2,86.7,0.4,27],[988,527.2,67.7,81.3,1.3,28],[1032.2,528.3,62.9,75.5,6.6,29],[1165.8,540.9,55.2,66.3,6.2,31],[1021,583.9,70.8,85,-3.7,32],[1081.8,583.1,67.5,80.9,-6.3,33],[964,587.2,68.3,81.9,-1.2,34],[911.9,591,72.1,86.6,-2.6,35],[867,583.2,67.7,81.3,7.2,36],[806.9,580.4,71.8,86.2,-6.3,37],[1134.7,589.6,50.8,61,-12,38],[1176.6,634.1,66.8,80.2,-2.7,39],[1059.4,647.1,68.7,82.4,2,40],[947.9,640.7,69.6,83.5,1.7,41],[809.7,638.9,72,86.3,6.5,42],[1127.7,645.4,69.2,83,-7.8,43],[937.9,688.8,70,84,-1.5,44],[999.6,635.5,68.7,82.4,-0.9,45],[1041.3,698,68.7,82.5,-0.4,46],[884.3,639.7,67.1,80.6,7.6,47],[841.2,633.1,45.4,54.5,-7.4,48],[747.7,635.6,65.1,78.2,-5.1,49],[992,693.7,58.1,69.7,-10.9,50],[888.1,695.2,67.9,81.5,-5.1,51],[1214.7,693.6,67.3,80.8,-5.3,52],[846.1,692.6,71.3,85.6,4.7,53],[806.8,703.4,72.2,86.6,-5.6,54],[1165.2,700.4,66,79.2,5.3,55],[750.4,701.6,70.8,85,5.8,56],[1096.6,695.2,71.3,85.6,5.6,57],[1151.2,756.8,72.2,86.6,3.9,58],[990.4,753.3,72.4,86.9,1.4,59],[1047.1,753.3,70,82,-6,60],[1104.8,755.7,70.4,84.4,-5.7,61],[898.6,742,66.7,80.1,-3.4,62],[940.3,746.4,65.2,78.2,-7.3,63],[847.1,743.7,66.9,80.3,4.1,64],[805.5,746.2,67.4,80.9,-4.6,65],[764.3,751.2,65.3,78.4,1.8,66],[745.3,806.6,72.7,87.2,6.8,67],[775.4,799.6,57.5,69,-11.4,68],[1136.2,811.4,68,81.6,2.3,69],[678.6,807.8,65.1,78.1,-1.7,70],[834.6,801.2,68.9,82.7,-2.4,71],[1193.5,806.4,68.9,82.7,-1.8,72],[1021.9,803.5,68.4,82.1,7.1,73],[897.5,800.4,70.8,85,-2.5,74],[934.6,804.7,58.3,69.9,12.5,75],[1254.9,804.1,65.5,78.6,6.2,76],[1079.3,811.8,68.5,82.2,-13.7,77],[980,809.4,53.2,63.9,-1.6,78],[1282.2,856.4,68.6,82.3,1.8,80],[905.1,857.5,66.7,80,0.8,81],[578.6,860.7,71.5,85.8,14,82],[631.2,855.9,70.3,84.4,2.4,83],[933.2,863.8,65.8,79,-5.6,84],[1158.3,863.2,72.6,87.2,-4,85],[1213.5,858.8,68.1,81.7,1,86],[1104.3,866.2,70,84.1,3.6,87],[843.7,854.4,65.6,78.7,4.9,88],[743.2,864.2,62.3,74.8,5.6,89],[689.5,869.2,59.9,71.9,7.8,90],[985,866.8,69.8,83.7,7.9,91],[1040.8,866.2,67.7,81.3,-0.7,92],[797.5,866.7,59.6,71.5,-5.9,93],[1347.8,861.1,70.8,84.9,-4.6,94]];
-const tree=document.getElementById('tree'),els=[];
+const tree=document.createElement('div');tree.className='tree';tree.setAttribute('aria-hidden','true');hero.appendChild(tree);const els=[];
 T.forEach(([cx,cy,w,h,r,pi])=>{const e=document.createElement('div');e.className='p';
   e.style.cssText=`left:${cx-w/2}px;top:${cy-h/2}px;width:${w}px;height:${h}px;background-image:url(img/p/${pi}.jpg);transform:rotate(${-r}deg)`;tree.appendChild(e);els.push({e,cx,cy,r});});
-{const p=POS.hero.xpol;const e=document.createElement('div');e.className='p';e.style.cssText=`left:${p[0]}px;top:${p[1]}px;width:${p[2]}px;height:${p[3]}px;background:url(img/l/hero-xpol.webp) center/100% 100% no-repeat;box-shadow:none`;tree.appendChild(e);els.push({e,cx:p[0]+p[2]/2,cy:p[1]+p[3]/2,r:0});}
-const sub=hero.querySelector('.sub');
-const H=lay('hero','H','tt'),K=lay('hero','K','tt r');H.alt='';
-['magn','key','caps','medal'].forEach(n=>lay('hero',n,'obj'));
+{const p=[714.7,476.6,83,96];const e=document.createElement('div');e.className='p';e.style.cssText=`left:${p[0]}px;top:${p[1]}px;width:${p[2]}px;height:${p[3]}px;background:url(img/l/hero-xpol.webp) center/100% 100% no-repeat;box-shadow:none`;tree.appendChild(e);els.push({e,cx:p[0]+p[2]/2,cy:p[1]+p[3]/2,r:0});}
+const sub=lay('hero','sub','rv');sub.alt='';
+const LB=['l1','l2','l3','l4'].map(n=>lay('hero',n,'clip'));
 const star=lay('hero','star','star');
-const A=[lay('hero','arr1','arr'),lay('hero','arr2','arr rtl'),lay('hero','arr3','arr')];
-const btn=layBtn('hero','btn','heroBtn');btn.classList.add('rv');
-const ICON=['ic1','ic2','ic3','ic4','ic5'];
-ICON.forEach((n,i)=>{const im=lay('hero',n,'pi');im.dataset.i=i;});
-const rating=lay('hero','rating','pi');rating.dataset.i=2;rating.alt='4,9 з 5, рейтинг у Google';
-const LB=[document.getElementById('h1'),document.getElementById('h2'),document.getElementById('h3')];
-// tree zoom
+const btn=cta(hero,'hero rv','Залишити заявку',786,946.5,348,72.4);btn.id='heroBtn';
+const AR=[lay('hero','a1','clip rtl'),lay('hero','a2','clip'),lay('hero','a3','clip'),lay('hero','a4','clip')];
+const K=lay('hero','K','tt r');
+const medal=lay('hero','medal','obj');
+// zoom on hover
 const Z=4.2;
 function zoom(o,on){o.z=on;const w=o.e.offsetWidth*Z,h=o.e.offsetHeight*Z;let dx=0,dy=0;
-  if(on){dy=Math.max(0,h/2+16-o.cy)-Math.max(0,o.cy+h/2+16-1333);dx=Math.max(0,w/2+16-o.cx)-Math.max(0,o.cx+w/2+16-1920);}
-  o.e.style.zIndex=on?60:'';o.e.style.boxShadow=on?'0 30px 60px rgba(0,0,0,.65)':'';
+  if(on){dy=Math.max(0,h/2+16-o.cy)-Math.max(0,o.cy+h/2+16-1513);dx=Math.max(0,w/2+16-o.cx)-Math.max(0,o.cx+w/2+16-1920);}
+  o.e.style.zIndex=on?60:'';o.e.style.boxShadow=on?'0 30px 60px rgba(0,0,0,.55)':'';
   o.e.style.transform=on?`translate(${dx}px,${dy}px) rotate(0deg) scale(${Z})`:`rotate(${-o.r}deg)`;}
 function enableZoom(){els.forEach(o=>{o.e.style.transition='transform .45s cubic-bezier(.22,1,.36,1),box-shadow .3s cubic-bezier(.22,1,.36,1)';o.e.style.cursor='zoom-in';
   o.e.addEventListener('mouseenter',()=>zoom(o,true));o.e.addEventListener('mouseleave',()=>zoom(o,false));
   o.e.addEventListener('click',()=>{const on=!o.z;els.forEach(x=>x.z&&x!==o&&zoom(x,false));zoom(o,on);});});}
-let introDone=false;const afterIntro=[];
-function points(){const items=[...hero.querySelectorAll('.pi')].sort((a,b)=>a.dataset.i-b.dataset.i);
-  const go=()=>items.forEach(x=>{x.style.transitionDelay=(x.dataset.i*220)+'ms';x.classList.add('on');});
-  onView(rating,()=>{introDone?go():afterIntro.push(go);},0.1);}
-const OBJ=[E['hero-magn'],E['hero-key'],E['hero-caps']];
-async function lab(){for(let i=0;i<3;i++){A[i].classList.add('on');await wait(560);
-  for(const s of LB[i].children){s.classList.add('on');await wait(380);} await wait(250);OBJ[i].classList.add('on');await wait(200);}}
-function showAll(){[H,K,sub,btn,star,...hero.querySelectorAll('.obj,.pi')].forEach(x=>x.classList.add('on'));A.forEach(a=>a.classList.add('on'));LB.forEach(l=>[...l.children].forEach(s=>s.classList.add('on')));star.classList.add('glow');enableZoom();introDone=true;}
-points();
+let introDone=false;
+function showPlates(){plates.forEach((g,i)=>g.forEach(x=>{x.style.transitionDelay=(i*170)+'ms';x.classList.add('on');}));}
+{let armed=false;const arm=()=>{if(armed)return;if(scrollY<30)return;armed=true;removeEventListener('scroll',arm);
+   const go=()=>{if(!introDone){setTimeout(go,300);return;}showPlates();};onView(plates[0][0],go,0.05);};
+ addEventListener('scroll',arm,{passive:true});}
+async function lab(){for(let i=0;i<4;i++){AR[i].classList.add('on');await wait(500);LB[i].classList.add('on');await wait(520);}medal.classList.add('on');}
+function showAll(){[E['hero-H'],K,sub,btn,star,medal,...AR,...LB].forEach(x=>x.classList.add('on'));plates.flat().forEach(x=>x.classList.add('on'));star.classList.add('glow');enableZoom();introDone=true;}
 if(reduce){showAll();}
 else{
   let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
   els.forEach(o=>{const dx=(rnd()*2-1)*640+(960-o.cx)*.3,dy=-(o.cy+300+rnd()*700);o.e.style.transition='none';o.e.style.transform=`translate(${dx}px,${dy}px) rotate(${(rnd()*2-1)*120}deg) scale(1.35)`;});
-  const pre=[...T.map(t=>'img/p/'+t[5]+'.jpg'),'img/bg/hero.webp','img/l/hero-star.webp'].map(s=>new Promise(res=>{const i=new Image();i.onload=i.onerror=res;i.src=s;}));
+  const pre=[...T.map(t=>'img/p/'+t[5]+'.jpg'),'img/v3/hero-bg.webp','img/v3/hero-star.webp','img/v3/hero-H.webp','img/v3/hero-K.webp'].map(s=>new Promise(res=>{const i=new Image();i.onload=i.onerror=res;i.src=s;}));
   let started=false;
   const start=async()=>{if(started)return;started=true;void tree.offsetWidth;
     const ys=els.map(o=>o.cy),maxY=Math.max(...ys),minY=Math.min(...ys);
     els.forEach(o=>{const order=(maxY-o.cy)/(maxY-minY);const delay=120+order*1500+rnd()*260;
       o.e.style.transition=`transform ${900+rnd()*300}ms cubic-bezier(.22,1,.36,1) ${delay}ms`;o.e.style.transform=`rotate(${-o.r}deg)`;});
-    await wait(2700);star.classList.add('on');setTimeout(()=>{star.classList.add('glow');btn.classList.add('glow')},1000);
-    await wait(600);H.classList.add('on');await wait(160);K.classList.add('on');await wait(200);sub.classList.add('on');
-    E['hero-medal'].style.transitionDelay='300ms';E['hero-medal'].classList.add('on');
+    await wait(2700);star.classList.add('on');setTimeout(()=>star.classList.add('glow'),1000);
+    await wait(500);E['hero-H'].classList.add('on');await wait(160);K.classList.add('on');await wait(200);sub.classList.add('on');
     await wait(250);btn.classList.add('on');enableZoom();
-    await wait(300);introDone=true;afterIntro.forEach(f=>f());
-    lab();
+    await wait(300);introDone=true;lab();
   };
-  Promise.all(pre).then(start);setTimeout(start,3500);
+  Promise.all(pre).then(start);setTimeout(start,4000);
 }
 
 /* ---------- PAIN ---------- */
 const pain=document.getElementById('pain');
 const tearEl=document.getElementById('tear');
-lay('b2','h1','sc','#tear');
+const h1=lay('b2','h1','sc','#tear');
 const WO=['w1','w2','w3','w4','w5','w6','w7','w8','w9','w10','q1','q2','q3','q4','q5','q6'];
 const bx=POS.b2.box,cx0=bx[0]+bx[2]/2,cy0=bx[1]+bx[3]/2;
 const wos=WO.map(n=>{const im=lay('b2',n,'wo','#tear');const p=POS.b2[n];const dx=p[0]+p[2]/2-cx0,dy=p[1]+p[3]/2-cy0,d=Math.hypot(dx,dy)||1;
-  im.style.setProperty('--dx',(dx/d*90)+'px');im.style.setProperty('--dy',(dy/d*90)+'px');im.style.setProperty('--r',(dx>0?14:-14)+'deg');im.dataset.side=dx>0?1:-1;return im;});
+  im.style.setProperty('--dx',(dx/d*90)+'px');im.style.setProperty('--dy',(dy/d*90)+'px');im.style.setProperty('--r',(dx>0?14:-14)+'deg');return im;});
 const box=lay('b2','box','sc','#tear');
 const h2=lay('b2','h2','sc','#tear');
 const cats=['cat1','cat2','cat3'].map(n=>lay('b2',n,'cat','#tear'));
-// torn paper rips away while scrolling into the block
+// the purple sheet tears away while the yellow block scrolls in
 let tearP=reduce?1:0;
-function tearUpd(){const r=pain.getBoundingClientRect(),vh=innerHeight;const p=Math.min(1,Math.max(0,(vh-r.top)/(vh*.75)));
+function tearUpd(){const r=pain.getBoundingClientRect(),vh=innerHeight;const p=Math.min(1,Math.max(0,(vh-r.top)/(vh*.8)));
   if(p>tearP)tearP=p;const k=1-tearP,e=k*k*(3-2*k);
-  tearEl.style.transform=`translateY(${e*520}px) rotate(${-e*2.4}deg)`;}
-if(!reduce){let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;tearUpd();});}},{passive:true});tearUpd();}
-else tearEl.style.transform='none';
-onView(E['b2-h1'],()=>{E['b2-h1'].classList.add('on');setTimeout(()=>box.classList.add('on'),300);},0.4);
-// worries pop one by one around the cat
-onView(box,async()=>{await wait(900);const order=[0,10,7,1,12,5,2,9,15,3,11,6,4,13,8,14];
-  for(const i of order){const w=wos[i];w.classList.add('on');
-    await wait(i<10?230:110);}
-},0.6);
+  tearEl.style.transform=`translateY(${e*560}px) rotate(${-e*2.6}deg)`;}
+if(reduce)tearEl.style.transform='none';
+onView(h1,()=>{h1.classList.add('on');setTimeout(()=>box.classList.add('on'),300);},0.4);
+onView(box,async()=>{await wait(800);const order=[0,10,7,1,12,5,2,9,15,3,11,6,4,13,8,14];
+  for(const i of order){wos[i].classList.add('on');await wait(i<10?220:110);}},0.6);
 onView(h2,()=>h2.classList.add('on'),0.4);
 onView(cats[1],()=>cats.forEach((c,i)=>{c.style.transitionDelay=(i*200)+'ms';c.classList.add('on')}),0.35);
 
@@ -277,7 +288,7 @@ const Q=[
   {t:'Де проводимо?',o:[['На нашій локації в Києві','img/q4.jpg'],['Виїзний, у твоєму місті','img/q5.jpg'],['Онлайн','img/q6.jpg']]},
   {t:'Скільки буде учасників?',num:true,o:[['4–25','Невелика команда'],['26–50','Середня команда'],['51–100','Великий відділ'],['100+','Уся компанія']]}
 ];
-const SL4=[[265,602,-3],[626,615,2.2],[1013,605,-1.8],[1375,617,2.8]],SL3=[[454,606,-2.4],[819,616,1.8],[1184,604,-1.6]];
+const SL4=[[264.8,602.9,-3],[626,616,2],[1013,606,-2],[1375,617,3]],SL3=[[454,606,-2.4],[819,616,1.8],[1184,604,-1.6]];
 let step=0;const ans=[];let name='';
 const body=document.getElementById('qbody'),prog=document.getElementById('prog'),fill=document.getElementById('trackFill'),back=document.getElementById('back');
 function setProg(i){prog.textContent=i<3?`питання ${i+1} з 3`:'останній крок';fill.style.strokeDashoffset=String(100-Math.round(Math.min(i+1,3)/3*100));}
@@ -311,7 +322,7 @@ function render(){
   } else {
     const d=document.createElement('div');d.className='done fade';
     d.innerHTML=`<div class="qtitle" style="position:static;width:auto">Дякуємо, ${name.replace(/[<>&"]/g,'')}!</div>
-      <p>Менеджер Q-team підбере 4 програми з таймінгом під твою команду і розрахує вартість.</p>
+      <p>Менеджер Q-team підбере 4 програми під твою команду і розрахує вартість.</p>
       <p class="note">Демоверсія лендингу: форма ще не підключена до CRM, тому заявка нікуди не відправляється.</p>
       <button class="qbtn" type="button" id="again">Пройти ще раз</button>`;
     body.appendChild(d);d.querySelector('#again').addEventListener('click',()=>{ans.length=0;step=0;render();});stopTimer();
@@ -323,38 +334,92 @@ function startTimer(){if(tid)return;tid=setInterval(()=>{left=Math.max(0,left-1)
 function stopTimer(){clearInterval(tid);}
 render();
 
+/* ---------- TABLE: horizontal scroll, lids open one by one ---------- */
+const tab=document.getElementById('tab'),strip=document.getElementById('strip');
+const tp=k=>POS.t[k];
+const tim=(k,cls,alt)=>{const im=img('img/v3/t-'+k+'.webp',tp(k),cls,alt||ALT['t-'+k]);tbl.appendChild(im);return im;};
+// header (stays), fading intro line, descriptions per scenario
+['h-291_1315','h-291_1313','h-291_1314','h-291_1312'].forEach(k=>tim(k));
+const fadeTxt=tim('fade');
+const arrow=tim('arrow');
+const SC=['det','fort','caps','quiz','mon'];
+const DS=SC.map(s=>[tim('d-'+s+'-o','dsc'),tim('d-'+s+'-f','dsc')]);
+const ps=tim('ps','more');
+const more=cta(tbl,'more','Більше сценаріїв',1390.5,403.4,299,72.4,'board');more.classList.add('more');
+tbl.appendChild(tab);
+// table layers: base, photos, lids, labels
+const base=document.createElement('img');base.src='img/v3/t-base.webp';base.alt='';base.className='L';base.style.cssText='left:-4px;top:-2px;width:4030px;height:1050px';tab.appendChild(base);
+const LID=['lid-white','lid-red','lid-blue','lid-gold','lid-purple'],PH=['ph-white','ph-red','ph-blue','ph-gold','ph-purple'];
+const tabImg=(k,cls)=>{const im=img('img/v3/t-'+k+'.webp',TB[k].p,cls,'');tab.appendChild(im);return im;};
+const PHS=PH.map(k=>tabImg(k,'ph'));
+const LIDS=LID.map(k=>{const im=tabImg(k,'lid');im.style.setProperty('--ox',TB[k].o[0]+'px');im.style.setProperty('--oy',TB[k].o[1]+'px');return im;});
+['lab-0','lab-1','lab-2','lab-3','lab-4'].forEach(k=>tabImg(k));
+PHS.forEach((p,i)=>p.alt=['Фото з корпоративу «Різдвяний детектив»','Фото з гри «Форт Боярд»','Фото з корпоративу «Капсула часу»','Фото з «Елітарного квізу»','Фото з корпоративу «За кадром»'][i]);
+tbl.insertBefore(strip,tab);
+// keyframes from Figma: table x at start and when each lid is open
+const X0=611,KX=[251,-229,-752,-1232,-1732];
+const sm=(a,b,v)=>{const t=Math.min(1,Math.max(0,(v-a)/(b-a)));return t*t*(3-2*t);};
+function openAmt(i,x){if(i===4&&x<KX[4])return 1;const d=Math.abs(x-KX[i]);return 1-sm(110,290,d);}
+function descAmt(i,x){if(i===4&&x<KX[4])return 1;const d=Math.abs(x-KX[i]);return 1-sm(70,230,d);}
+function tblUpd(){
+  const r=tblw.getBoundingClientRect(),vhS=innerHeight/S;
+  const off=(vhS-TH)/2;
+  const y=Math.min(D,Math.max(0,-r.top/S+off));
+  tbl.style.transform=`translateY(${y}px)`;
+  const p=y/D;const q=Math.min(1,p/0.9);
+  const x=X0+(KX[4]-X0)*q;
+  tab.style.transform=`translateX(${x}px)`;
+  fadeTxt.style.opacity=String(1-sm(KX[0]+160,KX[1],x));
+  arrow.style.opacity=String(sm(X0-80,KX[0]+40,x));
+  for(let i=0;i<5;i++){
+    const o=reduce?(i===0?1:0):openAmt(i,x);const m=TB[LID[i]].m;
+    const a=1+(m[0]-1)*o,b=m[1]*o,c=m[2]*o,d=1+(m[3]-1)*o;
+    LIDS[i].style.transform=`translate(${m[4]*o}px,${m[5]*o}px) matrix(${a},${b},${c},${d},0,0)`;
+    PHS[i].style.opacity=String(Math.min(1,o*1.6));
+    PHS[i].style.transform=`translateY(${(1-o)*110}px) scale(${.55+.45*o})`;
+    const da=descAmt(i,x);DS[i].forEach(e=>{e.style.opacity=String(da);e.style.transform=`translateY(${(1-da)*14}px)`;});
+  }
+  strip.style.opacity=String(sm(0.05,0.95,p));
+  const end=x<=KX[4]+40;more.classList.toggle('on',end);ps.classList.toggle('on',end);
+  if(!reduce)tearUpd();
+}
+let tk=false;addEventListener('scroll',()=>{if(!tk){tk=true;requestAnimationFrame(()=>{tk=false;tblUpd();});}},{passive:true});
+
 /* ---------- BOARD ---------- */
 const board=document.getElementById('board');
-const head=lay('b5','head','ds');
-const PIN={fort:'pa',caps:'pb',quest:'pc',det:'pe',quiz:'pf',online:'pg'};
-const PC=n=>{const p=POS.b5[n];return [p[0]+p[2]/2,p[1]+p[3]/2];};
-const pols=['fort','caps','quest','det','quiz','online'].map((n,i)=>{const im=lay('b5',n,'pol');im.alt=ALT['b5-'+n];const p=POS.b5[n];const [px,py]=PC(PIN[n]);
-  im.style.setProperty('--ox',(px-p[0])+'px');im.style.setProperty('--oy',(py-p[1])+'px');
-  const cx=p[0]+p[2]/2,cy=p[1]+p[3]/2;im.style.setProperty('--fx',((cx-960)*.35)+'px');im.style.setProperty('--fy',((cy-1200)*.12)+'px');im.style.setProperty('--fr',(i%2?9:-9)+'deg');
-  return {im,cx,cy,n};});
-const ds=['d1','d2','d3','d4','d5','d6'].map(n=>lay('b5',n,'ds'));
-const SFROM={s1:'pa',s2:'pa',s3:'pb',s4:'pe',s5:'pe',s7:'pg',s6:'pd'};
-const strs=Object.keys(SFROM).map(n=>{const im=lay('b5',n,'str');const p=POS.b5[n];const [x,y]=PC(SFROM[n]);im.style.setProperty('--sx',(x-p[0])+'px');im.style.setProperty('--sy',(y-p[1])+'px');return im;});
-const bbtn=layBtn('b5','btn','boardBtn');bbtn.classList.add('ds');
-const pins=['pa','pb','pc','pd','pe','pf','pg','ph'].map(n=>lay('b5',n,'pin'));
-if(reduce){[head,...pols.map(p=>p.im),...ds,bbtn].forEach(x=>x.classList.add('on'));}
+const bbtnP=POS.b6.f9;const bbtn=document.createElement('button');bbtn.type='button';bbtn.className='imgbtn ds';bbtn.dataset.go='quiz';
+bbtn.style.cssText=`left:${bbtnP[0]}px;top:${bbtnP[1]}px;width:${bbtnP[2]}px;height:${bbtnP[3]}px`;bbtn.innerHTML='<img src="img/v3/b6-f9.webp" alt="Залишити заявку">';board.appendChild(bbtn);
+const sub6=lay('b6','f10','ds');sub6.alt='';
+const POL=['f11','f12','f13','f14','f15','f16'];
+const pols=POL.map((n,i)=>{const im=lay('b6',n,'pol');const p=POS.b6[n];const cx=p[0]+p[2]/2,cy=p[1]+p[3]/2;
+  im.style.setProperty('--fx',((cx-960)*.35)+'px');im.style.setProperty('--fy',((cy-1200)*.12)+'px');im.style.setProperty('--fr',(i%2?9:-9)+'deg');return {im,cx,cy};});
+const thr=img('img/v3/b6-thr.webp',[0,0,1920,2354],'thr','');board.appendChild(thr);
+const head6=lay('b6','f32','ds');head6.alt='';
+const note=lay('b6','f33','pol');note.style.setProperty('--fx','-60px');note.style.setProperty('--fy','-40px');note.style.setProperty('--fr','-12deg');
+const pin1=lay('b6','f34','ds');
+const side=[lay('b6','f35','pol'),lay('b6','f37','pol')];side[0].alt='Номер люкс у Bakkara Hotel';side[1].alt='Bakkara Hotel на воді';
+side.forEach((s,i)=>{s.style.setProperty('--fx',(i?-120:120)+'px');s.style.setProperty('--fy','0px');s.style.setProperty('--fr',(i?-10:10)+'deg');});
+const pins=[pin1,lay('b6','f36','ds'),lay('b6','f38','ds')];
+const allPol=[...pols.map(p=>p.im),note,...side];
+if(reduce){[head6,sub6,bbtn,thr,...allPol,...pins].forEach(x=>x.classList.add('on'));}
 else{
-  onView(head,()=>head.classList.add('on'),0.5);
-  const order=[0,1,2,3,4,5];
-  pols.forEach(p=>onView(p.im,()=>{p.im.style.transitionDelay=(Math.random()*150|0)+'ms';p.im.classList.add('on');setTimeout(()=>p.im.classList.add('live'),1300);},0.3));
-  ds.forEach(d=>onView(d,()=>{d.style.transitionDelay='500ms';d.classList.add('on')},0.4));
-  onView(bbtn,()=>{setTimeout(()=>bbtn.classList.add('on'),600)},0.5);
+  onView(head6,()=>{head6.classList.add('on');setTimeout(()=>sub6.classList.add('on'),250);},0.5);
+  allPol.forEach(im=>onView(im,()=>{im.style.transitionDelay=(Math.random()*160|0)+'ms';im.classList.add('on');setTimeout(()=>im.classList.add('live'),1300);},0.3));
+  pins.forEach(p=>onView(p,()=>{p.style.transitionDelay='700ms';p.classList.add('on');},0.3));
+  onView(pols[2].im,()=>setTimeout(()=>thr.classList.add('on'),900),0.3);
+  onView(bbtn,()=>setTimeout(()=>bbtn.classList.add('on'),500),0.5);
 }
-// polaroids react to the cursor: a small swing around their pin
-if(!reduce&&matchMedia('(hover:hover)').matches){let mx=-1e4,my=-1e4,tk=false;
-  function upd(){tk=false;pols.forEach(p=>{if(!p.im.classList.contains('live'))return;const dx=p.cx-mx,dy=p.cy-my,d=Math.hypot(dx,dy),R=480;
-    if(d>R){p.im.style.transform='';return;}const k=(1-d/R);const f=k*k;p.im.style.transform=`translate(${dx/d*14*f}px,${dy/d*10*f}px) rotate(${(dx>0?1:-1)*3.2*f}deg)`;});}
-  board.addEventListener('mousemove',e=>{const r=board.getBoundingClientRect();mx=(e.clientX-r.left)/S;my=(e.clientY-r.top)/S;if(!tk){tk=true;requestAnimationFrame(upd);}});
+// polaroids swing a little around their pin when the cursor is near
+if(!reduce&&matchMedia('(hover:hover)').matches){let mx=-1e4,my=-1e4,tk2=false;
+  function upd(){tk2=false;pols.forEach(p=>{if(!p.im.classList.contains('live'))return;const dx=p.cx-mx,dy=p.cy-my,d=Math.hypot(dx,dy),R=460;
+    if(d>R){p.im.style.transform='';return;}const k=(1-d/R);const f=k*k;p.im.style.transform=`translate(${dx/d*12*f}px,${dy/d*8*f}px) rotate(${(dx>0?1:-1)*3*f}deg)`;});}
+  board.addEventListener('mousemove',e=>{const r=board.getBoundingClientRect();mx=(e.clientX-r.left)/S;my=(e.clientY-r.top)/S;if(!tk2){tk2=true;requestAnimationFrame(upd);}});
   board.addEventListener('mouseleave',()=>{mx=my=-1e4;requestAnimationFrame(upd);});
 }
 
 /* ---------- scroll buttons ---------- */
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;const t=document.getElementById(b.dataset.go);const y=scaler.getBoundingClientRect().top+scrollY+t.offsetTop*S;scrollTo({top:y,behavior:reduce?'auto':'smooth'});});
+fit();addEventListener('resize',fit);
 })();
 </script>
 </body>
