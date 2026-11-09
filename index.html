@@ -454,10 +454,12 @@ tin.appendChild(tcv); // the table sits above every text, plaque and snowflake
 const endG=G(tin,'end');const more=cta(endG,'m','Підібрати сценарій',[1342.06,336,394,72],'quiz');
 const KX=TP.kx,X0=TP.x0;
 let vhS=1000,sc2=1,tY=0;
-function tLayout(k){vhS=innerHeight/k;tst.style.height=vhS+'px';tblw.style.height=(vhS+DIST)+'px';
-  // the scene is the 1920x1215 Figma frame, pinned to the bottom of the screen so the board follows straight after
-  sc2=Math.min(1,vhS/(FH-150));const tx=(1920-1920*sc2)/2;tY=vhS-FH*sc2;tstrip.style.top=(tY+STRIP*sc2)+'px';tin.style.transform=`translate(${tx}px,${tY}px) scale(${sc2})`;
-  const ex=Math.ceil(tx/sc2)+2;tcv.style.left=(-ex)+'px';if(tR){tR.size(1920+2*ex,TH,k*sc2,2);tR.vx=-ex;}}
+function tLayout(k){vhS=innerHeight/k;
+  // the scene is the 1920x1215 Figma frame at full width. It pins when the top of the upper snowflake (y=95) reaches the top of the screen;
+  // the table and the blue strip below stay in place and scroll into view after the horizontal part ends.
+  const SNOW=95.3;sc2=1;const H=Math.max(vhS,FH-SNOW);tY=H-FH;
+  tst.style.height=H+'px';tblw.style.height=(H+DIST)+'px';tstrip.style.top=(tY+STRIP)+'px';tin.style.transform=`translate(0px,${tY}px)`;
+  tcv.style.left='0px';if(tR){tR.size(1920,TH,k,2);tR.vx=0;}}
 function openAmt(i,x){if(i===4&&x<KX[4])return 1;return 1-sm(110,290,Math.abs(x-KX[i]));}
 function descAmt(i,x){if(i===4&&x<KX[4])return 1;return 1-sm(60,210,Math.abs(x-KX[i]));}
 let tpC=0,tpT=0,tDirty=true;
