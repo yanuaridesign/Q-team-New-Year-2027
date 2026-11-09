@@ -1,0 +1,193 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#0b0908;--y:#fbfc7e;--pu:#5542e7;--pu2:#4635c9;--pu3:#2a1d9a;--pink:#ec187e;--cy:#00ffff;--ez:cubic-bezier(.22,1,.36,1);--pop:cubic-bezier(.34,1.56,.64,1);--z:1}
+body{margin:0;overflow-x:clip}
+#stage,#stage *{box-sizing:border-box}
+#stage{color:var(--ink);font-family:Montserrat,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;background:var(--pu)}
+#stage{width:1920px;zoom:var(--z);position:relative}
+#stage section{position:relative;width:1920px;overflow:clip}
+.L{position:absolute;display:block;max-width:none;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.g{position:absolute;left:0;top:0;width:0;height:0}
+.tx{position:absolute;left:0;top:0;transform-origin:0 0;margin:0;font-kerning:normal;font-feature-settings:"kern" 1;cursor:text}
+.tx span{font-synthesis:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0;white-space:nowrap}
+canvas.gl{position:absolute;left:0;top:0;pointer-events:none;display:block}
+button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
+::selection{background:rgba(251,252,126,.85);color:#2a1d9a}
+
+/* buttons */
+.cta{position:absolute;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;border-radius:3.2px;
+  font:700 22.44px/1.2 Montserrat,sans-serif;text-transform:uppercase;letter-spacing:0;
+  transition:transform .4s var(--ez),box-shadow .4s var(--ez),background-color .3s var(--ez)}
+.cta.y{background:var(--y);color:var(--pu2);border:3.6px solid var(--y);box-shadow:8px 8px 0 var(--pu2)}
+.cta.y:hover{transform:scale(1.05);box-shadow:10px 10px 0 var(--pu3)}
+.cta.m{background:var(--y);color:#d3086a;border:1.6px solid #d3086a;box-shadow:0 0 0 rgba(0,0,0,0)}
+.cta.m:hover{transform:scale(1.05);box-shadow:6px 6px 0 #a0004c}
+.cta:active{transform:scale(.98)}
+
+/* reveal helpers (only when JS animation is on) */
+.anim .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ez),transform .9s var(--ez)}
+.anim .rv.on{opacity:1;transform:none}
+.anim .tl{opacity:0;transform:translateX(-46px);transition:opacity .9s var(--ez),transform 1s var(--ez)}
+.anim .tl.r{transform:translateX(46px)}
+.anim .tl.on{opacity:1;transform:none}
+.anim .pp{opacity:0;transform:scale(.5);transition:opacity .45s var(--ez),transform .8s var(--pop)}
+.anim .pp.on{opacity:1;transform:none}
+
+/* HERO */
+#hero{height:1513px;background:var(--pu)}
+.anim #hero .star{opacity:0;transform:translateY(-240px) rotate(-70deg) scale(.5);transform-origin:968px 146px;transition:transform 1.05s var(--pop),opacity .4s var(--ez)}
+.anim #hero .star.on{opacity:1;transform:none}
+#hero .star.glow img{animation:glow 3.6s ease-in-out infinite}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 8px rgba(255,209,2,.2))}50%{filter:drop-shadow(0 0 30px rgba(255,209,2,.7))}}
+.anim #hero .arr img{clip-path:inset(-20% 100% -20% -20%);transition:clip-path .9s cubic-bezier(.45,.05,.3,1)}
+.anim #hero .arr.rtl img{clip-path:inset(-20% -20% -20% 100%)}
+.anim #hero .arr.on img{clip-path:inset(-20% -20% -20% -20%)}
+.anim #hero .lab{opacity:0;transform:translateY(10px);transition:opacity .7s var(--ez) .25s,transform .8s var(--ez) .25s}
+.anim #hero .lab.on{opacity:1;transform:none}
+.anim #hero .pl{opacity:0;transform:translateY(48px) scale(.95);transition:opacity .7s var(--ez),transform .95s var(--pop)}
+.anim #hero .pl.on{opacity:1;transform:none}
+.anim #hero .medal{transform-origin:1454px 538px}
+.flake{animation:flk 7s ease-in-out infinite}
+@keyframes flk{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(18deg)}}
+.twk{animation:twk 2.8s ease-in-out infinite}
+@keyframes twk{0%,100%{opacity:1}50%{opacity:.35}}
+.zm{position:absolute;display:none;z-index:80;pointer-events:none;background:#f6f5f2 center/100% 100% no-repeat;box-shadow:0 2px 4px rgba(0,0,0,.4);
+  transition:transform .5s var(--ez),box-shadow .4s var(--ez)}
+.zm.vis{display:block}.zm.on{box-shadow:0 30px 60px rgba(0,0,0,.5)}
+#hero.hov{cursor:zoom-in}
+
+/* PAIN */
+#pain{height:1956px;margin-bottom:-2px;background:var(--pu)}
+.tear{position:absolute;left:-240px;top:0;width:2400px;height:191px;transform-origin:30% 100%;pointer-events:none;will-change:transform}
+.tear::before{content:"";position:absolute;left:0;right:0;bottom:189px;height:2600px;background:var(--pu)}
+.tear img{position:absolute;left:240px;top:0;width:1920px;height:191px}
+.anim #pain .sc{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ez),transform 1s var(--ez)}
+.anim #pain .sc.on{opacity:1;transform:none}
+.anim #pain .wo{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.25) rotate(var(--r));transform-origin:var(--ox) var(--oy);transition:opacity .25s var(--ez),transform .6s var(--pop)}
+.anim #pain .wo.on{opacity:1;transform:none}
+.anim #pain .cat{opacity:0;transform:translateY(90px);transition:opacity .6s var(--ez),transform 1s var(--pop)}
+.anim #pain .cat.on{opacity:1;transform:none}
+.logos{position:absolute;left:0;top:1706.65px;width:1920px;height:58px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.logos .row{display:flex;gap:80px;width:max-content;padding-left:19.5px;animation:marq 70s linear infinite}
+.logos img{height:57.6px;width:4248px;display:block;pointer-events:none}
+@keyframes marq{to{transform:translateX(-4328px)}}
+
+/* QUIZ */
+#quiz{height:1168px;background:var(--pink)}
+.anim #quiz .qin{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ez),transform 1s var(--ez)}
+.anim #quiz.on .qin{opacity:1;transform:none}
+.prog{position:absolute;left:191px;top:401.2px;white-space:nowrap;font:400 15px/18px Montserrat,sans-serif;letter-spacing:-.45px;color:rgba(11,9,8,.55)}
+.track{position:absolute;left:305px;top:408px;overflow:visible}
+.timer{position:absolute;left:1655.2px;top:399.9px;font:700 20.8px/25px Montserrat,sans-serif;color:var(--pu);font-variant-numeric:tabular-nums}
+#quiz.form .prog,#quiz.form .track,#quiz.form .timer{display:none}
+.back{position:absolute;left:191px;top:930px;white-space:nowrap;font:600 15px/13.5px Montserrat,sans-serif;letter-spacing:-.15px;color:#000;background:none;border:0;padding:4px 0;cursor:pointer}
+.back:hover{color:var(--pu)}
+.qtitle{position:absolute;left:218.8px;top:455.2px;width:1482.4px;text-align:center;font:700 30px/37px Montserrat,sans-serif;text-transform:uppercase;color:var(--ink);margin:0}
+.wg{position:absolute;left:0;top:0;overflow:visible;display:block}
+.wg .f{fill:#f8f6f3;transition:fill .3s var(--ez)}.wg .s{fill:none;stroke:#000;stroke-width:1.23;stroke-linejoin:round}
+.wg.so .f{display:none}
+.qcard{position:absolute;left:143.13px;top:377.15px}
+.qcard .wg{filter:drop-shadow(14.62px 14.62px 0 #d3086a)}
+.qcard .st{display:none}#quiz.form .qcard .wl{display:none}#quiz.form .qcard .st{display:block}
+.opt{position:absolute;top:542.16px;width:255.09px;height:350px;padding:0;border:0;background:none;cursor:pointer;transition:transform .35s var(--ez)}
+.opt>*{position:absolute}.opt>.cb,.opt>.wg{left:0;top:0}
+.opt .ph{left:0;top:0;width:255.09px;height:255.09px;border-radius:50%;overflow:hidden}
+.opt img{position:absolute;display:block;max-width:none;pointer-events:none}
+.opt .cb{filter:drop-shadow(4.62px 4.62px 0 #4635c9);transition:filter .3s var(--ez)}
+.opt .lb{left:39.08px;top:290.65px;width:176.92px;height:58.93px}
+.opt .lt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:0 23px;font:600 20px/18px Montserrat,sans-serif;letter-spacing:-.2px;color:var(--pu);text-align:center;transition:color .3s var(--ez)}
+.opt:hover,.opt:focus-visible{transform:translateY(-4px)}
+.opt:focus-visible{outline:none}
+.opt:hover .cb,.opt:focus-visible .cb,.opt.sel .cb{filter:drop-shadow(4.62px 4.62px 0 #d3086a)}
+.opt:hover .lb .f,.opt:focus-visible .lb .f,.opt.sel .lb .f{fill:var(--pink)}
+.opt:hover .lt,.opt:focus-visible .lt,.opt.sel .lt{color:#f8f6f3}
+.ftop{position:absolute;left:500px;top:438px;width:862px;text-align:center;font:600 20px/24px Montserrat,sans-serif;color:#0b0908;margin:0}
+.chips{position:absolute;left:500px;top:492px;width:862px;height:41px}
+.chips span{position:absolute;top:0;width:258px;height:41px;border:2px solid var(--pink);border-radius:3px;display:flex;align-items:center;justify-content:center;font:600 15px/18px Montserrat,sans-serif;color:#d3086a;white-space:nowrap}
+.ftitle{position:absolute;left:191px;top:585px;width:1481px;text-align:center;font:600 33.34px/38.35px Montserrat,sans-serif;color:#000;margin:0}
+.ff{position:absolute;top:669px;width:388px;height:80px}
+.ff input{position:absolute;left:0;top:0;width:100%;height:80px;padding:0 10px;font:400 22.23px/26.7px Montserrat,sans-serif;color:#1e1611;background:transparent;border:0;border-bottom:1px solid #000;border-radius:0;outline:none}
+.ff input::placeholder{color:#1e1611;opacity:1}
+.ff input:focus{border-bottom-color:var(--pu)}
+.ff .hint{position:absolute;left:177px;top:29px;font:400 18.06px/21.7px Montserrat,sans-serif;color:rgba(88,88,88,.65);pointer-events:none}
+.ff input:not(:placeholder-shown)~.hint{display:none}
+.ff .err{position:absolute;left:10px;top:86px;font:400 14px/1.2 Montserrat,sans-serif;color:#b3261e;white-space:nowrap}
+.fbtn{position:absolute;left:757px;top:804px;width:348px;height:72px;background:var(--pink);border:3.6px solid var(--pink);border-radius:3.2px;box-shadow:6px 6px 0 #d3086a;font:700 22.44px/26.9px Montserrat,sans-serif;text-transform:uppercase;color:#fbfc7e;cursor:pointer;padding:0;transition:transform .35s var(--ez),box-shadow .35s var(--ez)}
+.fbtn:hover{transform:scale(1.04);box-shadow:8px 8px 0 #a0004c}
+.fbtn:active{transform:scale(.98)}
+.deco{position:absolute;pointer-events:none;display:block}
+.done p{position:absolute;left:191px;width:1481px;text-align:center;margin:0}
+.fade{animation:fadeIn .55s var(--ez) both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}}
+
+/* TABLE */
+#tblw{background:var(--pink);overflow:visible}
+#tst{position:sticky;top:0;width:1920px;overflow:clip;background:var(--pink)}
+#tstrip{position:absolute;left:0;width:1920px;bottom:0;background:var(--cy)}
+#tin{position:absolute;left:0;top:0;width:1920px;height:1268px;transform-origin:0 0}
+#tin .ds,#tin .fd,#tin .end,#tin .arw,#tin .hd{will-change:opacity,transform}
+.pl{position:absolute;background:#d3086a}
+#tin .end{opacity:0;transition:opacity .6s var(--ez),transform .6s var(--ez);transform:translateY(16px);pointer-events:none}
+#tin .end.on{opacity:1;transform:none;pointer-events:auto}
+
+/* BOARD */
+#board{height:2354px;background:var(--cy) url(https://q-team-new-year-2027.vercel.app/img/v5/board2x.webp) 0 0/1920px 2354px no-repeat}
+#board .bc{position:absolute;background-image:url(https://q-team-new-year-2027.vercel.app/img/v5/board2x.webp);background-size:1920px 2354px;background-repeat:no-repeat}
+#board .rb{position:absolute;left:0;top:0;width:1920px;height:2354px;pointer-events:none}
+#board .tape{position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden}
+#board .trk{position:absolute;display:flex;white-space:nowrap;font-family:Montserrat,sans-serif;font-weight:700;line-height:1;color:#1b1b1b;animation:tape 40s linear infinite}
+#board .trk.rev{animation-direction:reverse}
+#board .trk span{display:flex;flex:none;gap:var(--g);padding-right:var(--g)}
+#board .trk b{font-weight:700;white-space:nowrap;flex:none}
+@keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+#board .thr{position:absolute;left:0;top:0;width:1920px;height:2354px;pointer-events:none;max-width:none}
+#board .hv,#board .ly{position:absolute}
+#board .hv img,#board .ly img{display:block;width:100%;height:100%;pointer-events:none}
+#board .hv{transition:transform .5s var(--ez);transform-origin:50% 30%}
+#board .hv:hover{transform:rotate(var(--r))}
+#board .bc{border:0;padding:0;cursor:pointer;font:700 22.4px/26.88px Montserrat,sans-serif;text-transform:uppercase;color:#0b0908;transition:transform .4s var(--ez)}
+#board .bc:hover{transform:scale(1.05)}
+#board .bc:active{transform:scale(.98)}
+
+
+/* ===== MOBILE (< 1024px): 780-unit canvas, desktop groups re-placed by .mw wrappers ===== */
+.mw{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0}
+.mo{display:none}
+.mob #stage,.mob #stage section{width:780px}
+.mob .mw{transform:var(--m)}
+.mob .mw.mh{display:none}
+.mob .mo{display:block}
+.mob #hero{height:1700px}
+.mob #pain{height:2470px}
+.mob #pain .logos{width:780px}
+.mob #pain .bx{display:none}
+.mob #pain .mbx{transform:translate(327px,464px)!important;width:700px!important;background:#fdf8f0;border:1.5px solid #0b0908;box-shadow:8px 8px 0 #5542e7;padding:26px 28px}
+.mob #quiz{height:1560px}
+.mob .qcard{left:20px;top:300px}
+.mob .qcard .wl,.mob .qcard .st{display:none!important}
+.qcard .wm{display:none}.mob .qcard .wm{display:block}
+.mob .prog{left:50px;top:332px}
+.mob .track{left:180px;top:340px;width:420px;height:10px}
+.mob .timer{left:640px;top:328px}
+.mob .qtitle{left:40px;top:385px;width:700px;font-size:38px;line-height:46px}
+.mob .opt{top:var(--ty)}
+.mob .opt .lt{font-size:24px;line-height:23px;padding:0 10px}
+.mob .back{left:50px;top:1300px;font-size:24px;line-height:24px}
+.mob .ftop{left:40px;top:340px;width:700px;font-size:28px;line-height:34px}
+.mob .chips{left:90px;top:400px;width:600px;height:auto;display:flex;flex-direction:column;gap:12px}
+.mob .chips span{position:static;width:100%;height:56px;font-size:24px}
+.mob .ftitle{left:40px;top:640px;width:700px;font-size:38px;line-height:44px}
+.mob .ff{left:70px!important;width:640px}
+.mob .ff:nth-child(1){top:730px}.mob .ff:nth-child(2){top:850px}.mob .ff:nth-child(3){top:970px}
+.mob .ff input{font-size:28px}.mob .ff .hint{left:auto;right:10px;font-size:22px}
+.mob .fbtn{left:166px;top:1120px;width:448px;height:84px;font-size:26px}
+.mob .deco{display:none}
+.mob #tst,.mob #tstrip{width:780px}
+.mob #board{height:3850px;background:var(--cy)}
+.mob #board .mpanel{position:absolute;left:18px;top:28px;width:744px;height:3800px;background:#141414;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(-1deg)}
+.mob #board .hv:hover{transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before{transition-duration:0s!important;animation:none!important}}
+</style>
