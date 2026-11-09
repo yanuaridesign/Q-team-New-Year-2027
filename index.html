@@ -144,6 +144,13 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 #board{height:2354px;background:var(--cy) url(img/v5/board2x.webp) 0 0/1920px 2354px no-repeat}
 #board .hv,#board .bc{position:absolute;background-image:url(img/v5/board2x.webp);background-size:1920px 2354px;background-repeat:no-repeat}
 #board .rb{position:absolute;left:0;top:0;width:1920px;height:2354px;pointer-events:none}
+#board .tape{position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden}
+#board .trk{position:absolute;display:flex;white-space:nowrap;font-family:Montserrat,sans-serif;font-weight:700;line-height:1;color:#1b1b1b;animation:tape 40s linear infinite}
+#board .trk.rev{animation-direction:reverse}
+#board .trk span{display:flex;gap:var(--g);padding-right:var(--g)}
+#board .trk b{font-weight:700}
+@keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+#board .thr{position:absolute;left:0;top:0;width:1920px;height:2354px;pointer-events:none;max-width:none}
 #board .hv{transition:transform .5s var(--ez);transform-origin:50% 50%}
 #board .hv:hover{transform:translateY(-3px) scale(1.035) rotate(var(--r));z-index:2}
 #board .bc{border:0;padding:0;cursor:pointer;font:700 22.4px/26.88px Montserrat,sans-serif;text-transform:uppercase;color:#0b0908;transition:transform .4s var(--ez)}
@@ -449,7 +456,7 @@ const KX=TP.kx,X0=TP.x0;
 let vhS=1000,sc2=1,tY=0;
 function tLayout(k){vhS=innerHeight/k;tst.style.height=vhS+'px';tblw.style.height=(vhS+DIST)+'px';
   // the scene is the 1920x1215 Figma frame, pinned to the bottom of the screen so the board follows straight after
-  sc2=Math.min(1,vhS/FH);const tx=(1920-1920*sc2)/2;tY=vhS-FH*sc2;tstrip.style.top=(tY+STRIP*sc2)+'px';tin.style.transform=`translate(${tx}px,${tY}px) scale(${sc2})`;
+  sc2=Math.min(1,vhS/(FH-150));const tx=(1920-1920*sc2)/2;tY=vhS-FH*sc2;tstrip.style.top=(tY+STRIP*sc2)+'px';tin.style.transform=`translate(${tx}px,${tY}px) scale(${sc2})`;
   const ex=Math.ceil(tx/sc2)+2;tcv.style.left=(-ex)+'px';if(tR){tR.size(1920+2*ex,TH,k*sc2,2);tR.vx=-ex;}}
 function openAmt(i,x){if(i===4&&x<KX[4])return 1;return 1-sm(110,290,Math.abs(x-KX[i]));}
 function descAmt(i,x){if(i===4&&x<KX[4])return 1;return 1-sm(60,210,Math.abs(x-KX[i]));}
@@ -479,9 +486,15 @@ const HV=[[450.3,586.6,405.7,420.9,1.4],[1319.7,423.5,345.2,443.3,-1.3],[939.9,9
   e.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;background-position:${-x}px ${-y}px;--r:${r}deg`;return {e,x,y,w,h};});
 // ribbon captions run under the board, so they are clipped to the area outside it, like in Figma
 const rb=G(board,'rb');rb.style.clipPath="path(evenodd,'M-600 -600H2600V3000H-600Z M107.4 235L1584.1 82.3L1797.4 2144.7L320.7 2297.5Z')";
-D.board.slice(0,16).forEach(t=>TX(t,rb,0,0,'p'));
+// running ribbons: endless «БЕЗПЕЧНЕ СВЯТО · Q-TEAM» lines inside the two yellow tapes
+[[[0.9784,0.2069,-0.2069,0.9784,-15.1445,535.3203],2105.36,75.16,30.97,1.86,37.16,24.78,18.58,1],
+ [[0.9511,-0.309,0.309,0.9511,-349.9531,2031.834],2574.93,83.81,34.84,2.09,41.81,27.88,20.91,-1]].forEach(([m,w,h,fs,ls,gap,pl,pt,dir])=>{
+  const t=$('div','tape',rb);t.style.cssText=`width:${w}px;height:${h}px;transform:matrix(${m.join(',')})`;
+  const half=`<span>${'<b>БЕЗПЕЧНЕ СВЯТО</b><b>Q-TEAM</b>'.repeat(6)}</span>`;
+  const tr=$('div','trk'+(dir<0?' rev':''),t);tr.style.cssText=`top:${pt}px;left:${pl}px;font-size:${fs}px;letter-spacing:${ls}px;--g:${gap}px`;tr.setAttribute('aria-hidden','true');tr.innerHTML=half+half;});
 D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;for(let i=HV.length-1;i>=0;i--){const h=HV[i];if(px>=h.x&&px<=h.x+h.w&&py>=h.y&&py<=h.y+h.h){g=h;break;}}
   g?TX(t,g.e,-g.x,-g.y,'p'):TX(t,board,0,0,'p');});
+{const im=$('img','thr',board);im.src='img/v5/threads2x.webp';im.alt='';im.setAttribute('aria-hidden','true');im.decoding='async';}
 {const b=[1323.93,2004.29,326.4,72.25];const x=$('button','bc',board);x.type='button';x.dataset.go='quiz';x.textContent='Залишити заявку';
   x.style.cssText=`left:${b[0]}px;top:${b[1]}px;width:${b[2]}px;height:${b[3]}px;background-position:${-b[0]}px ${-b[1]}px`;}
 
