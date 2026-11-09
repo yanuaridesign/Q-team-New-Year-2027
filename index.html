@@ -142,17 +142,19 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 
 /* BOARD */
 #board{height:2354px;background:var(--cy) url(img/v5/board2x.webp) 0 0/1920px 2354px no-repeat}
-#board .hv,#board .bc{position:absolute;background-image:url(img/v5/board2x.webp);background-size:1920px 2354px;background-repeat:no-repeat}
+#board .bc{position:absolute;background-image:url(img/v5/board2x.webp);background-size:1920px 2354px;background-repeat:no-repeat}
 #board .rb{position:absolute;left:0;top:0;width:1920px;height:2354px;pointer-events:none}
 #board .tape{position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden}
 #board .trk{position:absolute;display:flex;white-space:nowrap;font-family:Montserrat,sans-serif;font-weight:700;line-height:1;color:#1b1b1b;animation:tape 40s linear infinite}
 #board .trk.rev{animation-direction:reverse}
-#board .trk span{display:flex;gap:var(--g);padding-right:var(--g)}
-#board .trk b{font-weight:700}
+#board .trk span{display:flex;flex:none;gap:var(--g);padding-right:var(--g)}
+#board .trk b{font-weight:700;white-space:nowrap;flex:none}
 @keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 #board .thr{position:absolute;left:0;top:0;width:1920px;height:2354px;pointer-events:none;max-width:none}
-#board .hv{transition:transform .5s var(--ez);transform-origin:50% 50%}
-#board .hv:hover{transform:translateY(-3px) scale(1.035) rotate(var(--r));z-index:2}
+#board .hv,#board .ly{position:absolute}
+#board .hv img,#board .ly img{display:block;width:100%;height:100%;pointer-events:none}
+#board .hv{transition:transform .5s var(--ez);transform-origin:50% 30%}
+#board .hv:hover{transform:rotate(var(--r))}
 #board .bc{border:0;padding:0;cursor:pointer;font:700 22.4px/26.88px Montserrat,sans-serif;text-transform:uppercase;color:#0b0908;transition:transform .4s var(--ez)}
 #board .bc:hover{transform:scale(1.05)}
 #board .bc:active{transform:scale(.98)}
@@ -481,20 +483,22 @@ if(tR)tR.onload=()=>{tDirty=true;};
 
 /* ================= BOARD ================= */
 const board=document.getElementById('board');
-// the board picture (2x) carries no text; every caption is live text on top. Polaroids lift slightly on hover.
-const HV=[[450.3,586.6,405.7,420.9,1.4],[1319.7,423.5,345.2,443.3,-1.3],[939.9,935.5,409.1,459.8,1.2],[171.1,1065.5,358.2,453.3,-1.5],[1377.2,1363,409.6,407.4,1.3],[592.9,1644.1,345.2,407.4,-1.2],
- [1397,999.7,360,358,1.6],[644.9,1160.5,258,266,-1.8],[996.4,1565.8,258,266,1.8],[202.3,1550.7,303.6,271.1,-1.6]].map(([x,y,w,h,r])=>{
-  const e=$('div','hv',board);x-=6;y-=6;w+=12;h+=12;r*=.35;
-  e.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;background-position:${-x}px ${-y}px;--r:${r}deg`;return {e,x,y,w,h};});
-// ribbon captions run under the board, so they are clipped to the area outside it, like in Figma
-const rb=G(board,'rb');rb.style.clipPath="path(evenodd,'M-600 -600H2600V3000H-600Z M107.4 235L1584.1 82.3L1797.4 2144.7L320.7 2297.5Z')";
-// running ribbons: endless «БЕЗПЕЧНЕ СВЯТО · Q-TEAM» lines inside the two yellow tapes
+// running ribbons (under the board and the note sheet, like in Figma): endless «БЕЗПЕЧНЕ СВЯТО · Q-TEAM»
+const rb0=G(board,'rb');rb0.style.clipPath="path(evenodd,'M-600 -600H2600V3000H-600Z M107.4 235L1584.1 82.3L1797.4 2144.7L320.7 2297.5Z')";
+const rb=G(rb0,'rb');rb.style.clipPath="path(evenodd,'M-600 -600H2600V3000H-600Z M207 1649.7L666.4 1625.6L685.2 1985.1L225.9 2009.2Z')";
 [[[0.9784,0.2069,-0.2069,0.9784,-15.1445,535.3203],2105.36,75.16,30.97,1.86,37.16,24.78,18.58,1],
  [[0.9511,-0.309,0.309,0.9511,-349.9531,2031.834],2574.93,83.81,34.84,2.09,41.81,27.88,20.91,-1]].forEach(([m,w,h,fs,ls,gap,pl,pt,dir])=>{
   const t=$('div','tape',rb);t.style.cssText=`width:${w}px;height:${h}px;transform:matrix(${m.join(',')})`;
   const half=`<span>${'<b>БЕЗПЕЧНЕ СВЯТО</b><b>Q-TEAM</b>'.repeat(6)}</span>`;
   const tr=$('div','trk'+(dir<0?' rev':''),t);tr.style.cssText=`top:${pt}px;left:${pl}px;font-size:${fs}px;letter-spacing:${ls}px;--g:${gap}px`;tr.setAttribute('aria-hidden','true');tr.innerHTML=half+half;});
-D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;for(let i=HV.length-1;i>=0;i--){const h=HV[i];if(px>=h.x&&px<=h.x+h.w&&py>=h.y&&py<=h.y+h.h){g=h;break;}}
+// polaroids, the key and the hotel note are separate layers in Figma order; on hover a polaroid only tilts (no zoom)
+const LY=[['p6',1402.58,940.6,349.77,349.77,5],['p7',632.82,1154.49,290.05,290.05,-5],['p8',984.39,1559.78,290.05,290.05,5],
+ ['p0',450.29,586.63,412.79,428.03,-5],['p1',1319.67,423.46,352.34,450.36,5],['p2',939.86,877.24,416.16,466.92,-5],['p3',171.1,1055.24,365.33,460.4,5],['p4',1377.2,1363.02,416.73,414.48,-5],['p5',592.94,1644.08,352.34,414.48,5],
+ ['key',876.05,876.58,300.34,370.89,0],['paper',169.82,538.7,450.12,235.11,0],['p9',162.31,1543.4,342.47,310.01,-5]].map(([k,x,y,w,h,r])=>{
+  const e=$('div',r?'hv':'ly',board);e.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;--r:${r}deg`;
+  const im=$('img','',e);im.src='img/v5/b-'+k+'.webp';im.alt='';im.decoding='async';im.draggable=false;return {e,x,y,w,h,k};});
+D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;
+  for(let i=LY.length-1;i>=0;i--){const h=LY[i];if(px>=h.x+8&&px<=h.x+h.w-8&&py>=h.y+8&&py<=h.y+h.h-12){g=h;break;}}
   g?TX(t,g.e,-g.x,-g.y,'p'):TX(t,board,0,0,'p');});
 {const im=$('img','thr',board);im.src='img/v5/threads2x.webp';im.alt='';im.setAttribute('aria-hidden','true');im.decoding='async';}
 {const b=[1323.93,2004.29,326.4,72.25];const x=$('button','bc',board);x.type='button';x.dataset.go='quiz';x.textContent='Залишити заявку';
