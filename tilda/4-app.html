@@ -1,6 +1,8 @@
 <script>
 (function(){
 'use strict';
+if(window.__qteamInit)return;window.__qteamInit=1;
+if(document.querySelectorAll('#stage').length>1)console.warn('Q-team landing: the page contains the landing more than once — keep only one Tilda block with it.');
 const B=window.QTEAM_BASE||'';const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let MOB=false;
 const root=document.documentElement;if(!reduce)root.classList.add('anim');
 const stage=document.getElementById('stage');
@@ -95,7 +97,6 @@ for(const it of HD.items){
 Object.keys(plateOf).sort().forEach(n=>plates.push(plateOf[n]));
 // tree photos rendered with WebGL
 const TREE=D.tree.map(([cx,cy,w,h,r,pi])=>({cx,cy,w,h,a:-r*Math.PI/180,src:B+'img/p/'+pi+'.jpg',sh:1}));
-TREE.push({cx:714.7+41.5,cy:476.6+48,w:83,h:96,a:0,src:B+'img/l/hero-xpol.webp',sh:0});
 let introDone=false;
 {
   let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
@@ -179,6 +180,7 @@ for(const it of PD.items){
 function wosPrep(g,cx,cy){const dx=cx-BX[0],dy=cy-BX[1],d=Math.hypot(dx,dy)||1;
   g.style.setProperty('--dx',(-dx/d*110)+'px');g.style.setProperty('--dy',(-dy/d*110)+'px');g.style.setProperty('--r',(dx>0?16:-16)+'deg');
   g.style.setProperty('--ox',cx+'px');g.style.setProperty('--oy',cy+'px');}
+{const a=[...pain.querySelectorAll('img')].find(i=>/b2-n40/.test(i.src));if(a)pain.insertBefore(a,cats[0]);}
 const tear=$('div','tear',pain);tear.setAttribute('aria-hidden','true');{const im=$('img',null,tear);im.src=V+'b2-tear.webp';im.alt='';}
 if(reduce){[h1G,boxG,h2G,...wos,...cats].forEach(x=>x.classList.add('on'));}
 else{
