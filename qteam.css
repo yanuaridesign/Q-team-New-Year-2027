@@ -46,7 +46,7 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 .anim #hero .lab.on{opacity:1;transform:none}
 .anim #hero .pl{opacity:0;transform:translateY(48px) scale(.95);transition:opacity .7s var(--ez),transform .95s var(--pop)}
 .anim #hero .pl.on{opacity:1;transform:none}
-.anim #hero .medal{transform-origin:1454px 538px}
+.anim #hero .medal{transform-origin:1447px 462px}
 .flake{animation:flk 7s ease-in-out infinite}
 @keyframes flk{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-9px) rotate(18deg)}}
 .twk{animation:twk 2.8s ease-in-out infinite}
@@ -127,6 +127,12 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 #tin{position:absolute;left:0;top:0;width:1920px;height:1268px;transform-origin:0 0}
 #tin .ds,#tin .fd,#tin .end,#tin .arw,#tin .hd{will-change:opacity,transform}
 .pl{position:absolute;background:#d3086a}
+#tin .nxt,.mz .nxt{position:absolute;padding:0;border:0;background:none;cursor:pointer;pointer-events:auto;transition:transform .45s var(--ez),opacity .4s var(--ez)}
+#tin .nxt img,.mz .nxt img{position:absolute;display:block;pointer-events:none}
+#tin .nxt:hover,.mz .nxt:hover{transform:translateX(10px)}
+#tin .nxt:focus-visible{outline:3px solid var(--y);outline-offset:6px}
+#tin .nxt.off{opacity:0;pointer-events:none}
+.mob #tin>.nxt{display:none}
 #tin .end{opacity:0;transition:opacity .6s var(--ez),transform .6s var(--ez);transform:translateY(16px);pointer-events:none}
 #tin .end.on{opacity:1;transform:none;pointer-events:auto}
 

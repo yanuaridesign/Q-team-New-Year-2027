@@ -88,7 +88,7 @@ for(const it of HD.items){
   if(/^i\d/.test(k)){const g=plateOf[k[1]]=plateOf[k[1]]||G(hero,'pl');hs(k,p,g);continue;}
   if(k==='H'||k==='K'){const g=G(hero,'tl'+(k==='K'?' r':''));g.setAttribute('aria-hidden','true');hs(k,p,g);it.tx.forEach(t=>TX(t,g,p[0],p[1]));if(k==='H')Hg=g;else Kg=g;continue;}
   if(k==='star'){starG=G(hero,'star');hs(k,p,starG);continue;}
-  if(k==='medal'){medalG=G(hero,'pp medal');hs(k,p,medalG);continue;}
+  if(k==='medal'){medalG=G(hero,'pp medal');IMG(MI+'d-medal.webp',[1349.74,442.2,151.35,161.44],medalG);continue;}
   if(/^a\d/.test(k)){const g=G(hero,'arr'+(k==='a1'?' rtl':''));hs(k,p,g);arrows.push(g);continue;}
   if(/^n2\d/.test(k)){const im=hs(k,p,hero,'flake');im.style.animationDelay=(-Math.random()*7).toFixed(2)+'s';im.style.transformOrigin='50% 50%';im.style.transformBox='fill-box';continue;}
   if(/^n\d$|^n1\d$/.test(k)&&k!=='n0'){const im=hs(k,p,hero,'twk');im.style.animationDelay=(-Math.random()*3).toFixed(2)+'s';continue;}
@@ -296,7 +296,7 @@ function tildaSend(d){
 
 /* ================= TABLE (WebGL, pinned with native sticky) ================= */
 const tblw=document.getElementById('tblw'),tst=document.getElementById('tst'),tin=document.getElementById('tin'),tstrip=document.getElementById('tstrip');
-const TS=D.tsec,TB=D.tbl,TP=TS.tablePos;const TH=1268,FH=1215,STRIP=1145;let DIST=3000;
+const TS=D.tsec,TB=D.tbl,TP=TS.tablePos;const TH=1268,FH=1157,STRIP=1157;let DIST=3000;
 const tcv=document.createElement('canvas');tcv.className='gl';tcv.setAttribute('aria-hidden','true');
 const tR=GLR(tcv);
 const LIDK={'lid-white':'white','lid-red':'red','lid-blue':'blue','lid-gold':'gold','lid-purple':'purple'};
@@ -313,7 +313,8 @@ const DSC=SCN.map(k=>{const c=TS.scn[k],g=G(tin,'ds');c.pl.forEach(p=>{const e=$
 const vs=Object.fromEntries(TS.v.map(v=>[v[0],v.slice(1)]));
 ['s1','s2','s3','s4'].forEach(k=>{const im=IMG(V+'tbl-'+k+'.webp',vs[k],tin,'flake');im.style.transformBox='fill-box';im.style.transformOrigin='50% 50%';im.style.animationDelay=(-Math.random()*7).toFixed(2)+'s';});
 tin.appendChild(tcv); // the table sits above every text, plaque and snowflake
-const endG=G(tin,'end');const more=cta(endG,'m','Підібрати сценарій',[1342.06,336,394,72],'quiz');
+const endG=G(tin,'end');
+const nxD=$('button','nxt',tin);nxD.type='button';nxD.setAttribute('aria-label','Наступний сценарій');nxD.style.cssText='left:1731.65px;top:1079.97px;width:110.63px;height:34.47px';IMG(MI+'d-next.webp',[0,0,110.63,34.47],nxD);const more=cta(endG,'m','Підібрати сценарій',[1342.06,336,394,72],'quiz');
 const KX=TP.kx,X0=TP.x0;
 let vhS=1000,sc2=1,tY=0;
 function tLayout(k){vhS=innerHeight/k;
@@ -342,7 +343,7 @@ function drawTable(p){
   const hp=reduce?(x<X0-5?1:0):1-sm(470,X0-5,x);hd.style.transform=`translateX(${(-1050*hp).toFixed(1)}px)`;hd.style.opacity=(1-hp*.6).toFixed(3);hd.style.visibility=hp>.995?'hidden':'visible';
   for(let i=0;i<5;i++){const da=descAmt(i,x);DSC[i].style.opacity=da.toFixed(3);DSC[i].style.transform=`translateY(${((1-da)*14).toFixed(2)}px)`;DSC[i].style.visibility=da<.01?'hidden':'visible';
     }
-  const end=x<=KX[4]+40;endG.classList.toggle('on',end);
+  const end=x<=KX[4]+40;endG.classList.toggle('on',end);nxD.classList.toggle('off',x<=KX[4]+40);
 }
 if(tR)tR.onload=()=>{tDirty=true;};
 
@@ -448,7 +449,7 @@ function treeGeom(mob){TREE.forEach(o=>{[o.cx,o.cy,o.w,o.h,o.a,o.dx,o.dy]=mob?o.
  mI(z,'p-cat1',[104.4,639.03,77.47,81.85]);mR(z,[24.86,717.54,236.556,71.902],cr,'rough');mT(z,49.28,733.09,187.719,cc,S('Тримаємо ціни з 2023 року',0,600)+', хоча це не просто, коли все навколо дорожчає');
  mI(z,'p-cat2',[149.11,791.99,89.79,82.48]);mR(z,[75.72,871.13,236.556,71.902],cr,'rough');mT(z,117.84,886.68,152.323,cc,'З 2014 року провели '+S('5800+ корпоративів',0,700)+' для 2000+ компаній');
  mI(z,'p-cat3',[201.76,945.03,90.2,88.54]);mR(z,[128.58,1027.54,236.556,71.902],cr,'rough');mT(z,159.13,1043.09,175.466,cc,S('Своя безпечна локація на -1 поверсі:',0,700)+' окремо платити за оренду зали не треба');
- {const lg=mR(z,[0,1175.59,390,39.03],'overflow:hidden;opacity:.2;mix-blend-mode:luminosity'),row=$('div','mlg',lg);
+ {const lg=mR(z,[0,1175.59,390,39.03],'overflow:hidden;opacity:.4;mix-blend-mode:luminosity'),row=$('div','mlg',lg);
   for(let i=0;i<2;i++)mI(row,'v4/b2-logos',[11.6+i*2932.87,0,2878.67,39.03]);}
  mR(z,[24.86,338.4,340.281,118.923],'background:#fdf8f0;border:.8px solid #000','rough');
  mT(z,35.05,362.32,319.904,'font:400 15px/1.2 Montserrat,sans-serif;letter-spacing:-.3px;text-align:center;color:#0b0908',S('Ті, хто пропустив минулий рік,',0,700)+' тепер приходять до нас, коли команда мовчки розвалюється, а цінних спеціалістів вже не повернути....');
@@ -506,6 +507,7 @@ const tmH=$('div','a fx',tmA);tmH.style.cssText='left:0;top:0;width:390px;height
  mT(tmH,15.83,200.51,235.388,'font:500 12px/1.05 Montserrat,sans-serif;color:#a00f55','Ми провели серію новорічних корпоративів, зібрали відгуки й склали найкраще в одну програму');
  mT(tmH,15.83,111.81,0,h+'color:#f8f6f3','на будь-який смак','nw');
  mT(tmH,5.39,75.63,0,'font:700 58.382px/25.592px Caveat,cursive;text-transform:uppercase;color:#fdff83','40+','cv nw');}
+{const b=$('button','nxt',tmA);b.type='button';b.setAttribute('aria-label','Наступний сценарій');b.style.cssText='left:282.03px;top:653.21px;width:70.95px;height:22.1px';mI(b,'s-next',[0,0,70.95,22.1]);TMS.nx=b;}
 tmA.querySelectorAll('button').forEach(b=>b.closest('.mz').removeAttribute('aria-hidden'));
 // eased camera position: dwells on every Figma state
 function tmU(p){const u=clamp(p,0,1)*6,i=Math.min(5,Math.floor(u)),f=u-i;return i+(reduce?Math.round(f):sm(.22,.78,f));}
@@ -528,6 +530,7 @@ function drawTableM(p){
   for(let i=1;i<=6;i++){const da=i<6?1-sm(.08,.42,Math.abs(ue-i)):sm(5.5,5.92,ue);
     for(const e of TMS[i]){if(!e)continue;e.style.opacity=da.toFixed(3);e.style.visibility=da<.01?'hidden':'visible';}
     TMS[i][1].style.transform=`translateY(${((1-da)*7).toFixed(2)}px)`;TMS[i][1].style.pointerEvents=da>.5?'auto':'none';}
+  {const e=sm(5.5,5.92,ue);TMS.nx.style.opacity=(1-e).toFixed(3);TMS.nx.style.visibility=e>.99?'hidden':'visible';}
 }
 
 /* ---------- 5 · Board ---------- */
@@ -574,17 +577,24 @@ let Z=1;
 function fit(){const w=root.clientWidth;const mob=w<1024;if(mob!==MOB){MOB=mob;root.classList.toggle('mob',MOB);treeGeom(MOB);treeDirty=true;if(typeof render==='function')render();}Z=w/(MOB?MW:1920);root.style.setProperty('--z',Z);const k=kOf(hero).k||Z;
   if(treeR){if(MOB)treeR.size(MW,840,k,2);else treeR.size(1920,1513,k,2);treeDirty=true;}tLayout(k);tDirty=true;}
 fit();addEventListener('resize',fit);
-// mobile: when scrolling stops between two plates, glide to the nearest one
+// scenarios: when scrolling stops between two plates, glide gently to the nearest one; the arrow glides to the next one
 {let st=null,touching=false,snapping=false;
- const snap=()=>{if(!MOB||touching||snapping)return;const {r,k}=kOf(tblw);const p=-r.top/k/DIST;if(p<=0.004||p>=0.996)return;
-   const n=Math.round(p*6)/6;if(Math.abs(n-p)*6<0.03)return;
-   snapping=true;const y0=scrollY,dy=(n-p)*DIST*k;if(reduce){scrollTo(0,y0+dy);snapping=false;return;}
-   const dur=Math.min(1100,Math.max(550,Math.abs(dy)*1.6)),t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-   const stop=()=>{snapping=false;removeEventListener('touchstart',stop);removeEventListener('wheel',stop);};addEventListener('touchstart',stop,{passive:true});addEventListener('wheel',stop,{passive:true});
-   const step=now=>{if(!snapping)return;const t=Math.min(1,(now-t0)/dur);scrollTo(0,y0+dy*ease(t));if(t<1)requestAnimationFrame(step);else setTimeout(stop,60);};requestAnimationFrame(step);};
+ const stops=()=>MOB?[0,1,2,3,4,5,6].map(i=>i/6):[0,...KX.map(v=>.9*(X0-v)/(X0-KX[4]))];
+ const prog=()=>{const {r,k}=kOf(tblw);return {p:-r.top/k/DIST,k};};
+ const stop=()=>{snapping=false;removeEventListener('touchstart',stop);removeEventListener('wheel',stop);removeEventListener('keydown',stop);};
+ function glide(dy){if(Math.abs(dy)<1)return;if(reduce){scrollTo(0,scrollY+dy);return;}
+   snapping=true;const y0=scrollY,dur=Math.min(1200,Math.max(650,Math.abs(dy)*.9)),t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+   addEventListener('touchstart',stop,{passive:true});addEventListener('wheel',stop,{passive:true});addEventListener('keydown',stop);
+   const step=now=>{if(!snapping)return;const t=Math.min(1,(now-t0)/dur);scrollTo(0,y0+dy*ease(t));if(t<1)requestAnimationFrame(step);else setTimeout(stop,80);};requestAnimationFrame(step);}
+ const snap=()=>{if(touching||snapping)return;const {p,k}=prog();const S=stops(),last=S[S.length-1];if(p<=0.004||p>=last-0.004)return;
+   let n=S[0];for(const v of S)if(Math.abs(v-p)<Math.abs(n-p))n=v;if(Math.abs(n-p)*DIST<25)return;glide((n-p)*DIST*k);};
+ function next(){const {p,k}=prog();const n=stops().find(v=>v>p+0.01);
+   if(n!=null){glide((n-p)*DIST*k);return;}
+   glide(board.getBoundingClientRect().top);}
+ document.addEventListener('click',e=>{if(e.target.closest('.nxt')){e.preventDefault();next();}});
  addEventListener('touchstart',()=>{touching=true;clearTimeout(st);},{passive:true});
  addEventListener('touchend',()=>{touching=false;clearTimeout(st);st=setTimeout(snap,350);},{passive:true});
- addEventListener('scroll',()=>{if(snapping)return;clearTimeout(st);st=setTimeout(snap,350);},{passive:true});}
+ addEventListener('scroll',()=>{if(snapping)return;clearTimeout(st);st=setTimeout(snap,MOB?350:450);},{passive:true});}
 let tearC=reduce?1:0,tearT=0,last=performance.now();
 function frame(now){
   const dt=Math.min(.064,(now-last)/1000);last=now;const a=1-Math.exp(-dt*10);
