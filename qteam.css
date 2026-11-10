@@ -167,13 +167,16 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 .mz .nw{white-space:nowrap}
 .mz .rt{transform-origin:50% 50%}
 .mz .rough{filter:url(#qrough)}
+.anim .mz .ph{opacity:0;translate:0 14px;transition:opacity .8s var(--ez),translate .9s var(--ez)}
+.anim .mz .ph.st{translate:0 -70px;transition:opacity .4s var(--ez),translate 1.05s var(--pop)}
+.anim .mz .ph.on{opacity:1;translate:0 0}
 .mz .mlg{left:0;top:0;width:5865.74px;height:39.03px;animation:mlg 70s linear infinite}
 @keyframes mlg{to{transform:translateX(-2932.87px)}}
 .mz button{pointer-events:auto;cursor:pointer;padding:0;border-style:solid;font-family:Montserrat,sans-serif;transition:transform .4s var(--ez)}
 .mz button:active{transform:scale(.97)}
 .mob #stage,.mob #stage section{width:780px}
 .mob #hero{height:2176px}
-.mob #hero>:not(.mz):not(.gl):not(.sr),.mob #pain>:not(.mz):not(.sr),.mob #board>:not(.mz):not(.sr):not(ul){display:none}
+.mob #hero>:not(.mz):not(.gl):not(.sr):not(.zm),.mob #pain>:not(.mz):not(.sr),.mob #board>:not(.mz):not(.sr):not(ul){display:none}
 .mob #hero>canvas.gl{top:280px}
 .mob #pain{height:2638px;margin-bottom:0;background:#5542e7}
 /* quiz: the working card is re-laid in Figma units x2 */

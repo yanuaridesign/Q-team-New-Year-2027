@@ -177,13 +177,16 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 .mz .nw{white-space:nowrap}
 .mz .rt{transform-origin:50% 50%}
 .mz .rough{filter:url(#qrough)}
+.anim .mz .ph{opacity:0;translate:0 14px;transition:opacity .8s var(--ez),translate .9s var(--ez)}
+.anim .mz .ph.st{translate:0 -70px;transition:opacity .4s var(--ez),translate 1.05s var(--pop)}
+.anim .mz .ph.on{opacity:1;translate:0 0}
 .mz .mlg{left:0;top:0;width:5865.74px;height:39.03px;animation:mlg 70s linear infinite}
 @keyframes mlg{to{transform:translateX(-2932.87px)}}
 .mz button{pointer-events:auto;cursor:pointer;padding:0;border-style:solid;font-family:Montserrat,sans-serif;transition:transform .4s var(--ez)}
 .mz button:active{transform:scale(.97)}
 .mob #stage,.mob #stage section{width:780px}
 .mob #hero{height:2176px}
-.mob #hero>:not(.mz):not(.gl):not(.sr),.mob #pain>:not(.mz):not(.sr),.mob #board>:not(.mz):not(.sr):not(ul){display:none}
+.mob #hero>:not(.mz):not(.gl):not(.sr):not(.zm),.mob #pain>:not(.mz):not(.sr),.mob #board>:not(.mz):not(.sr):not(ul){display:none}
 .mob #hero>canvas.gl{top:280px}
 .mob #pain{height:2638px;margin-bottom:0;background:#5542e7}
 /* quiz: the working card is re-laid in Figma units x2 */
@@ -324,7 +327,7 @@ function GLR(cv){
 const hero=document.getElementById('hero');const HD=D.hero;
 const hs=(k,p,par,cls)=>IMG(V+'hero-'+k+'.webp',p,par,cls);
 const LBL={l1:['a1',1],l2:['a2',0],l3:['a3',0],l4:['a4',0]};
-const plates=[],labels=[],arrows=[];let Hg,Kg,subG,starG,medalG,btn,treeCv,treeR=null;
+const plates=[],labels=[],arrows=[];const MPH=[[],[],[],[]],mph=n=>MPH[n].forEach(e=>e.classList.add('on'));let Hg,Kg,subG,starG,medalG,btn,treeCv,treeR=null;
 const plateOf={};
 for(const it of HD.items){
   if(it.TREE){treeCv=$('canvas','gl',hero);treeCv.setAttribute('aria-hidden','true');continue;}
@@ -377,10 +380,11 @@ function drawTree(now){
   return busy;}
 let treeDirty=true;
 // hover zoom: a crisp HTML copy of the photo pops above everything
-const ZF=4.2;let hovO=null;
-function zoomOn(o){let z=o.z;if(!z){z=o.z=$('div','zm',hero);z.style.cssText=`left:${o.cx-o.w/2}px;top:${o.cy-o.h/2}px;width:${o.w}px;height:${o.h}px;background-image:url(${o.src})`;if(!o.sh)z.style.boxShadow='none';}
-  clearTimeout(o.tm);const W=o.w*ZF,H=o.h*ZF;
-  const dy=Math.max(0,H/2+16-o.cy)-Math.max(0,o.cy+H/2+16-1513),dx=Math.max(0,W/2+16-o.cx)-Math.max(0,o.cx+W/2+16-1920);
+let hovO=null;const ZF0=4.2,zf=()=>MOB?4.6:ZF0,TOFF=()=>MOB?280:0,ZW=()=>MOB?780:1920,ZH=()=>MOB?2176:1513;
+function zoomOn(o){let z=o.z;if(!z){z=o.z=$('div','zm',hero);z.style.backgroundImage=`url(${o.src})`;if(!o.sh)z.style.boxShadow='none';}
+  const cy=o.cy+TOFF();if(!z.classList.contains('vis'))Object.assign(z.style,{left:(o.cx-o.w/2)+'px',top:(cy-o.h/2)+'px',width:o.w+'px',height:o.h+'px'});
+  clearTimeout(o.tm);const ZF=zf(),W=o.w*ZF,H=o.h*ZF;
+  const dy=Math.max(0,H/2+16-cy)-Math.max(0,cy+H/2+16-ZH()),dx=Math.max(0,W/2+16-o.cx)-Math.max(0,o.cx+W/2+16-ZW());
   if(!z.classList.contains('vis')){z.style.transition='none';z.style.transform=`rotate(${o.a}rad)`;z.classList.add('vis');void z.offsetWidth;z.style.transition='';}
   o.hid=true;treeDirty=true;z.classList.add('on');z.style.transform=`translate(${dx}px,${dy}px) scale(${ZF})`;}
 function zoomOff(o){const z=o.z;if(!z)return;z.classList.remove('on');z.style.transform=`rotate(${o.a}rad)`;clearTimeout(o.tm);
@@ -389,24 +393,28 @@ function hitTree(x,y){for(let i=TREE.length-1;i>=0;i--){const o=TREE[i];const dx
   const lx=dx*c-dy*s,ly=dx*s+dy*c;if(Math.abs(lx)<=o.w/2&&Math.abs(ly)<=o.h/2)return o;}return null;}
 function setHover(o){if(o===hovO)return;if(hovO)zoomOff(hovO);hovO=o;if(o)zoomOn(o);hero.classList.toggle('hov',!!o);}
 hero.addEventListener('mousemove',e=>{if(!introDone||MOB)return;const {r,k}=kOf(hero);const x=(e.clientX-r.left)/k,y=(e.clientY-r.top)/k;
-  if(hovO){const W=hovO.w*ZF/2,H=hovO.h*ZF/2;/* keep while cursor stays on the zoomed copy */const zr=hovO.z.getBoundingClientRect();
+  if(hovO){/* keep while cursor stays on the zoomed copy */const zr=hovO.z.getBoundingClientRect();
     if(e.clientX>=zr.left&&e.clientX<=zr.right&&e.clientY>=zr.top&&e.clientY<=zr.bottom)return;}
   setHover(hitTree(x,y));});
 hero.addEventListener('mouseleave',()=>setHover(null));
-hero.addEventListener('click',e=>{if(!introDone||MOB||e.target.closest('button'))return;const {r,k}=kOf(hero);const o=hitTree((e.clientX-r.left)/k,(e.clientY-r.top)/k);setHover(o===hovO?null:o);});
+// click (desktop) / tap (phone): enlarge a photo, tap again or anywhere else to put it back
+hero.addEventListener('click',e=>{if(!introDone||e.target.closest('button'))return;const {r,k}=kOf(hero);
+  if(hovO&&hovO.z&&e.target===hovO.z){setHover(null);return;}
+  const o=hitTree((e.clientX-r.left)/k,(e.clientY-r.top)/k-TOFF());setHover(o===hovO?null:o);});
+addEventListener('scroll',()=>{if(MOB&&hovO)setHover(null);},{passive:true});
 
 function showPlates(){plates.forEach((g,i)=>{g.style.transitionDelay=(i*160)+'ms';g.classList.add('on');});}
 {let armed=false;const arm=()=>{if(armed||scrollY<30)return;armed=true;removeEventListener('scroll',arm);
   const go=()=>{if(!introDone){setTimeout(go,250);return;}showPlates();};onView(plates[0],go,0.05);};addEventListener('scroll',arm,{passive:true});}
 function labelsIn(){arrows.forEach(a=>a.classList.add('on'));labels.forEach(l=>l.classList.add('on'));setTimeout(()=>medalG.classList.add('on'),700);}
-if(reduce){[Hg,Kg,subG,btn,starG,medalG,...arrows,...labels,...plates].forEach(x=>x.classList.add('on'));introDone=true;}
+if(reduce){[Hg,Kg,subG,btn,starG,medalG,...arrows,...labels,...plates].forEach(x=>x.classList.add('on'));introDone=true;setTimeout(()=>[1,2,3].forEach(mph));}
 else{
   const pre=TREE.map(o=>o.T?o.T.p:Promise.resolve());
   let started=false;
   const start=async()=>{if(started)return;started=true;t0=performance.now();treeDirty=true;
-    await wait(2500);starG.classList.add('on');setTimeout(()=>starG.classList.add('glow'),1000);
-    await wait(450);Hg.classList.add('on');await wait(150);Kg.classList.add('on');await wait(220);subG.classList.add('on');
-    await wait(220);btn.classList.add('on');await wait(250);introDone=true;labelsIn();};
+    await wait(2500);starG.classList.add('on');mph(1);setTimeout(()=>starG.classList.add('glow'),1000);
+    await wait(450);Hg.classList.add('on');mph(2);await wait(150);Kg.classList.add('on');await wait(220);subG.classList.add('on');
+    await wait(220);btn.classList.add('on');mph(3);await wait(250);introDone=true;labelsIn();};
   Promise.all(pre).then(()=>document.fonts.ready).then(start);setTimeout(start,3500);
 }
 
@@ -617,9 +625,10 @@ const LY=[['p6',1402.58,940.6,349.77,349.77,5],['p7',632.82,1154.49,290.05,290.0
 D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;
   for(let i=LY.length-1;i>=0;i--){const h=LY[i];if(h.k!=='key'&&px>=h.x+8&&px<=h.x+h.w-8&&py>=h.y+8&&py<=h.y+h.h-12){g=h;break;}}
   g?TX(t,g.e,-g.x,-g.y,'p'):TX(t,board,0,0,'p');});
-{const im=$('img','thr',board);im.src=B+'img/v5/threads2x.webp';im.alt='';im.setAttribute('aria-hidden','true');im.decoding='async';}
 {const b=[1323.93,2004.29,326.4,72.25];const x=$('button','bc',board);x.type='button';x.dataset.go='quiz';x.textContent='Залишити заявку';
   x.style.cssText=`left:${b[0]}px;top:${b[1]}px;width:${b[2]}px;height:${b[3]}px;background-position:${-b[0]}px ${-b[1]}px`;}
+// threads and pins above the button: the last pin holds the button
+{const im=$('img','thr',board);im.src=B+'img/v5/threads2x.webp';im.alt='';im.setAttribute('aria-hidden','true');im.decoding='async';}
 
 
 /* ================= MOBILE: Figma Page 4 (390 px frames), drawn in Figma units inside .mz (x2) ================= */
@@ -638,23 +647,23 @@ const S=(t,c,w)=>`<span style="${c?'color:'+c+';':''}${w?'font-weight:'+w+';':''
 function mBtn(par,b,css,txt,go){const x=$('button',null,par);x.type='button';x.dataset.go=go||'quiz';x.textContent=txt;x.style.cssText=`left:${b[0]}px;top:${b[1]}px;width:${b[2]}px;height:${b[3]}px;`+css;return x;}
 
 /* ---------- 1 · Hero ---------- */
-{const z0=MZ(hero,treeCv),z1=MZ(hero);
+{const z0=MZ(hero,treeCv),z1=MZ(hero);const ph=(n,...els)=>els.forEach(e=>{e.classList.add('ph');if(n===1)e.classList.add('st');MPH[n].push(e);});
  const tl='font:600 43.05px/.95 Montserrat,sans-serif;letter-spacing:-2.1525px;text-transform:uppercase;color:#fbfc7e;text-shadow:2.46px 2.46px 0 #4635c9';
  mI(z0,'h-q',[0,108.09,390,474.71]);
- mT(z0,105.6,103.76,0,tl,'орпоратив','nw');mI(z0,'h-K',[37,78.64,143.55,84.68]);
- mT(z0,68.43,59.5,0,'font:600 44.625px/.95 Montserrat,sans-serif;letter-spacing:-2.2313px;text-transform:uppercase;color:#fbfc7e;text-shadow:2.55px 2.55px 0 #4635c9','оворічний ','nw');
- mI(z0,'h-H',[7.55,31.59,74.18,69.71]);mI(z0,'h-spark',[151.92,78.64,27.8,29.93]);
+ ph(2,mT(z0,105.6,103.76,0,tl,'орпоратив','nw'),mI(z0,'h-K',[37,78.64,143.55,84.68]));
+ ph(2,mT(z0,68.43,59.5,0,'font:600 44.625px/.95 Montserrat,sans-serif;letter-spacing:-2.2313px;text-transform:uppercase;color:#fbfc7e;text-shadow:2.55px 2.55px 0 #4635c9','оворічний ','nw'),
+ mI(z0,'h-H',[7.55,31.59,74.18,69.71]),mI(z0,'h-spark',[151.92,78.64,27.8,29.93]));
  mI(z0,'h-dots',[21.16,189.69,343.22,343.22],'opacity:.65');
  // above the polaroid tree
  mI(z1,'h-st1',[352.41,412.6,14.91,14.92]);mI(z1,'h-st1',[26.63,535.46,14.91,14.92]);
  const lb='font:700 13.412px/1.2 Caveat,cursive;letter-spacing:-.1341px;color:#fbfc7e;';
- mRT(z1,[18.79,266.32,61.115,32.083],-16.48,0,lb+'text-shadow:.447px 1.341px 0 #4635c9','Форт Боярд','cv nw');
- mRT(z1,[277.55,187,61.502,34.895],-17.55,58.812,lb+'line-height:.7','Різдвяний детектив','cv');
- mRT(z1,[-10.09,397.99,74.462,28.587],-8.55,72.593,lb+'line-height:.7;text-align:center','Онлайн тімбілдінг','cv');
- mRT(z1,[343.71,342.04,52.183,31.481],16.89,49.07,lb+'line-height:.7;text-shadow:.447px .447px 0 #4635c9','Капсула Часу','cv');
- mI(z1,'h-star',[163.55,123.41,67.14,65.81]);
- mBtn(z1,[108,529.81,174,36.194],'background:#fbfc7e;border:1.8px solid #fbfc7e;border-radius:1.603px;font:700 11.221px/1.2 Montserrat,sans-serif;text-transform:uppercase;color:#4635c9','Залишити заявку');
- mI(z1,'h-a311',[224.52,188.95,58.37,23.79]);mI(z1,'h-a312',[308.06,353.17,35.4,48.58]);mI(z1,'h-a316',[57.49,285.37,52.93,44.12]);
+ ph(2,mRT(z1,[18.79,266.32,61.115,32.083],-16.48,0,lb+'text-shadow:.447px 1.341px 0 #4635c9','Форт Боярд','cv nw'));
+ ph(2,mRT(z1,[277.55,187,61.502,34.895],-17.55,58.812,lb+'line-height:.7','Різдвяний детектив','cv'));
+ ph(2,mRT(z1,[-10.09,397.99,74.462,28.587],-8.55,72.593,lb+'line-height:.7;text-align:center','Онлайн тімбілдінг','cv'));
+ ph(2,mRT(z1,[343.71,342.04,52.183,31.481],16.89,49.07,lb+'line-height:.7;text-shadow:.447px .447px 0 #4635c9','Капсула Часу','cv'));
+ ph(1,mI(z1,'h-star',[163.55,123.41,67.14,65.81]));
+ ph(3,mBtn(z1,[108,529.81,174,36.194],'background:#fbfc7e;border:1.8px solid #fbfc7e;border-radius:1.603px;font:700 11.221px/1.2 Montserrat,sans-serif;text-transform:uppercase;color:#4635c9','Залишити заявку'));
+ ph(2,mI(z1,'h-a311',[224.52,188.95,58.37,23.79]),mI(z1,'h-a312',[308.06,353.17,35.4,48.58]),mI(z1,'h-a316',[57.49,285.37,52.93,44.12]));
  const P=t=>S(t,'#5542e7',600),ct='font:400 12px/1.2 Montserrat,sans-serif;text-align:center;color:#0b0908;letter-spacing:';
  const card=(r,cx,ty,tw,html,ls,ic,icb)=>{mR(z1,r,'background:#f8f6f3;border:.608px solid #000;border-radius:.76px','rough');if(html)mTC(z1,cx,ty,tw,ct+(ls||-.12)+'px',html);if(ic)mI(z1,ic,icb);};
  card([14.8,677.48,170,90],100.96,709.52,148.45,P('На нашій локації в Києві, Оnline')+' чи на виїзд по всій Україні',0,'v4/hero-i1',[74.53,652,52.83,52.83]);
@@ -665,9 +674,9 @@ function mBtn(par,b,css,txt,go){const x=$('button',null,par);x.type='button';x.d
  {const f=mR(z1,[234,706,110,47],'display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.52px;font-family:Montserrat,sans-serif;white-space:nowrap');
   f.innerHTML='<p style="position:static;margin:0;font-size:14px;line-height:normal;color:#5542e7"><span style="font-weight:600;color:#0b0908">4,9</span> ★★★★★</p><p style="position:static;margin:0;font-size:10px;line-height:normal;letter-spacing:-.3px;color:#0b0908">рейтинг у Google</p>';}
  mI(z1,'v4/hero-i2',[263.51,662.85,54.44,45.14]);
- mI(z1,'h-a328',[15.53,427.15,24.81,56.49]);
- mT(z1,25.93,596.95,338.131,'font:400 17px/1.2 Montserrat,sans-serif;letter-spacing:-.34px;color:#fdf8f0',S('Нова надихаюча програма','#fbfc7e',600)+' під ключ, <br>на своїй локації зі світлом та без тривог');
- mI(z1,'h-flake',[19.89,124.44,17.41,15.33]);mI(z1,'h-st2',[315.26,241.94,16.68,16.68]);mI(z1,'h-medal',[2.02,142.1,89.25,97.21]);}
+ ph(2,mI(z1,'h-a328',[15.53,427.15,24.81,56.49]));
+ ph(3,mT(z1,25.93,596.95,338.131,'font:400 17px/1.2 Montserrat,sans-serif;letter-spacing:-.34px;color:#fdf8f0',S('Нова надихаюча програма','#fbfc7e',600)+' під ключ, <br>на своїй локації зі світлом та без тривог'));
+ mI(z1,'h-flake',[19.89,124.44,17.41,15.33]);mI(z1,'h-st2',[315.26,241.94,16.68,16.68]);ph(2,mI(z1,'h-medal',[2.02,142.1,89.25,97.21]));}
 // the polaroid tree keeps its WebGL renderer; on mobile every photo takes its Figma (Page 4) place
 {const MT=[[212.35,204.63,36.41,43.69,6.64],[228.87,233.62,32.87,39.44,-0.74],[157.99,231.16,33.95,40.73,-3.36],[182.62,206.93,32.3,38.76,-1.83],[72.49,420.56,31.89,38.27,-7.0],[178.54,236.92,27.0,34.29,3.26],[204.83,236.1,32.42,38.91,3.22],[249.76,263.72,31.41,37.7,-3.24],[135.6,263.66,32.84,39.41,-1.64],[225.42,259.71,30.5,36.6,1.82],[161.16,262.57,33.79,40.55,0.8],[204.16,260.44,31.39,37.67,7.25],[185.59,269.62,32.8,39.37,5.67],[146.16,288.29,33.33,39.99,5.11],[174.4,283.73,31.47,37.76,-3.82],[210.13,284.01,33.7,40.44,0.0],[125.81,309.87,25.84,31.0,2.57],[213.36,308.26,31.18,37.41,2.65],[106.63,341.42,33.04,39.65,-3.22],[235.99,288.79,32.77,39.33,-5.26],[242.58,311.72,32.54,39.05,8.93],[153.72,311.42,33.08,39.7,-7.25],[184.74,306.65,30.68,36.81,7.03],[267.17,339.42,30.59,36.71,-4.15],[247.38,337.04,29.19,35.03,-2.26],[185.53,333.94,24.92,29.9,-1.14],[137.33,339.58,32.34,38.81,5.09],[161.77,335.4,31.51,37.81,-0.42],[206.37,335.24,31.79,38.15,-1.28],[227.12,335.74,29.54,35.44,-6.59],[289.82,341.68,25.93,31.11,-6.23],[221.86,361.83,33.23,39.88,3.67],[250.42,361.45,31.66,37.99,6.3],[195.14,363.38,32.05,38.46,1.2],[170.67,365.18,33.85,40.62,2.65],[149.58,361.5,31.78,38.14,-7.25],[121.38,364.19,33.7,40.44,6.3],[275.25,364.5,23.85,28.61,11.96],[294.88,385.42,31.36,37.63,2.68],[239.92,391.51,32.25,38.7,-2.0],[187.54,388.53,32.66,39.19,-1.73],[122.71,387.67,33.77,40.53,-6.53],[271.97,390.74,32.48,38.98,7.81],[182.86,411.1,32.86,39.43,1.46],[211.81,386.06,32.24,38.69,0.95],[231.41,415.4,32.26,38.72,0.38],[157.7,388.02,31.52,37.82,-7.61],[137.47,384.95,21.32,25.58,7.45],[93.59,386.09,30.58,36.69,5.09],[208.27,413.38,27.25,32.7,10.93],[159.48,414.06,31.87,38.25,5.1],[312.8,413.34,31.6,37.92,5.25],[139.77,412.88,33.47,40.16,-4.66],[121.32,417.91,33.87,40.64,5.59],[289.56,416.52,30.96,37.15,-5.27],[94.88,417.09,33.25,39.9,-5.78],[257.35,414.09,33.47,40.16,-5.55],[282.97,442.98,33.89,40.67,-3.91],[207.51,441.36,34.0,40.8,-1.38],[234.11,441.38,32.84,38.51,6.02],[261.21,442.49,33.03,39.63,5.72],[164.42,436.07,31.31,37.58,3.35],[183.98,438.14,30.6,36.72,7.27],[140.26,436.85,31.4,37.68,-4.06],[120.72,438.02,31.63,37.95,4.56],[101.41,440.36,30.67,36.8,-1.84],[92.49,466.35,34.11,40.93,-6.77],[106.59,463.07,27.0,32.41,11.42],[275.95,468.64,31.93,38.31,-2.3],[61.15,466.93,30.55,36.66,1.69],[134.37,463.85,32.33,38.8,2.43],[302.82,466.25,32.33,38.8,1.83],[222.28,464.93,32.12,38.55,-7.13],[163.89,463.46,33.23,39.88,2.47],[181.32,465.48,27.35,32.82,-12.46],[331.67,465.2,30.75,36.9,-6.18],[249.25,468.81,32.14,38.56,13.74],[202.64,467.67,24.98,29.98,1.56],[338.15,489.76,32.19,38.63,-1.85],[183.22,490.24,31.31,37.57,-0.84],[36.29,491.94,33.56,40.27,-14.02],[63.18,492.19,33.0,39.6,-2.38],[134.81,493.93,27.98,33.57,5.94],[286.32,492.93,34.09,40.91,3.96],[312.25,490.85,31.97,38.37,-1.02],[260.95,494.32,32.88,39.45,-3.58],[154.41,489.18,30.79,36.94,-4.92],[110.38,493.56,29.26,35.12,-5.6],[86.25,495.34,28.11,33.73,-7.76],[204.95,494.62,32.76,39.31,-7.86],[231.17,494.33,31.79,38.15,0.74],[204.81,494.6,30.88,37.06,-8.5],[361.6,490.88,33.22,39.86,4.57]];
  TREE.forEach((o,i)=>{const m=MT[i];o.G=[o.cx,o.cy,o.w,o.h,o.a,o.dx,o.dy];
@@ -700,7 +709,7 @@ function treeGeom(mob){TREE.forEach(o=>{[o.cx,o.cy,o.w,o.h,o.a,o.dx,o.dy]=mob?o.
  mI(z,'p-cat1',[104.4,639.03,77.47,81.85]);mR(z,[24.86,717.54,236.556,71.902],cr,'rough');mT(z,49.28,733.09,187.719,cc,S('Тримаємо ціни з 2023 року',0,600)+', хоча це не просто, коли все навколо дорожчає');
  mI(z,'p-cat2',[149.11,791.99,89.79,82.48]);mR(z,[75.72,871.13,236.556,71.902],cr,'rough');mT(z,117.84,886.68,152.323,cc,'З 2014 року провели '+S('5800+ корпоративів',0,700)+' для 2000+ компаній');
  mI(z,'p-cat3',[201.76,945.03,90.2,88.54]);mR(z,[128.58,1027.54,236.556,71.902],cr,'rough');mT(z,159.13,1043.09,175.466,cc,S('Своя безпечна локація на -1 поверсі:',0,700)+' окремо платити за оренду зали не треба');
- {const lg=mR(z,[0,1175.59,390,39.03],'overflow:hidden;opacity:.4;mix-blend-mode:luminosity'),row=$('div','mlg',lg);
+ {const lg=mR(z,[0,1175.59,390,39.03],'overflow:hidden;opacity:.75;mix-blend-mode:luminosity'),row=$('div','mlg',lg);
   for(let i=0;i<2;i++)mI(row,'v4/b2-logos',[11.6+i*2932.87,0,2878.67,39.03]);}
  mR(z,[24.86,338.4,340.281,118.923],'background:#fdf8f0;border:.8px solid #000','rough');
  mT(z,35.05,362.32,319.904,'font:400 15px/1.2 Montserrat,sans-serif;letter-spacing:-.3px;text-align:center;color:#0b0908',S('Ті, хто пропустив минулий рік,',0,700)+' тепер приходять до нас, коли команда мовчки розвалюється, а цінних спеціалістів вже не повернути....');
@@ -746,7 +755,7 @@ const TMS=[null];// per-state description layers [below-table, above-table]
   mT(g,42.03,250.51,0,fc,'2,5–5 год, від 7 гравців','nw');mI(g,'s-aquiz',[27.99,296.18,42.43,57.6]);});
  st([32.5,104.23,324.96,174.68],g=>{mI(g,'s-amon',[20.86,287.81,33.22,63.52]);
   mT(g,42.03,122.09,302.969,ds+'0px','Знімальна група у високогірному готелі працює над новим блокбастером. '+SB('Режисер збився з ніг, шукаючи продюсерів, а потім його збили з ніг важким предметом.')+' Хто це зробив і хто тепер займе його місце? Проби тривають, бо The Show Must Go On.');
-  mT(g,42.03,250.51,0,fc,'до 3 год, від 8 гравців','nw');mRT(g,[172,188.7,117.9,40.3],-10.24,116.2,ps,'P.S. : проводимо у справжньому готелі','cv');});
+  mT(g,42.03,250.51,0,fc,'до 3 год, від 8 гравців','nw');mRT(g,[62,206,104,34],-10.24,100,ps,'P.S. : проводимо у справжньому готелі','cv');});
  st(null,g=>{mI(g,'s-aend',[181.71,240.85,12.45,42.46]);
   mT(g,64.84,156.09,260.326,'font:700 30px/.8 Caveat,cursive;text-align:center;color:#fdff83','Організуємо корпоратив саме під вашу команду і бюджет','cv');
   mBtn(g,[78.62,294.66,232.75,48.81],'background:#fbfc7e;border:1.08px solid #d3086a;border-radius:2.16px;font:700 15.132px/1.2 Montserrat,sans-serif;text-transform:uppercase;color:#d3086a','Більше сценаріїв');});
