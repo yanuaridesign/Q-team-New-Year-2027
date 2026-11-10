@@ -169,7 +169,29 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 #mfr .lb{font:700 40px/28px Caveat,cursive;letter-spacing:-.4px;color:#000;text-align:center}
 #mfr .ds{font:400 20px/20px Montserrat,sans-serif;letter-spacing:-.2px;color:#000;text-align:center}
 #mfr .ar{filter:drop-shadow(1px 3px 0 #4635c9)}
-.mob #meth{display:none}
+.mob #mst{width:780px}
+.mob #mfr,#mmz{display:none}
+.mob #mmz{display:block}
+#mmz{position:absolute;left:0;top:0;width:390px;height:835px;transform-origin:0 0}
+#mmz p,#mmz h2{position:absolute;margin:0}
+#mmz img{position:absolute;display:block;max-width:none;pointer-events:none;user-select:none}
+#mmz .mt{position:absolute;left:22.01px;top:36.67px;width:364px;font:600 25px/31.2px Montserrat,sans-serif;text-transform:uppercase;color:#000;white-space:pre}
+#mmz .sb{font:500 15px/16.5px Montserrat,sans-serif;color:#000;white-space:nowrap}
+#mmz .sb b{font-weight:700}#mmz .sb.s3 b{font-weight:600}
+#mmz .sb.s3{line-height:15.75px}
+#mmz .cd{position:absolute;width:255.66px;height:162.85px;transform-origin:0 0;will-change:transform,opacity}
+#mmz .mpp{position:absolute;inset:0;background:#f8f6f3;border:1.2px solid #000;border-radius:2px;filter:url(#qrough)}
+#mmz .cd p{font:600 15px/18px Montserrat,sans-serif;letter-spacing:-.15px;color:#0b0908;text-align:center}
+#mmz .st{position:absolute;height:8px;transform-origin:0 50%}
+#mmz .st svg{display:block;width:100%;height:100%;overflow:visible}
+#mmz .ly{position:absolute;left:30.02px;top:410.35px;width:330.25px;height:211.49px;transform-origin:50% 50%;will-change:transform}
+#mmz .ly .mpp{background:var(--c)}
+#mmz .ly p{font:500 15px/15.75px Montserrat,sans-serif;letter-spacing:-.15px;color:#000}
+#mmz .ly p b{font-weight:700}
+#mmz .pol{will-change:transform,opacity}
+#mmz .lb{font:700 20px/14px Caveat,cursive;letter-spacing:-.2px;color:#000;text-align:center}
+#mmz .ds{font:400 10px/10px Montserrat,sans-serif;letter-spacing:-.1px;color:#000;text-align:center}
+#mmz .ar{filter:drop-shadow(.5px 1.5px 0 #4635c9)}
 
 /* BOARD */
 #board{height:2354px;background:var(--cy) url(img/v5/board2x.webp) 0 0/1920px 2354px no-repeat}
@@ -665,7 +687,7 @@ D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;
    4 the card tilts into isometry (true 3D, orthographic) and splits into three layers with hand-drawn labels. */
 const meth=document.createElement('section');meth.id='meth';meth.setAttribute('aria-label','Метод «Очі в очі»');board.parentNode.insertBefore(meth,board.nextSibling);// the last block of the page
 const mst=$('div',null,meth);mst.id='mst';const mfr=$('div',null,mst);mfr.id='mfr';
-const MD=2800;let mLast=0,mvh=1000,mtC=0,mtT=0,mDirty=true;
+let MD=2800,mLast=0,mvh=1000,mtC=0,mtT=0,mDirty=true;
 const mImg=(f,b,par,cls)=>{const im=$('img',cls||null,par||mfr);im.src=MI+f+'.webp';im.alt='';im.decoding='async';im.draggable=false;im.setAttribute('aria-hidden','true');
   im.style.cssText=`left:${b[0]}px;top:${b[1]}px;width:${b[2]}px;height:${b[3]}px`;return im;};
 const mP=(cls,b,html,par,tag)=>{const p=$(tag||'p',cls,par||mfr);p.style.left=b[0]+'px';p.style.top=b[1]+'px';if(b[2])p.style.width=b[2]+'px';p.innerHTML=html;return p;};
@@ -710,9 +732,12 @@ const OUT=[[mImg('x-a1',[616.99,535.38,149.67,119.19],mfr,'ar'),mP('lb',[288.7,5
 OUT[2][2].style.letterSpacing='0';
 const seg=(t,a,b)=>clamp((t-a)/(b-a),0,1),ee=v=>v*v*(3-2*v),eo=v=>1-Math.pow(1-v,3);
 const op=(el,v)=>{el.style.opacity=v.toFixed(3);el.style.visibility=v<.004?'hidden':'visible';};
-function mLayout(k){mvh=innerHeight/k;const s=Math.min(1,mvh/1050),oy=(mvh-1080*s)/2;
+function mLayout(k){mvh=innerHeight/k;
+  if(MOB){MD=2400;const s=Math.min(1,mvh/1670),oy=(mvh-1670*s)/2;mst.style.height=mvh+'px';meth.style.height=(mvh+MD)+'px';
+    mmz.style.transform=`translate(${(390*(1-s)).toFixed(2)}px,${oy.toFixed(2)}px) scale(${(2*s).toFixed(4)})`;return;}
+  MD=2800;const s=Math.min(1,mvh/1050),oy=(mvh-1080*s)/2;
   mst.style.height=mvh+'px';meth.style.height=(mvh+MD)+'px';mfr.style.transform=`translate(${(960*(1-s)).toFixed(2)}px,${oy.toFixed(2)}px) scale(${s.toFixed(4)})`;}
-function drawMeth(t){
+function drawMeth(t){if(MOB){drawMethM(t);return;}
   // 0→1: the second line comes in and the minuses get struck out
   const s2=ee(seg(t,.1,.55)),out12=seg(t,1.25,1.5);
   op(sub1,1-out12);op(sub2,s2*(1-out12));sub2.style.transform=`translateY(${((1-s2)*14).toFixed(2)}px)`;
@@ -730,12 +755,62 @@ function drawMeth(t){
     op(L.l,i===2?y:(tilt>.6?1:0));});
   op(ytx,ee(seg(t,1.68,1.9))*(1-seg(t,2.95,3.12)));op(qm,seg(t,3.3,3.65));
   // polaroids fly in from both sides, gather into the card and hide under it
-  POL.forEach((P,i)=>{const f=eo(seg(t,1.62+.035*i,2.05+.035*i)),g=ee(seg(t,2.15+.02*i,2.8+.02*i));
+  POL.forEach((P,i)=>{const f=eo(seg(t,1.55+.03*i,1.75+.03*i)),g=ee(seg(t,2.15+.02*i,2.8+.02*i));
     const x=P.b[0]+(P.s[0]-P.b[0])*g+P.side*(1-f)*900,yy=P.b[1]+(P.s[1]-P.b[1])*g+(1-f)*60;
     P.im.style.transform=`translate(${(x-P.b[0]).toFixed(2)}px,${(yy-P.b[1]).toFixed(2)}px) rotate(${(P.side*(1-f)*28).toFixed(2)}deg) scale(${(1-.12*g).toFixed(3)})`;
     op(P.im,(f>0?1:0)*(1-seg(t,2.9,3)));});
   OUT.forEach((o,i)=>{const v=eo(seg(t,3.65+.08*i,3.95+.05*i));o.forEach((e,j)=>{op(e,v);e.style.transform=`translateY(${((1-v)*(j?10:0)).toFixed(2)}px) scale(${j?1:(.85+.15*v).toFixed(3)})`;});
     o[0].style.transformOrigin=i===1?'0 100%':'100% 100%';});
+}
+
+/* ---- the same scene on the phone (Figma 463:4205, 390x835 frames, drawn in Figma units, x2) ---- */
+const mmz=$('div',null,mst);mmz.id='mmz';mmz.setAttribute('aria-hidden','true');
+const zI=(f,b,par,cls)=>mImg(f,b,par||mmz,cls);
+const zP=(cls,b,html,par)=>mP(cls,b,html,par||mmz);
+{const t=$('p','mt',mmz);t.innerHTML='Ч   му після нашого\nкорпоративу <span style="color:#d3086a">команда\nпрацює краще?</span>';
+ zI('x-O',[42.23,41.01,18.38,21.78]);zI('x-cat',[267.56,147.47,189.7,164.9]);zI('x-mb',[227.46,52.73,162.75,192.5]);}
+const zs1=zP('sb',[22.01,142.73],'Існує 3 варіанти<br>проведення корпоративу');
+const zs2=zP('sb',[22.01,142.73],'За “Бритвою Самульова” <b>ми<br>відрубаємо усі недоліки</b><br>відомих варіантів');
+const zs3=zP('sb s3',[22.01,161.18],'І пропонуємо сценарій,<br>який не лише розважить,<br><b>АЛЕ зміцнить та надихне<br>команду</b>');
+const zs4=zP('sb s3',[22.01,161.18],'Ми це все беремо на себе,<br>а ви <b>отримуєте</b>:');
+const ZSP=[[151.49,644.57,96.92,107.21],[316.33,681.34,79.12,88.34],[267.44,778.59,83.06,95.29],[80.88,755.86,79.03,90.5],[320.83,308.85,88.4,100.4],[362.46,480.5,74.53,84.69],[120.76,242.78,89.72,96.49],[-8.91,282.32,86.25,99.67],[191.16,306.12,94.64,102.36],[-3.98,619.56,72.39,87.34]];
+const ZST=[[146.05,464.39],[154.95,473.42],[152.98,470.35],[154.99,472.45],[150.31,467.8],[157.25,475.21],[149.65,469.34],[151.38,468.16],[147.19,466.61],[158.31,474.33]];
+const ZPOL=ZSP.map((b,i)=>({im:zI('x-mp'+i,b,mmz,'pol'),b,s:ZST[i],side:b[0]+b[2]/2<195?-1:1}));
+const ZY0=[233.74,432.77,628.8],ZK=332.02/255.66;
+const ZCD=[['x-i1',[61.59,-26.95,136.63,138.17],[32.2,114.45,194.68],'Концерт — якісно,<br>АЛЕ всі глядачі',[52.52,141.17,154.04]],
+ ['x-i2',[71.69,-41.39,116.43,143.26],[31.65,114.45,195.78],'Застілля — душевно,<br>АЛЕ кожен зі своїми',[38.4,139.24,182.28]],
+ ['x-i3',[36.26,-24.38,194.41,109.04],[21.59,104.45,214.81],'Самодіяльність — всі<br>залучені, АЛЕ хаос і стрес',[93.48,130.06,150.01]]].map((c,i)=>{
+  const g=$('div','cd',mmz);g.style.left='62.83px';g.style.top=ZY0[i]+'px';$('div','mpp',g);zI(c[0],c[1],g);zP('',c[2],c[3],g);
+  const st=$('div','st',g);const w=c[4][2];st.style.cssText=`left:${c[4][0]}px;top:${c[4][1]-1.5}px;width:${w}px`;
+  st.innerHTML=`<svg viewBox="0 0 ${w} 8" preserveAspectRatio="none" aria-hidden="true"><path d="M1.5 ${5+i%2} C ${w*.3} 3, ${w*.65} 6, ${w-1.5} 3.2" fill="none" stroke="#d3086a" stroke-width="2.6" stroke-linecap="round"/></svg>`;
+  return {g,st};});
+const ZLY=[['#ec187e',104.96],['#5542e7',54.17],['#fbfc7e',0]].map(([c,dy])=>{const l=$('div','ly',mmz);l.style.setProperty('--c',c);$('div','mpp',l);return {l,dy};});
+const zyel=ZLY[2].l,zytx=G(zyel);zytx.style.cssText='left:0;top:0';
+zP('',[18.49,19,293.27],'Це відбувається тоді, коли колеги дивляться не на сцену чи екран, а <b>взаємодіють “очі в очі”</b>: разом дискутують, долають перешкоди, приймають рішення, впливають на фінал.',zytx);
+zP('',[18.49,128.8,297.38],'Отримують добре зрежисовані приводи: <b>захопитися одне одним, посміятися разом і сподобатися собі в очах колег</b>',zytx);
+const zqm=zI('x-q',[0,0,193.82,214.63],zyel);zqm.style.transformOrigin='0 0';zqm.style.transform='matrix(0.89527,-0.06987,0.07922,0.65015,76.92,37.11)';
+const ZOUT=[[zI('x-ma1',[28.4,344.2,82.09,146.43],mmz,'ar'),zP('lb',[17.83,292.77,184.23],'Веселий корпоратив'),zP('ds',[25.42,312.46,169.03],'У кожного своя роль, усі залучені та взаємодіють між собою')],
+ [zI('x-ma3',[271.95,415.67,96.01,143.89],mmz,'ar'),zP('lb',[220.69,328.46,159.67],'Зріст ефективності команди'),zP('ds',[222.69,359.15,155.66],'Колеги з різних відділів розкривають справу разом, налагоджується комунікація та будується довіра')],
+ [zI('x-ma2',[53.99,599.69,55.28,121.09],mmz,'ar'),zP('lb',[80.25,718.09,229.51],'Надійна організація “під ключ”'),zP('ds',[104.29,737.78,181.42],'Сценарій, ведучі, техніка, безпека, тепло й світло повністю на нас. 100% без скасувань')]];
+function drawMethM(t){
+  const s2=ee(seg(t,.1,.55)),out12=seg(t,1.4,1.62);
+  op(zs1,1-s2);op(zs2,s2*(1-out12));zs2.style.transform=`translateY(${(10*ee(seg(t,1,1.4))+(1-s2)*8).toFixed(2)}px)`;
+  ZCD.forEach((c,i)=>{c.st.style.transform=`scaleX(${eo(seg(t,.3+.14*i,.75+.14*i)).toFixed(4)})`;
+    const a=ee(seg(t,1,1.4+.04*i)),sc=1+(ZK-1)*a;
+    c.g.style.transform=`translate(${((28.99-62.83)*a).toFixed(2)}px,${((410.35-ZY0[i])*a).toFixed(2)}px) scale(${sc.toFixed(4)})`;op(c.g,1-seg(t,1.58,1.72));});
+  const y=eo(seg(t,1.52,1.78)),tilt=ee(seg(t,3,3.5)),split=eo(seg(t,3.35,3.85));
+  op(zs3,ee(seg(t,1.6,1.9))*(1-seg(t,2.95,3.15)));
+  const s4=ee(seg(t,3.45,3.8));op(zs4,s4);zs4.style.transform=`translateY(${((1-s4)*8).toFixed(2)}px)`;
+  const cy=-30.67*tilt,sc=.9+.1*y,sx=1-(1-.7855)*tilt,sy=1-(1-.9817)*tilt;
+  ZLY.forEach((L,i)=>{L.l.style.transform=`translate(0px,${(cy+L.dy*split).toFixed(2)}px) scale(${i===2?sc.toFixed(4):1}) rotateX(${(54.7356*tilt).toFixed(3)}deg) rotateZ(${(-45*tilt).toFixed(3)}deg) scale(${sx.toFixed(4)},${sy.toFixed(4)})`;
+    op(L.l,i===2?y:(tilt>.6?1:0));});
+  op(zytx,ee(seg(t,1.68,1.9))*(1-seg(t,2.95,3.12)));op(zqm,seg(t,3.3,3.65));
+  ZPOL.forEach((P,i)=>{const f=eo(seg(t,1.55+.03*i,1.75+.03*i)),g=ee(seg(t,2.15+.02*i,2.8+.02*i));
+    const x=P.b[0]+(P.s[0]-P.b[0])*g+P.side*(1-f)*260,yy=P.b[1]+(P.s[1]-P.b[1])*g+(1-f)*30;
+    P.im.style.transform=`translate(${(x-P.b[0]).toFixed(2)}px,${(yy-P.b[1]).toFixed(2)}px) rotate(${(P.side*(1-f)*28).toFixed(2)}deg) scale(${(1-.12*g).toFixed(3)})`;
+    op(P.im,(f>0?1:0)*(1-seg(t,2.9,3)));});
+  ZOUT.forEach((o,i)=>{const v=eo(seg(t,3.65+.08*i,3.95+.05*i));o.forEach((e,j)=>{op(e,v);e.style.transform=`translateY(${((1-v)*(j?6:0)).toFixed(2)}px) scale(${j?1:(.85+.15*v).toFixed(3)})`;});
+    o[0].style.transformOrigin=i===2?'50% 0':'50% 100%';});
 }
 
 
@@ -956,7 +1031,7 @@ fit();addEventListener('resize',fit);
    const step=now=>{if(!snapping)return;const t=Math.min(1,(now-t0)/dur);scrollTo(0,y0+dy*ease(t));if(t<1)requestAnimationFrame(step);else setTimeout(stop,80);};requestAnimationFrame(step);}
  // method scene: a small scroll is enough — it glides on to the next state in the direction you scrolled
  const mProg=()=>{const r=meth.getBoundingClientRect(),k=kOf(meth).k;return {p:-r.top/k/MD*4,k};};
- const mSnap=()=>{if(MOB)return false;const {p,k}=mProg();if(p<=0){mLast=0;return false;}if(p>=4){mLast=4;return false;}
+ const mSnap=()=>{const {p,k}=mProg();if(p<=0){mLast=0;return false;}if(p>=4){mLast=4;return false;}
    let n;if(Math.abs(p-mLast)*MD/4<30)n=mLast;else n=p>mLast?Math.ceil(p-.02):Math.floor(p+.02);n=clamp(n,0,4);
    if(Math.abs(n-p)*MD/4<2){mLast=n;return true;}mLast=n;glide((n-p)*MD/4*k);return true;};
  const snap=()=>{if(touching||snapping)return;if(mSnap())return;const {p,k}=prog();const S=stops(),last=S[S.length-1];if(p<=0.004||p>=last-0.004)return;
