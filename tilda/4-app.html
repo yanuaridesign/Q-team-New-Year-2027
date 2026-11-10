@@ -209,7 +209,7 @@ const card=G(quiz,'qin');
 onView(quiz,()=>quiz.classList.add('on'),0.3);
 card.insertAdjacentHTML('beforeend',`<div class="qcard">${wSvg(CW,CH,wRect(CW,CH,7),'wl')}${wSvg(740,1058.69,wRect(740,1058.69,9),'wm')}<svg class="wg st" width="${CW}" height="${CH}" aria-hidden="true"><rect class="f" x=".62" y=".62" width="${CW-1.23}" height="${CH-1.23}" rx="1.54"/><rect class="s" x=".62" y=".62" width="${CW-1.23}" height="${CH-1.23}" rx="1.54"/></svg></div>
  <div class="prog" id="prog">Питання 1 / 3</div>
- <svg class="track" width="1310" height="10" viewBox="0 0 1310 10" preserveAspectRatio="none" aria-hidden="true"><path d="M4 5H1306" stroke="rgba(11,9,8,.15)" stroke-width="3.2" stroke-linecap="round" fill="none"/><path id="trackFill" d="M4 5H1306" fill="none" stroke="#5542e7" stroke-width="8" stroke-linecap="round" pathLength="1302" stroke-dasharray="1302" stroke-dashoffset="946" style="transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)"/></svg>
+ <svg class="track" width="1310" height="10" viewBox="0 0 1310 10" preserveAspectRatio="none" aria-hidden="true"><path d="M4 5H1306" stroke="rgba(11,9,8,.15)" stroke-width="3.2" stroke-linecap="round" fill="none"/><path id="trackFill" d="M4 5H1306" fill="none" stroke="#5542e7" stroke-width="8" stroke-linecap="round" pathLength="1302" stroke-dasharray="1302" stroke-dashoffset="1302" style="opacity:0;transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1),opacity .2s"/></svg>
  <div class="timer" id="timer" aria-label="Час на квіз">3:00</div><button class="back" id="back" type="button" hidden>Попереднє питання</button><div id="qbody"></div>`);
 [[59.73,197.51],[1834.02,364.72],[285.01,1038.27]].forEach(p=>IMG(V+'tbl-s1.webp',[p[0],p[1],58.05,51.09],quiz));
 const X4=[308.79,657.91,1007.01,1356.13],X3=[397.48,823.52,1249.56];
@@ -219,14 +219,15 @@ const Q=[
   {t:'Скільки буде учасників?',x:X4,o:[['4–25 людей','n0',-1.49,-1.46,258.38,258.52],['26–50 людей','n1',-1.49,-1.46,258.38,258.52],['51–100 людей','n2',-1.49,-1.46,258.38,258.52],['100+ людей','n3',-1.49,-1.46,258.38,258.52]]}];
 const CD=255.09;let step=0;const ans=[];let uname='',sent='';
 const body=document.getElementById('qbody'),prog=document.getElementById('prog'),fill=document.getElementById('trackFill'),back=document.getElementById('back');
-function setProg(i){if(i<3)prog.textContent=`Питання ${i+1} / 3`;fill.style.strokeDashoffset=String(1302-[356,829,1302][Math.min(i,2)]);}
+function setFill(n){const L=[0,434,868,1302][Math.max(0,Math.min(3,n))];fill.style.strokeDashoffset=String(1302-L);fill.style.opacity=L?1:0;}
+function setProg(i){if(i<3)prog.textContent=`Питання ${i+1} / 3`;setFill(i);}
 function render(){
   body.innerHTML='';back.hidden=step===0||step>3;setProg(step);quiz.classList.toggle('form',step>=3);
   if(step<3){const q=Q[step];const t=$('div','qtitle fade',body);t.textContent=q.t;
     q.o.forEach((o,j)=>{const b=$('button','opt fade',body);b.type='button';b.style.left=(MOB?(q.o.length===3&&j===2?262:[112,412][j%2]):q.x[j])+'px';b.style.setProperty('--ty',(MOB?(j<2?620:1010):(j<2?480:870))+'px');b.style.animationDelay=(j*70)+'ms';
       b.innerHTML=`<span class="cb">${wSvg(CD,CD,wCirc(CD,11+j*7+step*31))}</span><span class="ph"><img src="${B}img/v5/${o[1]}.webp" alt="" loading="lazy" style="left:${o[2]}px;top:${o[3]}px;width:${o[4]}px;height:${o[5]}px"></span>${wSvg(CD,CD,wCirc(CD,11+j*7+step*31),'so')}<img class="mph" src="${MI}q-${'qln'[step]}${j}.webp" alt="" loading="lazy" style="${step?'left:-1.22px;top:-1.4px;width:257.36px;height:257.9px':'left:-1.48px;top:-1.46px;width:258.38px;height:258.52px'}"><span class="lb">${wSvg(176.92,58.93,wRect(176.92,58.93,3+j*5+step*17))}<span class="lt">${o[0]}</span></span>`;
       if(ans[step]===j)b.classList.add('sel');b.setAttribute('aria-label',o[0]);
-      b.addEventListener('click',()=>{ans[step]=j;startTimer();body.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');setTimeout(()=>{step++;render();},380);});});
+      b.addEventListener('click',()=>{ans[step]=j;startTimer();setFill(step+1);body.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');setTimeout(()=>{step++;render();},380);});});
   }else if(step===3){
     body.insertAdjacentHTML('beforeend',`<p class="ftop fade">Дякуємо за відповіді!</p><div class="chips fade">${ans.map((a,i)=>`<span style="left:${[0,303,604][i]}px">${Q[i].o[a][0]}</span>`).join('')}</div><p class="ftitle fade">${MOB?'<span class="pk">4 програми</span> вже майже у вас':'Куди надіслати 4 програми?'}</p>`);
     const f=$('form','fade',body);f.noValidate=true;
@@ -507,7 +508,7 @@ const tmH=$('div','a fx',tmA);tmH.style.cssText='left:0;top:0;width:390px;height
  mT(tmH,5.39,75.63,0,'font:700 58.382px/25.592px Caveat,cursive;text-transform:uppercase;color:#fdff83','40+','cv nw');}
 tmA.querySelectorAll('button').forEach(b=>b.closest('.mz').removeAttribute('aria-hidden'));
 // eased camera position: dwells on every Figma state
-function tmU(p){const u=clamp(p,0,1)*6,i=Math.min(5,Math.floor(u)),f=u-i;return i+(reduce?Math.round(f):sm(.4,.6,f));}// each plate holds ~80% of the scroll, the switch takes ~20%
+function tmU(p){const u=clamp(p,0,1)*6,i=Math.min(5,Math.floor(u)),f=u-i;return i+(reduce?Math.round(f):sm(.22,.78,f));}
 const lerp=(a,b,t)=>a+(b-a)*t;
 function drawTableM(p){
   const ue=tmU(p),i0=Math.min(5,Math.floor(ue)),f=ue-i0,A=TM.cam[i0],Bc=TM.cam[i0+1];
@@ -577,10 +578,13 @@ fit();addEventListener('resize',fit);
 {let st=null,touching=false,snapping=false;
  const snap=()=>{if(!MOB||touching||snapping)return;const {r,k}=kOf(tblw);const p=-r.top/k/DIST;if(p<=0.004||p>=0.996)return;
    const n=Math.round(p*6)/6;if(Math.abs(n-p)*6<0.03)return;
-   snapping=true;scrollTo({top:scrollY+(n-p)*DIST*k,behavior:reduce?'auto':'smooth'});setTimeout(()=>{snapping=false;},700);};
+   snapping=true;const y0=scrollY,dy=(n-p)*DIST*k;if(reduce){scrollTo(0,y0+dy);snapping=false;return;}
+   const dur=Math.min(1100,Math.max(550,Math.abs(dy)*1.6)),t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+   const stop=()=>{snapping=false;removeEventListener('touchstart',stop);removeEventListener('wheel',stop);};addEventListener('touchstart',stop,{passive:true});addEventListener('wheel',stop,{passive:true});
+   const step=now=>{if(!snapping)return;const t=Math.min(1,(now-t0)/dur);scrollTo(0,y0+dy*ease(t));if(t<1)requestAnimationFrame(step);else setTimeout(stop,60);};requestAnimationFrame(step);};
  addEventListener('touchstart',()=>{touching=true;clearTimeout(st);},{passive:true});
- addEventListener('touchend',()=>{touching=false;clearTimeout(st);st=setTimeout(snap,260);},{passive:true});
- addEventListener('scroll',()=>{if(snapping)return;clearTimeout(st);st=setTimeout(snap,260);},{passive:true});}
+ addEventListener('touchend',()=>{touching=false;clearTimeout(st);st=setTimeout(snap,350);},{passive:true});
+ addEventListener('scroll',()=>{if(snapping)return;clearTimeout(st);st=setTimeout(snap,350);},{passive:true});}
 let tearC=reduce?1:0,tearT=0,last=performance.now();
 function frame(now){
   const dt=Math.min(.064,(now-last)/1000);last=now;const a=1-Math.exp(-dt*10);
