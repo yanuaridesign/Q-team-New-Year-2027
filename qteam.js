@@ -374,10 +374,87 @@ D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;
   g?TX(t,g.e,-g.x,-g.y,'p'):TX(t,board,0,0,'p');});
 {const b=[1323.93,2004.29,326.4,72.25];const x=$('button','bc',board);x.type='button';x.dataset.go='quiz';x.textContent='Залишити заявку';
   x.style.cssText=`left:${b[0]}px;top:${b[1]}px;width:${b[2]}px;height:${b[3]}px;background-position:${-b[0]}px ${-b[1]}px`;}
-// the wavy front edge of the scenario table laps over the top of this block (Figma 452:3259)
-{const im=$('img','tedge',board);im.src=MI+'d-tableedge.svg';im.alt='';im.setAttribute('aria-hidden','true');}
 // threads and pins above the button: the last pin holds the button
 {const im=$('img','thr',board);im.src=B+'img/v5/threads2x.webp';im.alt='';im.setAttribute('aria-hidden','true');im.decoding='async';}
+
+/* ================= METHOD «Очі в очі» (Figma 457:3675) =================
+   One pinned 1920x1080 scene. Scroll moves t from 0 to 4 through the five Figma states:
+   0 three formats · 1 their minuses struck out · 2 the yellow «очі в очі» card + polaroids · 3 polaroids gathered into it ·
+   4 the card tilts into isometry (true 3D, orthographic) and splits into three layers with hand-drawn labels. */
+const meth=document.createElement('section');meth.id='meth';meth.setAttribute('aria-label','Метод «Очі в очі»');board.parentNode.insertBefore(meth,board);
+const mst=$('div',null,meth);mst.id='mst';const mfr=$('div',null,mst);mfr.id='mfr';
+const MD=2800;let mLast=0,mvh=1000,mtC=0,mtT=0,mDirty=true;
+const mImg=(f,b,par,cls)=>{const im=$('img',cls||null,par||mfr);im.src=MI+f+'.webp';im.alt='';im.decoding='async';im.draggable=false;im.setAttribute('aria-hidden','true');
+  im.style.cssText=`left:${b[0]}px;top:${b[1]}px;width:${b[2]}px;height:${b[3]}px`;return im;};
+const mP=(cls,b,html,par,tag)=>{const p=$(tag||'p',cls,par||mfr);p.style.left=b[0]+'px';p.style.top=b[1]+'px';if(b[2])p.style.width=b[2]+'px';p.innerHTML=html;return p;};
+// header: title, the Halimun «О», the cat with its speech bubble
+{const h=$('h2',null,mfr);h.style.cssText='left:0;top:0;width:1920px;height:400px;font:inherit';
+ h.setAttribute('aria-label','Чому після нашого корпоративу команда працює краще?');
+ mP('mt',[80,177.56],'Ч   му після нашого корпоративу',h,'span').style.cssText+='color:#000;white-space:pre';
+ mP('mt',[414.26,246.56],'команда працює краще?',h,'span').style.color='#d3086a';
+ h.querySelectorAll('span.mt').forEach(e=>e.style.position='absolute');
+ const o=mImg('x-O',[131.06,176.38,49.3,58.34]);o.alt='о';
+ mImg('x-cat',[1503.27,117.49,316.68,275.25]);const bb=mImg('x-bubble',[1326.49,0,389.77,293.01]);bb.alt='Бо ми використовуємо «Бритву Самульова»';bb.removeAttribute('aria-hidden');}
+const sub1=mP('sb',[604.4,339.64],'Існує 3 варіанти проведення корпоративу');
+const sub2=mP('sb',[397.5,400.96],'За “Бритвою Самульова” ми <b>відрубаємо усі недоліки відомих варіантів</b>');
+const sub3=mP('sb c',[532.66,390.96,829.68],'І пропонуємо сценарій, який не лише розважить, <b>АЛЕ зміцнить та надихне команду</b>');
+const sub4=mP('sb c',[532.66,390.96,829.68],'Ми це все беремо на себе, а ви <b>отримуєте</b>:');
+// polaroids (under the cards): spread positions of state 2 and the stacked ones of state 3
+const PSP=[[39.97,501.18,134.23,161.96],[1565.2,650.55,169.91,193.08],[-33.08,836.16,147,163.81],[1334.41,555.2,163.91,186.17],[499.05,800.86,146.55,167.8],
+ [405.19,472.97,154.02,176.7],[1788.61,525.77,168,191.85],[216.92,666.37,179.71,198.79],[1262.91,838.69,159.93,184.82],[1727.93,869.27,153.13,178.45]];
+const PST=[[893.71,629.29],[875.87,613.73],[887.47,627.61],[878.88,617.19],[887.55,625.81],[883.82,621.92],[877.07,614.35],[870.97,610.88],[880.86,617.86],[884.26,621.05]];
+const POL=PSP.map((b,i)=>{const im=mImg('x-p'+i,b,mfr,'pol');const side=b[0]+b[2]/2<960?-1:1;return {im,b,s:PST[i],side};});
+// three format cards: paper + picture + text + pink strike over the minus
+const CX0=[79.27,723.45,1366.89],CX1=[535.01,723.45,884.05];
+const CDS=[['x-i1',[91.74,-22.36,268.27,271.3],[48.84,265.95,375.44],'Концерт — якісно,<br>АЛЕ всі глядачі',[124.87,238.07]],
+ ['x-i2',[117.43,-22.35,228.61,281.29],[84.23,265.95,304.65],'Застілля — душевно,<br>АЛЕ кожен зі своїми',[94.11,281.7]],
+ ['x-i3',[48.24,-22.35,381.73,214.1],[29.43,265.95,414.24],'Самодіяльність — всі залучені,<br>АЛЕ хаос і стрес',[107.27,231.84]]].map((c,i)=>{
+  const g=$('div','cd',mfr);g.style.left=CX0[i]+'px';g.style.top='502.27px';$('div','mpp',g);mImg(c[0],c[1],g);mP('',c[2],c[3],g);
+  const st=$('div','st',g);st.style.cssText=`left:${c[4][0]}px;top:303px;width:${c[4][1]}px`;
+  st.innerHTML=`<svg viewBox="0 0 ${c[4][1]} 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 ${7+i%2*1.5} C ${c[4][1]*.3} 4.5, ${c[4][1]*.65} 8.5, ${c[4][1]-2} 4.8" fill="none" stroke="#d3086a" stroke-width="4" stroke-linecap="round"/></svg>`;
+  return {g,st};});
+// layers: pink, purple, yellow (the yellow one is the «очі в очі» card itself)
+const MLY=[['#ec187e',191.43],['#5542e7',98.79],['#fbfc7e',0]].map(([c,dy])=>{const l=$('div','ly',mfr);l.style.setProperty('--c',c);$('div','mpp',l);return {l,dy};});
+const yel=MLY[2].l;
+const ytx=G(yel);ytx.style.cssText='left:0;top:0';
+mP('',[26.48,43.33,420.14],'Це відбувається тоді, коли колеги дивляться не на сцену чи екран, а <b>взаємодіють “очі в очі”</b>: разом дискутують, долають перешкоди, приймають рішення, впливають на фінал.',ytx);
+mP('',[26.48,232.52,426.02],'Отримують добре зрежисовані приводи: <b>захопитися одне одним, посміятися разом і сподобатися собі в очах колег</b>',ytx);
+// the Q mark lies on the top layer (Figma 457:3659, mapped into the card's own plane)
+const qm=mImg('x-q',[0,0,193.82,214.63],yel);qm.style.transformOrigin='0 0';qm.style.transform='matrix(1.28255,-0.12517,0.11363,1.16397,110.19,66.42)';
+// what you get: arrows, hand-written labels, one line of proof each
+const OUT=[[mImg('x-a1',[616.99,535.38,149.67,119.19],mfr,'ar'),mP('lb',[288.7,526,308.78],'Веселий корпоратив'),mP('ds',[254.64,574.08,358.52],'У кожного своя роль, усі залучені та взаємодіють між собою')],
+ [mImg('x-a3',[1211.9,630,149.67,119.19],mfr,'ar'),mP('lb',[1391.49,624.82,326.43],'Зріст ефективності команди'),mP('ds',[1349.36,698.55,450.99],'Колеги з різних відділів розкривають справу разом, налагоджується комунікація та будується довіра')],
+ [mImg('x-a2',[538.69,816.86,176.2,94.78],mfr,'ar'),mP('lb',[187.59,803.61,326.81],'Надійна організація<br>“під ключ”'),mP('ds',[164.92,874.27,372.15],'Сценарій, ведучі, техніка, безпека, тепло й світло повністю на нас. 100% без скасувань')]];
+OUT[2][2].style.letterSpacing='0';
+const seg=(t,a,b)=>clamp((t-a)/(b-a),0,1),ee=v=>v*v*(3-2*v),eo=v=>1-Math.pow(1-v,3);
+const op=(el,v)=>{el.style.opacity=v.toFixed(3);el.style.visibility=v<.004?'hidden':'visible';};
+function mLayout(k){mvh=innerHeight/k;const s=Math.min(1,mvh/1050),oy=(mvh-1080*s)/2;
+  mst.style.height=mvh+'px';meth.style.height=(mvh+MD)+'px';mfr.style.transform=`translate(${(960*(1-s)).toFixed(2)}px,${oy.toFixed(2)}px) scale(${s.toFixed(4)})`;}
+function drawMeth(t){
+  // 0→1: the second line comes in and the minuses get struck out
+  const s2=ee(seg(t,.1,.55)),out12=seg(t,1.25,1.5);
+  op(sub1,1-out12);op(sub2,s2*(1-out12));sub2.style.transform=`translateY(${((1-s2)*14).toFixed(2)}px)`;
+  CDS.forEach((c,i)=>{c.st.style.transform=`scaleX(${eo(seg(t,.3+.14*i,.75+.14*i)).toFixed(4)})`;
+    // 1→2: the cards slide together and melt into one
+    const a=ee(seg(t,1,1.4)),m=ee(seg(t,1.36,1.52));let x=CX0[i]+(CX1[i]-CX0[i])*a;x+=(723.45-x)*m;
+    c.g.style.transform=`translateX(${(x-CX0[i]).toFixed(2)}px)`;op(c.g,1-seg(t,1.56,1.7));});
+  const y=eo(seg(t,1.52,1.78)),tilt=ee(seg(t,3,3.5)),split=eo(seg(t,3.35,3.85));
+  op(sub3,ee(seg(t,1.6,1.9))*(1-seg(t,2.95,3.15)));
+  const s4=ee(seg(t,3.45,3.8));op(sub4,s4);sub4.style.transform=`translateY(${((1-s4)*14).toFixed(2)}px)`;
+  // the card: pops in, tilts into the isometric view of Figma (rotateZ -45°, rotateX 54.74°), then the layers part
+  const cy=-26.88*tilt,sc=.9+.1*y;
+  MLY.forEach((L,i)=>{const dy=cy+L.dy*split;
+    L.l.style.transform=`translate(${(.81*tilt).toFixed(2)}px,${dy.toFixed(2)}px) scale(${i===2?sc.toFixed(4):1}) rotateX(${(54.7356*tilt).toFixed(3)}deg) rotateZ(${(-45*tilt).toFixed(3)}deg)`;
+    op(L.l,i===2?y:(tilt>.6?1:0));});
+  op(ytx,ee(seg(t,1.68,1.9))*(1-seg(t,2.95,3.12)));op(qm,seg(t,3.3,3.65));
+  // polaroids fly in from both sides, gather into the card and hide under it
+  POL.forEach((P,i)=>{const f=eo(seg(t,1.62+.035*i,2.05+.035*i)),g=ee(seg(t,2.15+.02*i,2.8+.02*i));
+    const x=P.b[0]+(P.s[0]-P.b[0])*g+P.side*(1-f)*900,yy=P.b[1]+(P.s[1]-P.b[1])*g+(1-f)*60;
+    P.im.style.transform=`translate(${(x-P.b[0]).toFixed(2)}px,${(yy-P.b[1]).toFixed(2)}px) rotate(${(P.side*(1-f)*28).toFixed(2)}deg) scale(${(1-.12*g).toFixed(3)})`;
+    op(P.im,(f>0?1:0)*(1-seg(t,2.9,3)));});
+  OUT.forEach((o,i)=>{const v=eo(seg(t,3.65+.08*i,3.95+.05*i));o.forEach((e,j)=>{op(e,v);e.style.transform=`translateY(${((1-v)*(j?10:0)).toFixed(2)}px) scale(${j?1:(.85+.15*v).toFixed(3)})`;});
+    o[0].style.transformOrigin=i===1?'0 100%':'100% 100%';});
+}
 
 
 /* ================= MOBILE: Figma Page 4 (390 px frames), drawn in Figma units inside .mz (x2) ================= */
@@ -584,7 +661,7 @@ function drawTableM(p){
 /* ================= layout + one smooth frame loop ================= */
 let Z=1;
 function fit(){const w=root.clientWidth;const mob=w<1024;if(mob!==MOB){MOB=mob;root.classList.toggle('mob',MOB);treeGeom(MOB);treeDirty=true;if(typeof render==='function')render();}Z=w/(MOB?MW:1920);root.style.setProperty('--z',Z);const k=kOf(hero).k||Z;
-  if(treeR){if(MOB)treeR.size(MW,840,k,2);else treeR.size(1920,1513,k,2);treeDirty=true;}tLayout(k);tDirty=true;}
+  if(treeR){if(MOB)treeR.size(MW,840,k,2);else treeR.size(1920,1513,k,2);treeDirty=true;}tLayout(k);tDirty=true;mLayout(k);mDirty=true;}
 fit();addEventListener('resize',fit);
 // scenarios: when scrolling stops between two plates, glide gently to the nearest one; the arrow glides to the next one
 {let st=null,touching=false,snapping=false;
@@ -595,7 +672,12 @@ fit();addEventListener('resize',fit);
    snapping=true;const y0=scrollY,dur=Math.min(1200,Math.max(650,Math.abs(dy)*.9)),t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
    addEventListener('touchstart',stop,{passive:true});addEventListener('wheel',stop,{passive:true});addEventListener('keydown',stop);
    const step=now=>{if(!snapping)return;const t=Math.min(1,(now-t0)/dur);scrollTo(0,y0+dy*ease(t));if(t<1)requestAnimationFrame(step);else setTimeout(stop,80);};requestAnimationFrame(step);}
- const snap=()=>{if(touching||snapping)return;const {p,k}=prog();const S=stops(),last=S[S.length-1];if(p<=0.004||p>=last-0.004)return;
+ // method scene: a small scroll is enough — it glides on to the next state in the direction you scrolled
+ const mProg=()=>{const r=meth.getBoundingClientRect(),k=kOf(meth).k;return {p:-r.top/k/MD*4,k};};
+ const mSnap=()=>{if(MOB)return false;const {p,k}=mProg();if(p<=0){mLast=0;return false;}if(p>=4){mLast=4;return false;}
+   let n;if(Math.abs(p-mLast)*MD/4<30)n=mLast;else n=p>mLast?Math.ceil(p-.02):Math.floor(p+.02);n=clamp(n,0,4);
+   if(Math.abs(n-p)*MD/4<2){mLast=n;return true;}mLast=n;glide((n-p)*MD/4*k);return true;};
+ const snap=()=>{if(touching||snapping)return;if(mSnap())return;const {p,k}=prog();const S=stops(),last=S[S.length-1];if(p<=0.004||p>=last-0.004)return;
    let n=S[0];for(const v of S)if(Math.abs(v-p)<Math.abs(n-p))n=v;if(Math.abs(n-p)*DIST<25)return;glide((n-p)*DIST*k);};
  function next(){const {p,k}=prog();const n=stops().find(v=>v>p+0.01);
    if(n!=null){glide((n-p)*DIST*k);return;}
@@ -614,6 +696,10 @@ function frame(now){
   const vis=r.bottom>-50&&r.top<innerHeight+50;
   if(Math.abs(tpT-tpC)>1e-5){tpC+=(tpT-tpC)*a;if(Math.abs(tpT-tpC)<1e-5)tpC=tpT;tDirty=true;}
   if(vis&&tDirty){drawTable(tpC);tDirty=false;}
+  // method scene, smoothed the same way
+  {const mr=meth.getBoundingClientRect();const mk=kOf(meth).k;mtT=clamp(-mr.top/mk/MD,0,1)*4;if(mtT<=0)mLast=0;else if(mtT>=4)mLast=4;
+   if(Math.abs(mtT-mtC)>1e-4){mtC+=(mtT-mtC)*a;if(Math.abs(mtT-mtC)<1e-4)mtC=mtT;mDirty=true;}
+   if(mDirty&&mr.bottom>-50&&mr.top<innerHeight+50){drawMeth(mtC);mDirty=false;}}
   // purple sheet tears off as the yellow block arrives
   if(!reduce){const pr=pain.getBoundingClientRect(),vh=innerHeight;tearT=Math.max(tearT,clamp((vh-pr.top)/(vh*.85),0,1));
     if(Math.abs(tearT-tearC)>1e-4){tearC+=(tearT-tearC)*a;const kk=1-tearC,e=kk*kk*(3-2*kk);tear.style.transform=`translate3d(0,${(e*560).toFixed(2)}px,0) rotate(${(-e*2.4).toFixed(3)}deg)`;}}

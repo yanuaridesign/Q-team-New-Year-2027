@@ -139,6 +139,31 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 #tin .end{opacity:0;transition:opacity .6s var(--ez),transform .6s var(--ez);transform:translateY(16px);pointer-events:none}
 #tin .end.on{opacity:1;transform:none;pointer-events:auto}
 
+/* METHOD «Очі в очі» (Figma 457:3675): pinned scene, 5 states driven by scroll */
+#meth{background:var(--cy);overflow:visible}
+#mst{position:sticky;top:0;width:1920px;overflow:clip;background:var(--cy)}
+#mfr{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+#mfr p,#mfr h2{position:absolute;margin:0}
+#mfr img{position:absolute;display:block;max-width:none;pointer-events:none;user-select:none}
+#mfr .mt{font:600 66px/64px Montserrat,sans-serif;text-transform:uppercase;white-space:nowrap;letter-spacing:0}
+#mfr .sb{font:500 30px/31.5px Montserrat,sans-serif;color:#000;white-space:nowrap}
+#mfr .sb b{font-weight:600}
+#mfr .sb.c{text-align:center;white-space:normal}
+#mfr .cd{position:absolute;width:473.11px;height:378.65px;will-change:transform,opacity}
+#mfr .mpp{position:absolute;inset:0;background:#f8f6f3;border:1.6px solid #000;border-radius:2px;filter:url(#qrough)}
+#mfr .cd p{font:600 24px/28.8px Montserrat,sans-serif;letter-spacing:-.24px;color:#0b0908;text-align:center}
+#mfr .st{position:absolute;height:12px;overflow:visible;transform-origin:0 50%}
+#mfr .st svg{display:block;width:100%;height:100%;overflow:visible}
+#mfr .ly{position:absolute;left:723.45px;top:502.27px;width:473.11px;height:378.65px;transform-origin:50% 50%;will-change:transform}
+#mfr .ly .mpp{background:var(--c)}
+#mfr .ly p{font:500 24px/25.2px Montserrat,sans-serif;letter-spacing:-.24px;color:#000}
+#mfr .ly p b{font-weight:700}
+#mfr .pol{will-change:transform,opacity}
+#mfr .lb{font:700 40px/28px Caveat,cursive;letter-spacing:-.4px;color:#000;text-align:center}
+#mfr .ds{font:400 20px/20px Montserrat,sans-serif;letter-spacing:-.2px;color:#000;text-align:center}
+#mfr .ar{filter:drop-shadow(1px 3px 0 #4635c9)}
+.mob #meth{display:none}
+
 /* BOARD */
 #board{height:2354px;background:var(--cy) url(https://q-team-new-year-2027.vercel.app/img/v5/board2x.webp) 0 0/1920px 2354px no-repeat}
 #board .bc{position:absolute;background-image:url(https://q-team-new-year-2027.vercel.app/img/v5/board2x.webp);background-size:1920px 2354px;background-repeat:no-repeat}
@@ -149,8 +174,6 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 #board .trk span{display:flex;flex:none;gap:var(--g);padding-right:var(--g)}
 #board .trk b{font-weight:700;white-space:nowrap;flex:none}
 @keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-#board .tedge{position:absolute;left:0;top:0;width:1920px;height:52px;pointer-events:none;max-width:none}
-.mob #board .tedge{display:none}
 #board .thr{position:absolute;left:0;top:0;width:1920px;height:2354px;pointer-events:none;max-width:none}
 #board .hv,#board .ly{position:absolute}
 #board .hv img,#board .ly img{display:block;width:100%;height:100%;pointer-events:none}
