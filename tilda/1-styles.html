@@ -153,41 +153,62 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 #board .bc:active{transform:scale(.98)}
 
 
-/* ===== MOBILE (< 1024px): 780-unit canvas, desktop groups re-placed by .mw wrappers ===== */
-.mw{position:absolute;left:0;top:0;width:0;height:0;transform-origin:0 0}
-.mo{display:none}
+/* ===== MOBILE (< 1024px): 780-unit canvas = the 390 px Figma mobile frames (Page 4) x2.
+   Every section gets its own Figma-ordered layers in .mz (drawn in Figma units, scaled x2). ===== */
+.mz{position:absolute;left:0;top:0;width:390px;height:0;transform:scale(2);transform-origin:0 0;display:none;pointer-events:none}
+.mob .mz{display:block}
+.mz p,.mz img,.mz div,.mz button{position:absolute;margin:0}
+.mz img{display:block;max-width:none;user-select:none;-webkit-user-drag:none}
+.mz .t{white-space:pre-wrap;font-family:Montserrat,sans-serif;font-kerning:normal}
+.mz .cv{font-family:Caveat,cursive}
+.mz .nw{white-space:nowrap}
+.mz .rt{transform-origin:50% 50%}
+.mz .rough{filter:url(#qrough)}
+.mz button{pointer-events:auto;cursor:pointer;padding:0;border-style:solid;font-family:Montserrat,sans-serif;transition:transform .4s var(--ez)}
+.mz button:active{transform:scale(.97)}
 .mob #stage,.mob #stage section{width:780px}
-.mob .mw{transform:var(--m)}
-.mob .mw.mh{display:none}
-.mob .mo{display:block}
-.mob #hero{height:1700px}
-.mob #pain{height:2470px}
-.mob #pain .logos{width:780px}
-.mob #pain .bx{display:none}
-.mob #pain .mbx{transform:translate(327px,464px)!important;width:700px!important;background:#fdf8f0;border:1.5px solid #0b0908;box-shadow:8px 8px 0 #5542e7;padding:26px 28px}
+.mob #hero{height:2176px}
+.mob #hero>:not(.mz):not(.gl):not(.sr),.mob #pain>:not(.mz):not(.sr),.mob #board>:not(.mz):not(.sr):not(ul){display:none}
+.mob #hero>canvas.gl{top:280px}
+.mob #pain{height:2638px;margin-bottom:0;background:#5542e7}
+/* quiz: the working card is re-laid in Figma units x2 */
 .mob #quiz{height:1560px}
-.mob .qcard{left:20px;top:300px}
+.mob #quiz>:not(.qin):not(.mz):not(.sr){display:none}
+.mob .qcard{left:20px;top:400px}
 .mob .qcard .wl,.mob .qcard .st{display:none!important}
 .qcard .wm{display:none}.mob .qcard .wm{display:block}
-.mob .prog{left:50px;top:332px}
-.mob .track{left:180px;top:340px;width:420px;height:10px}
-.mob .timer{left:640px;top:328px}
-.mob .qtitle{left:40px;top:385px;width:700px;font-size:38px;line-height:46px}
+.mob .prog{left:50px;top:432px;font-size:15px;line-height:18px;letter-spacing:-.45px}
+.mob .track{left:180px;top:437px;width:420px;height:10px}
+.mob .track path:first-child{stroke-width:3.7;stroke:rgba(11,9,8,.2)}.mob #trackFill{stroke-width:9}
+.mob .timer{left:640.2px;top:427.9px;font-size:20.8px;line-height:25px}
+.mob .qtitle{left:40px;top:524px;width:700px;font-size:38px;line-height:46px}
 .mob .opt{top:var(--ty)}
-.mob .opt .lt{font-size:24px;line-height:23px;padding:0 10px}
-.mob .back{left:50px;top:1300px;font-size:24px;line-height:24px}
-.mob .ftop{left:40px;top:340px;width:700px;font-size:28px;line-height:34px}
-.mob .chips{left:90px;top:400px;width:600px;height:auto;display:flex;flex-direction:column;gap:12px}
-.mob .chips span{position:static;width:100%;height:56px;font-size:24px}
-.mob .ftitle{left:40px;top:640px;width:700px;font-size:38px;line-height:44px}
-.mob .ff{left:70px!important;width:640px}
-.mob .ff:nth-child(1){top:730px}.mob .ff:nth-child(2){top:850px}.mob .ff:nth-child(3){top:970px}
-.mob .ff input{font-size:28px}.mob .ff .hint{left:auto;right:10px;font-size:22px}
-.mob .fbtn{left:166px;top:1120px;width:448px;height:84px;font-size:26px}
+.mob .opt .ph,.mob .opt>.so{display:none}
+.opt .mph{display:none}.mob .opt .mph{display:block;position:absolute;pointer-events:none}
+.mob .opt .lt{font-size:24px;line-height:24px;letter-spacing:-.24px;padding:0 8px}
+.mob .back{left:62.4px;top:1400px;font-size:20px;line-height:18px;letter-spacing:-.2px}
+.mob .ftop{left:88.26px;top:515.1px;width:621.96px;font-size:30px;line-height:37px}
+.mob .chips{left:130px;top:578px;width:542px;height:auto;display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
+.mob .chips span{position:static;width:260.24px;height:41.2px;border-width:2.016px;border-radius:3px;font-size:16px;line-height:19px}
+.mob .ftitle{left:40px;top:738.36px;width:700px;font-size:39.77px;line-height:45.7px}
+.ftitle .pk{color:#d3086a}
+.mob .ff{left:106px!important;width:568px;height:83.8px}
+.mob .ff:nth-child(1){top:822.44px}.mob .ff:nth-child(2){top:946.44px}.mob .ff:nth-child(3){top:1070.44px}
+.mob .ff input{height:83.8px;padding:0 10.47px;font-size:24px;line-height:28.8px;border-bottom-width:1.5px}
+.mob .ff .hint{left:208px;top:29.9px;font-size:20px;line-height:24px}
+.mob .ff .err{top:88px;font-size:18px}
+.mob .fbtn{left:106px;top:1217.54px;width:547.14px;height:99.02px;font-size:36px;line-height:43.2px;border-width:4.74px;border-radius:4.2px}
 .mob .deco{display:none}
-.mob #tst,.mob #tstrip{width:780px}
-.mob #board{height:3850px;background:var(--cy)}
-.mob #board .mpanel{position:absolute;left:18px;top:28px;width:744px;height:3800px;background:#141414;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(-1deg)}
-.mob #board .hv:hover{transform:none}
+.mdeco{display:none}.mob .mdeco{display:block;position:absolute;pointer-events:none;max-width:none}
+.mob .okt{left:60px;width:660px}
+.mob .okt.o1{top:560px!important;font-size:40px!important;line-height:48px!important}.mob .okt.o2{top:680px!important;font-size:28px!important;line-height:38px!important}.mob .okt.o3{top:840px!important;font-size:20px!important;line-height:28px!important}
+.mob #again{top:1000px}
+/* scenarios: one 390x763 Figma screen, pinned; the table camera follows the 7 Figma states */
+.mob #tst,.mob #tstrip,.mob #tin{width:780px}
+.mob #tstrip,.mob #tin>.hd,.mob #tin>.ds,.mob #tin>.flake,.mob #tin>.end{display:none}
+.mob #tin{height:1526px}
+.mob #tin .mz .fx{will-change:opacity,transform}
+/* board */
+.mob #board{height:3112px;background:#0ff}
 @media (prefers-reduced-motion:reduce){*,*::before{transition-duration:0s!important;animation:none!important}}
 </style>
