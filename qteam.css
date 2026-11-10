@@ -161,6 +161,8 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 .mz .nw{white-space:nowrap}
 .mz .rt{transform-origin:50% 50%}
 .mz .rough{filter:url(#qrough)}
+.mz .mlg{left:0;top:0;width:5865.74px;height:39.03px;animation:mlg 70s linear infinite}
+@keyframes mlg{to{transform:translateX(-2932.87px)}}
 .mz button{pointer-events:auto;cursor:pointer;padding:0;border-style:solid;font-family:Montserrat,sans-serif;transition:transform .4s var(--ez)}
 .mz button:active{transform:scale(.97)}
 .mob #stage,.mob #stage section{width:780px}

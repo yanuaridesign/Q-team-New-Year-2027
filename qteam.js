@@ -218,7 +218,7 @@ const Q=[
   {t:'Яка нагода свята?',x:X4,o:[['Новорічний корпоратив','q0',-1.49,26.33,258.38,230.73],['Тімбілдінг','q1',4.33,26.33,252.56,230.73],['Річниця компанії','q2',-1.49,20.7,258.38,236.37],['Інше','q3',-1.48,26.33,258.38,230.73]]},
   {t:'Де проводимо?',x:X3,o:[['На нашій локації','l0',-1.48,30.71,258.38,226.36],['Виїзний','l1',-1.48,23.61,258.38,233.45],['Онлайн','l2',-1.48,-1.46,258.38,258.52]]},
   {t:'Скільки буде учасників?',x:X4,o:[['4–25 людей','n0',-1.49,-1.46,258.38,258.52],['26–50 людей','n1',-1.49,-1.46,258.38,258.52],['51–100 людей','n2',-1.49,-1.46,258.38,258.52],['100+ людей','n3',-1.49,-1.46,258.38,258.52]]}];
-const CD=255.09;let step=0;const ans=[];let uname='';
+const CD=255.09;let step=0;const ans=[];let uname='',sent='';
 const body=document.getElementById('qbody'),prog=document.getElementById('prog'),fill=document.getElementById('trackFill'),back=document.getElementById('back');
 function setProg(i){if(i<3)prog.textContent=`Питання ${i+1} / 3`;fill.style.strokeDashoffset=String(1302-[356,829,1302][Math.min(i,2)]);}
 function render(){
@@ -237,12 +237,13 @@ function render(){
       <button class="fbtn" type="submit">Отримати програми</button>`;
     f.addEventListener('submit',e=>{e.preventDefault();const nm=f.querySelector('#q-name').value.trim(),ph=f.querySelector('#q-phone').value.replace(/\D/g,'');let ok=true;
       f.querySelector('#e-name').textContent=nm?'':'Напишіть, як до вас звертатися';if(!nm)ok=false;
-      f.querySelector('#e-phone').textContent=ph.length>=10?'':'Потрібен номер з кодом, наприклад 38 067 123 45 67';if(ph.length<10)ok=false;
-      if(ok){uname=nm;step=4;render();}});
+      f.querySelector('#e-phone').textContent=ph.length>=9?'':'Потрібен номер, наприклад +38 067 123 45 67';if(ph.length<9)ok=false;
+      if(!ok)return;const btn=f.querySelector('.fbtn');btn.disabled=true;btn.style.opacity=.6;
+      tildaSend({name:nm,phone:ph,company:f.querySelector('#q-company').value.trim(),answers:ans.map((a,i)=>Q[i].o[a][0])}).then(res=>{sent=res;uname=nm;step=4;render();});});
     IMG(B+'img/v5/gar.webp',[94.14,262.72,452.05,452.05],body,'deco fade');
     const cat=IMG(B+'img/v5/cat.webp',[1467.38,691.77,452.63,476.23],body,'deco fade');mDeco();
   }else{
-    body.insertAdjacentHTML('beforeend',`<p class="ftop okt o1 fade" style="top:520px;font-size:33.34px;line-height:40px">Дякуємо, ${uname.replace(/[<>&"]/g,'')}!</p><p class="ftop okt o2 fade" style="top:600px;font-weight:400;font-size:22px;line-height:32px">Менеджер Q-team підбере 4 програми під вашу команду і розрахує вартість.</p><p class="ftop okt o3 fade" style="top:660px;font-weight:400;font-size:16px;opacity:.55">Демоверсія лендингу: форма ще не підключена до CRM, тому заявка нікуди не відправляється.</p><button class="fbtn fade" type="button" id="again">Пройти ще раз</button>`);
+    body.insertAdjacentHTML('beforeend',`<p class="ftop okt o1 fade" style="top:520px;font-size:33.34px;line-height:40px">Дякуємо, ${uname.replace(/[<>&"]/g,'')}!</p><p class="ftop okt o2 fade" style="top:600px;font-weight:400;font-size:22px;line-height:32px">Менеджер Q-team підбере 4 програми під вашу команду і розрахує вартість.</p><p class="ftop okt o3 fade" style="top:660px;font-weight:400;font-size:16px;opacity:.55">${sent==='ok'?'':sent==='popup'?'Перевірте, будь ласка, дані у вікні заявки і надішліть її.':'Демоверсія: тут форма не підключена, заявки приймає сторінка на Тільді.'}</p><button class="fbtn fade" type="button" id="again">Пройти ще раз</button>`);
     IMG(B+'img/v5/gar.webp',[94.14,262.72,452.05,452.05],body,'deco');IMG(B+'img/v5/cat.webp',[1467.38,691.77,452.63,476.23],body,'deco');
     mDeco();body.querySelector('#again').addEventListener('click',()=>{ans.length=0;step=0;render();});stopTimer();}
 }
@@ -252,6 +253,46 @@ let left=180,tid=null;const tm=document.getElementById('timer');
 function startTimer(){if(tid)return;tid=setInterval(()=>{left=Math.max(0,left-1);tm.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');if(!left)stopTimer();},1000);}
 function stopTimer(){clearInterval(tid);}
 render();
+
+/* ================= Tilda popup form (#popup:callback) ================= */
+const POP='#popup:callback';
+function popupForm(){const p=document.querySelector('.t-popup[data-tooltip-hook="'+POP+'"]');return p?p.querySelector('form.t-form'):null;}
+// Tilda listens to clicks on links ending with the popup hook
+function openPopup(){if(!document.querySelector('.t-popup[data-tooltip-hook="'+POP+'"]'))return false;
+  const a=document.createElement('a');a.href=POP;a.style.display='none';document.body.appendChild(a);a.click();a.remove();return true;}
+const fire=(el,...ev)=>ev.forEach(n=>el.dispatchEvent(new Event(n,{bubbles:true})));
+// quiz -> the same Tilda form (same receivers: CRM, e-mail, Telegram ...). Resolves 'ok' | 'popup' | 'none'
+function tildaSend(d){
+  const f=popupForm();if(!f||!window.tildaForm)return Promise.resolve('none');
+  const set=(sel,v)=>{const i=f.querySelector(sel);if(i){i.value=v;fire(i,'input','change');}return i;};
+  set('input[name="Name"]',d.name);
+  // phone: the Tilda mask wants the national part ("67 123 45 67" for +380)
+  const tel=f.querySelector('.t-input-phonemask');let digits=d.phone;
+  if(tel){const code=(tel.getAttribute('data-phonemask-code')||'').replace(/\D/g,'');
+    if(code&&digits.startsWith(code))digits=digits.slice(code.length);else if(code==='380'&&digits.startsWith('80'))digits=digits.slice(2);
+    if(code==='380'&&digits.length===10&&digits[0]==='0')digits=digits.slice(1);
+    tel.focus();tel.value=digits;fire(tel,'input','keyup','change','blur');}
+  else set('input[name="Phone"]','+'+digits);
+  // e-mail is not asked in the quiz: let the form go without it
+  const em=f.querySelector('input[name="Email"][data-tilda-req]');if(em)em.removeAttribute('data-tilda-req');
+  const fn=f.querySelector('input[name="tildaspec-formname"]'),fn0=fn?fn.value:null;if(fn)fn.value='Квіз «4 програми» (лендинг)';
+  f.querySelectorAll('.qz-x').forEach(x=>x.remove());
+  [['Квіз_нагода',d.answers[0]],['Квіз_де',d.answers[1]],['Квіз_учасників',d.answers[2]],['Компанія',d.company],['Джерело','Квіз на лендингу «Новорічний корпоратив»']].forEach(([n,v])=>{
+    if(!v)return;const h=document.createElement('input');h.type='hidden';h.className='qz-x';h.name=n;h.value=v;f.appendChild(h);});
+  const restore=()=>{if(em)em.setAttribute('data-tilda-req','1');if(fn)fn.value=fn0;};
+  return new Promise(res=>{let done=false;
+    const end=r=>{if(done)return;done=true;f.removeEventListener('tildaform:aftersuccess',ok);f.removeEventListener('tildaform:aftererror',bad);
+      if(r==='ok'){restore();f.querySelectorAll('.qz-x').forEach(x=>x.remove());}
+      else{restore();openPopup();}// something is wrong in the data: show the Tilda form, prefilled, with its own hints
+      res(r);};
+    const ok=()=>end('ok'),bad=()=>end('popup');
+    f.addEventListener('tildaform:aftersuccess',ok);f.addEventListener('tildaform:aftererror',bad);
+    setTimeout(()=>{// check with Tilda's own rules first; if something does not pass, hand over to the popup
+      let errs=[];try{errs=window.tildaForm.validate(f)||[];}catch(_){}
+      if(errs.length){end('popup');return;}
+      const b=f.querySelector('.t-submit');if(b)b.click();else if(f.requestSubmit)f.requestSubmit();},150);
+    setTimeout(()=>end(f.classList.contains('js-send-form-success')?'ok':'popup'),15000);});
+}
 
 /* ================= TABLE (WebGL, pinned with native sticky) ================= */
 const tblw=document.getElementById('tblw'),tst=document.getElementById('tst'),tin=document.getElementById('tin'),tstrip=document.getElementById('tstrip');
@@ -407,7 +448,8 @@ function treeGeom(mob){TREE.forEach(o=>{[o.cx,o.cy,o.w,o.h,o.a,o.dx,o.dy]=mob?o.
  mI(z,'p-cat1',[104.4,639.03,77.47,81.85]);mR(z,[24.86,717.54,236.556,71.902],cr,'rough');mT(z,49.28,733.09,187.719,cc,S('Тримаємо ціни з 2023 року',0,600)+', хоча це не просто, коли все навколо дорожчає');
  mI(z,'p-cat2',[149.11,791.99,89.79,82.48]);mR(z,[75.72,871.13,236.556,71.902],cr,'rough');mT(z,117.84,886.68,152.323,cc,'З 2014 року провели '+S('5800+ корпоративів',0,700)+' для 2000+ компаній');
  mI(z,'p-cat3',[201.76,945.03,90.2,88.54]);mR(z,[128.58,1027.54,236.556,71.902],cr,'rough');mT(z,159.13,1043.09,175.466,cc,S('Своя безпечна локація на -1 поверсі:',0,700)+' окремо платити за оренду зали не треба');
- mI(z,'v4/b2-logos',[11.6,1175.59,2878.67,39.03],'opacity:.2;mix-blend-mode:luminosity');
+ {const lg=mR(z,[0,1175.59,390,39.03],'overflow:hidden;opacity:.2;mix-blend-mode:luminosity'),row=$('div','mlg',lg);
+  for(let i=0;i<2;i++)mI(row,'v4/b2-logos',[11.6+i*2932.87,0,2878.67,39.03]);}
  mR(z,[24.86,338.4,340.281,118.923],'background:#fdf8f0;border:.8px solid #000','rough');
  mT(z,35.05,362.32,319.904,'font:400 15px/1.2 Montserrat,sans-serif;letter-spacing:-.3px;text-align:center;color:#0b0908',S('Ті, хто пропустив минулий рік,',0,700)+' тепер приходять до нас, коли команда мовчки розвалюється, а цінних спеціалістів вже не повернути....');
  mI(z,'p-lines',[204.65,207.67,32.55,29.74]);mI(z,'p-lines2',[180.97,639.03,48.58,49.56]);mI(z,'p-st1',[278.86,809.44,20.88,23.13]);mI(z,'p-st2',[62.79,926.17,21.5,24.3]);}
@@ -456,7 +498,7 @@ const TMS=[null];// per-state description layers [below-table, above-table]
  st(null,g=>{mI(g,'s-aend',[181.71,240.85,12.45,42.46]);
   mT(g,64.84,156.09,260.326,'font:700 30px/.8 Caveat,cursive;text-align:center;color:#fdff83','Організуємо корпоратив саме під вашу команду і бюджет','cv');
   mBtn(g,[78.62,294.66,232.75,48.81],'background:#fbfc7e;border:1.08px solid #d3086a;border-radius:2.16px;font:700 15.132px/1.2 Montserrat,sans-serif;text-transform:uppercase;color:#d3086a','Більше сценаріїв');});
- mR(tmB,[0,689.12,390,73.66],'background:#0ff');}
+ mR(tmB,[0,689.12,390,76],'background:#0ff');}
 const tmH=$('div','a fx',tmA);tmH.style.cssText='left:0;top:0;width:390px;height:763px';
 {const h='font:600 25px/25.592px Montserrat,sans-serif;text-transform:uppercase;';
  mT(tmH,93.15,85.23,0,h+'color:#fdff83','готових СЦЕНАРІЇВ','nw');
@@ -466,7 +508,7 @@ const tmH=$('div','a fx',tmA);tmH.style.cssText='left:0;top:0;width:390px;height
  mT(tmH,5.39,75.63,0,'font:700 58.382px/25.592px Caveat,cursive;text-transform:uppercase;color:#fdff83','40+','cv nw');}
 tmA.querySelectorAll('button').forEach(b=>b.closest('.mz').removeAttribute('aria-hidden'));
 // eased camera position: dwells on every Figma state
-function tmU(p){const u=clamp(p,0,1)*6,i=Math.min(5,Math.floor(u)),f=u-i;return i+(reduce?Math.round(f):sm(.22,.78,f));}
+function tmU(p){const u=clamp(p,0,1)*6,i=Math.min(5,Math.floor(u)),f=u-i;return i+(reduce?Math.round(f):sm(.4,.6,f));}// each plate holds ~80% of the scroll, the switch takes ~20%
 const lerp=(a,b,t)=>a+(b-a)*t;
 function drawTableM(p){
   const ue=tmU(p),i0=Math.min(5,Math.floor(ue)),f=ue-i0,A=TM.cam[i0],Bc=TM.cam[i0+1];
@@ -532,6 +574,14 @@ let Z=1;
 function fit(){const w=root.clientWidth;const mob=w<1024;if(mob!==MOB){MOB=mob;root.classList.toggle('mob',MOB);treeGeom(MOB);treeDirty=true;if(typeof render==='function')render();}Z=w/(MOB?MW:1920);root.style.setProperty('--z',Z);const k=kOf(hero).k||Z;
   if(treeR){if(MOB)treeR.size(MW,840,k,2);else treeR.size(1920,1513,k,2);treeDirty=true;}tLayout(k);tDirty=true;}
 fit();addEventListener('resize',fit);
+// mobile: when scrolling stops between two plates, glide to the nearest one
+{let st=null,touching=false,snapping=false;
+ const snap=()=>{if(!MOB||touching||snapping)return;const {r,k}=kOf(tblw);const p=-r.top/k/DIST;if(p<=0.004||p>=0.996)return;
+   const n=Math.round(p*6)/6;if(Math.abs(n-p)*6<0.03)return;
+   snapping=true;scrollTo({top:scrollY+(n-p)*DIST*k,behavior:reduce?'auto':'smooth'});setTimeout(()=>{snapping=false;},700);};
+ addEventListener('touchstart',()=>{touching=true;clearTimeout(st);},{passive:true});
+ addEventListener('touchend',()=>{touching=false;clearTimeout(st);st=setTimeout(snap,260);},{passive:true});
+ addEventListener('scroll',()=>{if(snapping)return;clearTimeout(st);st=setTimeout(snap,260);},{passive:true});}
 let tearC=reduce?1:0,tearT=0,last=performance.now();
 function frame(now){
   const dt=Math.min(.064,(now-last)/1000);last=now;const a=1-Math.exp(-dt*10);
@@ -549,7 +599,8 @@ function frame(now){
 if(!reduce)tear.style.transform='translate3d(0,560px,0) rotate(-2.4deg)';
 requestAnimationFrame(frame);
 
-/* scroll buttons */
-document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;const t=document.getElementById(b.dataset.go);
+/* buttons: open the Tilda popup #popup:callback when the page has it, otherwise scroll to the quiz */
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;e.preventDefault();
+  if(openPopup())return;const t=document.getElementById(b.dataset.go);
   scrollTo({top:t.getBoundingClientRect().top+scrollY,behavior:reduce?'auto':'smooth'});});
 })();
