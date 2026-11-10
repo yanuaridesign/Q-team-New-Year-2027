@@ -156,6 +156,8 @@ button:focus-visible{outline:3px solid var(--y);outline-offset:5px}
 #board .trk span{display:flex;flex:none;gap:var(--g);padding-right:var(--g)}
 #board .trk b{font-weight:700;white-space:nowrap;flex:none}
 @keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+#board .tedge{position:absolute;left:0;top:0;width:1920px;height:52px;pointer-events:none;max-width:none}
+.mob #board .tedge{display:none}
 #board .thr{position:absolute;left:0;top:0;width:1920px;height:2354px;pointer-events:none;max-width:none}
 #board .hv,#board .ly{position:absolute}
 #board .hv img,#board .ly img{display:block;width:100%;height:100%;pointer-events:none}
@@ -627,6 +629,8 @@ D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;
   g?TX(t,g.e,-g.x,-g.y,'p'):TX(t,board,0,0,'p');});
 {const b=[1323.93,2004.29,326.4,72.25];const x=$('button','bc',board);x.type='button';x.dataset.go='quiz';x.textContent='Залишити заявку';
   x.style.cssText=`left:${b[0]}px;top:${b[1]}px;width:${b[2]}px;height:${b[3]}px;background-position:${-b[0]}px ${-b[1]}px`;}
+// the wavy front edge of the scenario table laps over the top of this block (Figma 452:3259)
+{const im=$('img','tedge',board);im.src=MI+'d-tableedge.svg';im.alt='';im.setAttribute('aria-hidden','true');}
 // threads and pins above the button: the last pin holds the button
 {const im=$('img','thr',board);im.src=B+'img/v5/threads2x.webp';im.alt='';im.setAttribute('aria-hidden','true');im.decoding='async';}
 
