@@ -374,6 +374,8 @@ D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;
   g?TX(t,g.e,-g.x,-g.y,'p'):TX(t,board,0,0,'p');});
 {const b=[1323.93,2004.29,326.4,72.25];const x=$('button','bc',board);x.type='button';x.dataset.go='quiz';x.textContent='Залишити заявку';
   x.style.cssText=`left:${b[0]}px;top:${b[1]}px;width:${b[2]}px;height:${b[3]}px;background-position:${-b[0]}px ${-b[1]}px`;}
+// the wavy front edge of the scenario table laps over the top of this block (Figma 452:3259)
+{const im=$('img','tedge',board);im.src=MI+'d-tableedge.svg';im.alt='';im.setAttribute('aria-hidden','true');}
 // threads and pins above the button: the last pin holds the button
 {const im=$('img','thr',board);im.src=B+'img/v5/threads2x.webp';im.alt='';im.setAttribute('aria-hidden','true');im.decoding='async';}
 
@@ -381,7 +383,7 @@ D.board.slice(16).forEach(t=>{const px=t.m[4],py=t.m[5];let g=null;
    One pinned 1920x1080 scene. Scroll moves t from 0 to 4 through the five Figma states:
    0 three formats · 1 their minuses struck out · 2 the yellow «очі в очі» card + polaroids · 3 polaroids gathered into it ·
    4 the card tilts into isometry (true 3D, orthographic) and splits into three layers with hand-drawn labels. */
-const meth=document.createElement('section');meth.id='meth';meth.setAttribute('aria-label','Метод «Очі в очі»');board.parentNode.insertBefore(meth,board);
+const meth=document.createElement('section');meth.id='meth';meth.setAttribute('aria-label','Метод «Очі в очі»');board.parentNode.insertBefore(meth,board.nextSibling);// the last block of the page
 const mst=$('div',null,meth);mst.id='mst';const mfr=$('div',null,mst);mfr.id='mfr';
 const MD=2800;let mLast=0,mvh=1000,mtC=0,mtT=0,mDirty=true;
 const mImg=(f,b,par,cls)=>{const im=$('img',cls||null,par||mfr);im.src=MI+f+'.webp';im.alt='';im.decoding='async';im.draggable=false;im.setAttribute('aria-hidden','true');
