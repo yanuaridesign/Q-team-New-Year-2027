@@ -309,6 +309,11 @@ if(document.querySelectorAll('#stage').length>1)console.warn('Q-team landing: th
 const B=window.QTEAM_BASE||'';const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let MOB=false;
 const root=document.documentElement;if(!reduce)root.classList.add('anim');
 const stage=document.getElementById('stage');
+// Tilda wraps the block in a record with an inline overflow:auto (on phones) — that turns it into its own scroll box
+// and the pinned scenes (table, method) stop sticking. Keep the sides clipped, let it scroll with the page.
+const unbox=()=>{for(let p=stage.parentElement;p&&p!==document.body&&p!==document.documentElement;p=p.parentElement){const c=getComputedStyle(p);
+  if(/auto|scroll|hidden/.test(c.overflowY)||/auto|scroll|hidden/.test(c.overflowX)){p.style.overflowX='clip';p.style.overflowY='visible';}}};
+unbox();addEventListener('load',unbox);addEventListener('resize',unbox);setTimeout(unbox,1500);
 const V=B+'img/v4/',MI=B+'img/m/',MW=780;
 const clamp=(v,a,b)=>v<a?a:v>b?b:v;
 const sm=(a,b,v)=>{const t=clamp((v-a)/(b-a),0,1);return t*t*(3-2*t);};
